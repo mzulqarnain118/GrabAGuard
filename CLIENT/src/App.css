@@ -1,0 +1,449 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v117/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+  
+  .MuiTableCell-root{
+    padding: 10px !important;
+    border-right: 1px solid lightgrey !important;
+
+  }
+
+  .MuiTableCell-head{
+    border-right: 1px solid #E0F3FF !important;
+  }
+  
+  /* .MuiButtonBase-root{
+    padding: 0 !important;
+  } */
+  
+  .MuiTablePagination-toolbar{
+    min-height: 35px !important;
+    padding-right: 5px !important;
+    background: var(--table-header-color);
+  }
+  
+  .MuiTableCell-footer{
+    padding: 0 !important;
+  }
+
+:root {
+  --primary-color: #872b26;
+  --scroll-color:#add8f2;
+  --color-divider: #e6e6e6;
+  /* --bg-color-body: #f6f7f8; */
+  --bg-color-body: #F1F4F6;
+  --navbar-color-divider: #e6e6e6;
+  /* --navbar-background: #1b1a47; */
+  --navitem-color:rgb(97, 97, 97);
+  --navbar-background: #fff;
+  /* --navbar-extended-background: #303056; */
+  /* --navbar-extended-background: rgb(227, 242, 253); */
+  --navbar-extended-background: #f7f7f7;
+  --navbar-link-color: #b5bfc7;
+  /* --navbar-link-active: #4b89dc; */
+  --navbar-link-active: #4988E5;
+  /* --navbar-link-hover-color: #f2f2f2; */
+  --navbar-link-hover-color: rgb(97, 97, 97);
+
+  --navbar-icon-size: 30px;
+  --navbar-width-lg: 70px;
+  --body-padding-lg: 270px;
+  --Form-heading: 14px bold;
+  --form-input-text:14px;
+  --error-cell: #FDEDED;
+  --warning-cell: #FFF4E5;
+  
+}
+
+html {
+  height: 100%;
+  font-family: "Poppins", sans-serif !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+  height: 100%;
+  overflow: hidden;
+}
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif !important;
+}
+
+* *:before,
+*:after {
+  font-family: "Poppins", sans-serif !important;
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+a,
+a:link,
+a:visited,
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+/* .button {
+  background-color: #872b26 !important;
+  font-size: 0.9rem;
+  border-color: brown !important;
+
+  letter-spacing: 0.05rem;
+ 
+}
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+*/
+
+.Toastify__toast-container{
+  width: unset !important;
+  min-width: 400px !important;
+}
+
+.image-container.show{
+  z-index: 10 !important;
+}
+
+.uff{
+  color: #872b26 !important;
+}
+
+/*Dropzone-UI styles*/
+.dropzone-ui .dz-ui-footer{
+  font-size: 12px !important;
+}
+
+.file-item-full-container-container{
+  margin: 2px !important;
+}
+
+.file-item-full-container-container .file-item-icon-container{
+  height: 55px !important;
+}
+
+.file-item-full-container-container .file-item-name{
+  height: 15px !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+.file-item-full-container-container .file-item-icon-container .img-container img{
+  height: 100% !important;
+  object-fit: contain;
+}
+
+.img-container.blur{
+  display: none !important;
+}
+
+/* Scrollbar Styles */
+
+::-webkit-scrollbar {
+  width: 10px;
+  cursor: pointer;
+}
+  ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  padding: 2px;
+  margin: 0.5rem; 
+  scroll-padding: 50px 3px 3px 50px;
+  cursor: pointer;
+}
+  ::-webkit-scrollbar-thumb {
+  background: var(  --scroll-color); 
+    border-radius:10px;
+    background-clip: padding-box;
+    scroll-padding: 50px 3px 3px 50px;
+    cursor: pointer;
+  
+}
+::-webkit-scrollbar-thumb:hover {
+  
+  background: #76a1e2;
+  cursor: pointer;
+} 
+
+.MuiTypography-h6{
+  font-size: 1rem !important;
+}
+
+/* React Pro Sidebar Styles */
+.app {
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.app .btn-toggle {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  background: #353535;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  display: none;
+  padding: 10px;
+  margin-left: 10px;
+
+}
+
+.app .btn-collapse{
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  background: #353535;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.app .sidebar-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app .sidebar-btn-wrapper .sidebar-btn {
+  padding: 1px 15px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #adadad;
+  text-decoration: none;
+  margin: 0 auto;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.app .sidebar-btn-wrapper .sidebar-btn span {
+  margin-left: 5px;
+  font-size: 13px;
+}
+.app .sidebar-btn-wrapper .sidebar-btn:hover {
+  color: #d8d8d8;
+}
+.app .collapsed .sidebar-btn {
+  display: inline-block;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  padding: 0;
+}
+.app main {
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  background: var(--bg-color-body);
+}
+
+
+.app .app-content {
+  height: 90%;
+}
+
+.app .social-bagdes {
+  margin-top: 10px;
+}
+.app .social-bagdes img {
+  margin: 5px;
+}
+.app .block {
+  display: flex;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #545454;
+}
+.app .block > span {
+  margin-left: 10px;
+}
+.app.rtl {
+  direction: rtl;
+  text-align: right;
+}
+.app.rtl header h1 {
+  transform: translateX(20px);
+}
+.app.rtl .block {
+  direction: rtl;
+}
+.app.rtl .block > span {
+  margin-left: 0;
+  margin-right: 10px;
+}
+.app.rtl .sidebar-btn-wrapper .sidebar-btn span {
+  margin-left: 0;
+  margin-right: 5px;
+}
+@media (max-width: 767.98px) {
+  .app {
+    overflow-x: hidden;
+  }
+  .app header h1 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 767px) {
+  .app .btn-toggle {
+    display: flex;
+  }
+
+  .app .btn-collapse{
+      display: none;
+  }
+
+  .app.rtl .btn-toggle {
+    margin-left: auto;
+  }
+}
+.badge {
+  padding: 3px 6px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  border-radius: 15px;
+}
+.badge.red {
+  color: #fff;
+  background: #d63030;
+}
+.badge.gray {
+  color: #fff;
+  background: #777;
+}
+.badge.yellow {
+  color: #000;
+  background: #ffd331;
+}
+
+.sidebar-header {
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+  margin-bottom: 3.2rem;
+  font-weight: bold;
+  background: #1b2330;
+  text-align: center;
+}
+.sidebar-header .user-email {
+  font-size: 14px;
+  color: darkgray;
+}
+.pro-sidebar {
+  width: 280px;
+  max-width: 280px;
+  min-width: 280px;
+}
+
+@media (max-width: 768px) {
+  .pro-sidebar.md {
+    position: fixed;
+    left: -280px;
+  }
+  .pro-sidebar.md.rtl {
+    left: auto;
+    right: -280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .app.rtl .btn-toggle {
+    margin-left: 16px;
+    margin-right: 0px;
+  }
+}
+.user-image {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 7px solid #252f3e;
+}
+
+.pro-sidebar-content,
+.pro-sidebar > .pro-sidebar-inner,
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item {
+  background-color: #fff;
+}
+
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header {
+  border-bottom: 0px;
+}
+
+.pro-sidebar-header {
+  position: relative;
+  padding: 10px;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.pro-sidebar
+  .pro-menu.shaped
+  .pro-menu-item
+  > .pro-inner-item
+  > .pro-icon-wrapper {
+  background-color: transparent;
+}
+
+.pro-sidebar{
+  box-shadow: rgb(136 165 191 / 48%) 0px 83px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
+  -webkit-box-shadow: rgb(136 165 191 / 48%) 0px 83px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
+  border-right: 1px solid var(--navbar-color-divider);
+}

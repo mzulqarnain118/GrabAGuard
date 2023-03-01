@@ -1,0 +1,31 @@
+$sidebar-bg-color: var(--navbar-extended-background);
+$sidebar-color: var(--navitem-color);
+$sidebar-width: 240px !default;
+$sidebar-collapsed-width: 80px !default;
+$highlight-color: var(--navbar-link-active) !default;
+$submenu-bg-color: var(--navbar-extended-background) !default;
+$submenu-bg-color-collapsed: #fff !default;
+$icon-bg-color: #e2e2e2 !default;
+$icon-size: 35px !default;
+$submenu-indent: 24px !default;
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$breakpoint-xxl: 1600px !default;
+
+@import 'react-pro-sidebar/dist/scss/styles.scss';
+
+.opacity-0{
+    opacity: 0;
+}
+
+.nav-link-active{
+    color: var(--navbar-link-active) !important;
+    background: #e0f3ff !important;
+}
+
+.popper-inner{
+    background: var(--navbar-extended-background) !important;
+}

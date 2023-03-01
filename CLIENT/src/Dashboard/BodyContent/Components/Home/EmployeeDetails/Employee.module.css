@@ -1,0 +1,109 @@
+.container{
+  justify-content: center !important;
+  align-items: center !important;
+  display: flex !important;
+  /* flex-direction: column !important; */
+}
+.column{
+  /* justify-content: center !important; */
+  display: inline-flex !important;
+  width: auto;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+}
+
+.main__box{
+  display: flex;
+  padding: 0 14rem;
+  padding-left: 12rem;
+  /* flex-wrap: nowrap; */
+}
+
+.container__padder{
+  padding: 1 0 !important;
+
+}
+.Grid {
+  height: 200 !important;
+  width: 100 !important;
+}
+
+.main__card {
+  background: linear-gradient(to right bottom, #1b1a47, #ffffff) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+}
+.second__card {
+  display: flex !important;
+  justify-content: right !important;
+  flex-direction: column !important;
+}
+.avatarpic {
+  /* align-self: center !important; */
+  margin: 10px !important;
+  width: 100px !important;
+  height: 100px !important;
+  justify-content: space-around !important;
+}
+.card__content {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.topGridFont {
+  margin: 0px 10px !important;
+  color: white !important;
+  font-size: 14px !important;
+}
+.header__card {
+  display: flex !important;
+  justify-content: right !important;
+  align-items: right !important;
+  padding: 0 !important;
+}
+
+.bottomGridFont {
+  margin: 0px 5px 0px 5px !important;
+  color: black !important;
+  font-family: 0.8rem !important;
+}
+
+.InfoGrid {
+  /* height: 500 !important;
+  width: 100 !important; */
+}
+.InfoCard {
+  background: white !important;
+  flex-direction: row !important;
+  margin-left: 2rem !important;
+  margin-bottom: 2rem;
+  /* padding: 1rem 2rem !important; */
+}
+.InfoTypography {
+  /* margin: 0px 5px 0px 5px !important; */
+  padding: 15px 20px !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  color: black !important;
+}
+
+.info__heading__wrapper{
+  position: relative;
+}
+
+.info__heading__before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    background-color: var(--navbar-link-active);
+    width: 25px;
+    height: 30px;
+    border-radius: 100%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

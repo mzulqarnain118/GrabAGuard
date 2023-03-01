@@ -1,0 +1,44 @@
+.hero__navitem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.icon {
+  font-size: 18px;
+  height: 20px;
+  color: var(--navitem-color);
+}
+
+.heading {
+  margin-top: 5px;
+  font-size: 9px;
+  color: var(--navitem-color);
+}
+
+.hero__navitem:hover .icon{
+  color: var(--navbar-link-active) !important;
+  /* color: blue !important; */
+}
+
+.hero__navitem:hover .heading{
+  color: var(--navbar-link-active) !important;
+  /* color: blue !important; */
+}
+
+.active__link > .hero__navitem {
+  background: var(--navbar-extended-background);
+  color: var(--navbar-link-active) !important;
+  border-left: 3px solid var(--navbar-link-active);
+}
+
+.active__link > .hero__navitem .icon{
+  color: var(--navbar-link-active) !important;
+}
+
+.active__link > .hero__navitem .heading{
+  color: var(--navbar-link-active) !important;
+}

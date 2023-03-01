@@ -1,0 +1,9 @@
+.submit__button__wrapper{
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+
+.submit__btn{
+    background-color: var(--primary-color) !important;
+}

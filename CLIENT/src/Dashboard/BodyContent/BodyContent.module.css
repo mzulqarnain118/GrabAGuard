@@ -1,0 +1,29 @@
+.body__content__wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  overflow-y: auto;
+}
+
+.sidebar {
+  height: 100%;
+}
+
+.body__content {
+  flex: 1;
+  /* border: 1px solid black; */
+  background: var(--bg-color-body);
+  transition: all ease-in-out 0.2s;
+  height: 100% !important;
+  overflow-y: auto;
+  position: relative;
+  margin-right: 4px;
+}
+
+.sidebar__expanded{
+  /* padding-left: var(--body-padding-lg); */
+}
+
+.sidebar__collapsed{
+  /* padding-left: var(--navbar-width-lg); */
+}

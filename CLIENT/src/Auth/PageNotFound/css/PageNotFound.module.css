@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@200&display=swap');
+
+
+
+body {
+  padding: 0;
+  margin: 0;
+}
+.image{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 10px;
+  width: 300px;
+  background: linear-gradient(to left, #8d8888, #d6d1e2, #f0e7c2, #e6cfcf);
+  border-radius: 50%;
+  border: transparent;
+
+}
+.para{
+  position: relative;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-weight: bold;
+  margin-right: 80px;
+  /* margin-bottom: 60px; */
+  
+}
+.heading_5{
+ 
+font-family: 'Pacifico', cursive !important;
+position: relative;
+font-size: 70px;
+margin-right: 100px;
+/* color: linear-gradient(to left, #161516, #e77d7d, #aaaee4, #eaeaea); */
+background: -webkit-linear-gradient(  #ad1313, #3f3a21, #e2a9a9 ,#770202);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+ .heading_5 {
+   position: relative;
+margin-top: 50px;
+margin-right: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  /* margin-top: 0px; */
+  /* margin-bottom: 10px; */
+  color: #151723;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+.card{
+  position: absolute;
+  border: transparent !important;
+  border: 0px;
+   border-color: transparent !important;
+}
+
+.card_body{
+  border: transparent !important;
+border: 1px solid;
+ 
+ border-color: transparent !important;
+}

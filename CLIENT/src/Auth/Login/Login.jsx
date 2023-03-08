@@ -92,11 +92,6 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error, "error")
-      if (result.error) {
-        setValues({ ...values, usererror: true, userhelper: 'Invalid Username', passerror: true, passhelper: 'Invalid Password' });
-        Toast("Invalid Username or Password", "error");
-        return
-      }
       Toast(error.message, "error");
     }
     setDisable(false);

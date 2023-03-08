@@ -9,10 +9,10 @@ const getError = (error) => {
   if (error.response) {
     let status = error?.response?.data?.code
     if (status === 401) {
-      // Toast("Your session has expired", "success")
-      // localStorage.removeItem("loggedIn")
-      // localStorage.removeItem("token")
-      // window.location = '/login';
+      Toast("Your session has expired", "success")
+      localStorage.removeItem("loggedIn")
+      localStorage.removeItem("token")
+      window.location = '/login';
     }
     else if (status === 403)
       Toast("This Role is restricted to access to this request.", "error")

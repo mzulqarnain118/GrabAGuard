@@ -1,13 +1,10 @@
 import React, { Component, useEffect, useState } from 'react'
 import ReactApexChart from "react-apexcharts";
-import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
-import HomePage from './HomePage';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
-import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
-const PieChart = (props) => {
+const PieChart = ({ hirers, guards }) => {
     const [options, setOptions] = useState({
-        labels: ["Female", "Male"],
-        colors: ['#1d3557','#9C3940', '#f48c06', '#168aad' ],
+        labels: ["Client", "Guard"],
+        colors: ['#FFEB3B', '#000000', '#f48c06', '#168aad'],
         responsive: [
             {
                 breakpoint: 100,
@@ -34,55 +31,46 @@ const PieChart = (props) => {
     })
 
 
-
+    console.log('====================================');
+    console.log(hirers, guards, 'hirers,guards');
+    console.log('====================================');
     const [popUp, setPopUp] = useState();
+    const [series, setSeries] = useState([hirers, guards]);
+
+
     const [value, setValue] = useState();
     const [temp, setTemp] = useState();
-    const [series, setSeries] = useState([])
 
-
+    // useEffect(() => {
+    //     if (value) {
+    //         setPopUp(true)
+    //     }
+    // }, [value]);
     useEffect(() => {
+        setSeries([hirers, guards])
 
-        const fetchData = async () => {
-
-            let arr = [];
-            arr.push(props.data['female_employees']);
-            arr.push(props.data['male_employees']);
-            setSeries(arr);
-
-
-
-        }
-        fetchData();
-
-
-    }, []);
-    useEffect(() => {
-        if (value) {
-            setPopUp(true)
-        }
-    }, [value]);
-    useEffect(() => {
-        if (!popUp) {
-            setValue(undefined);
-        }
-    }, [popUp]);
+    }, [hirers, guards]);
+    // useEffect(() => {
+    //     if (!popUp) {
+    //         setValue(undefined);
+    //     }
+    // }, [popUp]);
 
 
 
 
     return (
         <>
-            <div id="chart">
-                {series?.length > 0 ? <ReactApexChart
+            <div id="chart" key={Math.random()}>
+                <ReactApexChart
                     options={options}
                     series={series}
                     type="pie"
-                    width="350"
-                /> : null}
+                    width="450"
+                />
             </div>
             <Popup title={temp} openPopup={popUp} setOpenPopup={setPopUp}>
-                <AllEmployees user={props.user} idR={value} />
+                {/* <AllEmployees user={props.user} idR={value} /> */}
             </Popup>
 
         </>

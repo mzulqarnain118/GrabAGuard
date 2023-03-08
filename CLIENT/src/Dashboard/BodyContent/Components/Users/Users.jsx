@@ -9,6 +9,7 @@ import Loading from '../../../../Modules/UiModules/Core/Loading/Loading';
 import { ApiCallGet } from '../../../../Modules/CoreModules/ApiCall';
 import QualificationTable from '../EmployeeFix/UpdateEmployee/Qualification/QulaificationTable';
 import axios from 'axios';
+import UpdateEmployee from '../EmployeeFix/UpdateEmployee/UpdateEmployee';
 
 const Users = () => {
     const match = useRouteMatch();
@@ -29,23 +30,13 @@ const Users = () => {
     return (
         <React.Suspense fallback={<Loading />}>
             {/* console.log("users by oric ") */}
-            {(user.role === 'user' || user.role === 'DVO') && <AnimatedSwitch atEnter={{ opacity: 0 }}
+            {["user", "hirer", "guard", "admin"].includes(user?.role) && <AnimatedSwitch atEnter={{ opacity: 0 }}
                 atLeave={{ opacity: 0 }}
                 atActive={{ opacity: 1 }}
                 className="switch-wrapper w-100 h-100"
 
             >
-                <AnimatedRoute exact path={`${match.url}/table`} component={QualificationTable} />
                 <AnimatedRoute exact path={`${match.url}/`} component={QualificationTable} />
-
-            </AnimatedSwitch>}
-
-            {(user.role === 'user' || user.role === 'ADM') && <AnimatedSwitch atEnter={{ opacity: 0 }}
-                atLeave={{ opacity: 0 }}
-                atActive={{ opacity: 1 }}
-                className="switch-wrapper w-100 h-100"
-
-            >
                 <AnimatedRoute exact path={`${match.url}/reset-paswsword`} component={ResetPassword} />
                 <AnimatedRoute exact path={`${match.url}/change_password`} component={QualificationTable} />
                 <AnimatedRoute exact path={`${match.url}/add-users`} render={() => <AddUser user={user} />} />

@@ -204,6 +204,9 @@ const MatTable = (props) => {
                         exportPDFName: "Export as PDF"
                     }
                 }}
+                editingMode={props?.editingMode && props?.editingMode}
+                enableEditing={props?.enableEditing && props?.enableEditing}
+                onEditingRowSave={props?.onEditingRowSave && props?.onEditingRowSave}
                 components={{
                     Pagination: (props) => (
                         <>

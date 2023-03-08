@@ -12,10 +12,10 @@ import Toast from "../../Modules/UiModules/Core/Toast/Toast";
 import Popup from "../../Modules/UiModules/Core/Popup";
 import UserReset from "../ResetPassword/UserReset";
 import { useRouteMatch } from "react-router";
-import oric_logo from "../../Dashboard/Header/oric_logo.png";
 
 
 const Login = () => {
+ 
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
@@ -49,18 +49,15 @@ const Login = () => {
 
   const history = useHistory();
 
-
   const handleClickShowPassword = (prevPasswordState) => {
     setValues({
       ...values,
       showPassword: !prevPasswordState,
     });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
 
   const login = async (e) => {
 
@@ -90,14 +87,13 @@ const Login = () => {
       localStorage.setItem('email', result?.data?.user?.email)
       localStorage.setItem('role', result?.data?.user?.role)
       localStorage.setItem('id', result?.data?.user?.id)
-      localStorage.setItem('name', result?.data?.user?.name)
+      localStorage.setItem('name', result?.data?.user?.firstName)
       localStorage.setItem('user', result?.data?.user)
       history.push('/');
     }
     setDisable(false);
 
   }
-
   return (
     <>
       <div className={`${styles.container} px-1 px-md-1 px-lg-2 px-xl-4 py-4 mx-auto`}>

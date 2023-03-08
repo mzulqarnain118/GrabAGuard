@@ -4,7 +4,6 @@ import ReactApexChart from "react-apexcharts";
 import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 import HomePage from './HomePage';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
-import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
 
 const PieChart = (props) => {
     console.log(props.data, "props")
@@ -89,7 +88,7 @@ const PieChart = (props) => {
                 /> : null}
             </div>
             <Popup title={temp} openPopup={popUp} setOpenPopup={setPopUp}>
-                <AllEmployees user={props.user} idR={value} />
+                {/* <AllEmployees user={props.user} idR={value} /> */}
             </Popup>
         </>
     );

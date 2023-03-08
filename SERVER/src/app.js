@@ -38,13 +38,13 @@ app.use(mongoSanitize());
 app.use(compression());
 
 app.use(cors({
-  origin: 'http://localhost:3002',
+  origin: 'http://localhost:3001',
   credentials: true,
 }));
 
 // add the following middleware to send the correct headers for preflight requests
 app.options('*', cors({
-  origin: 'http://localhost:3002',
+  origin: 'http://localhost:3001',
   credentials: true,
 }));
 

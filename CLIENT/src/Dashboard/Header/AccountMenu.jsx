@@ -88,11 +88,11 @@ export default function AccountMenu() {
 
                 <Divider />
 
-                <NavLink to="/main/home/personal-profile">
+                {/* <NavLink to="/main/home/personal-profile">
                     <MenuItem>
                         <Avatar />Profile Info
                     </MenuItem>
-                </NavLink>
+                </NavLink> */}
                 {/* <MenuItem>
                     <Avatar /> My account
                 </MenuItem> */}
@@ -103,14 +103,14 @@ export default function AccountMenu() {
                     </ListItemIcon>
                     Add another account
                 </MenuItem> */}
-                <NavLink to="/main/users/change_password">
+                {/* <NavLink to="/main/users/change_password">
                     <MenuItem>
                         <ListItemIcon>
                             <Lock fontSize="small" />
                         </ListItemIcon>
                         Change Password
                     </MenuItem>
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink to="/logout">
                     <MenuItem>

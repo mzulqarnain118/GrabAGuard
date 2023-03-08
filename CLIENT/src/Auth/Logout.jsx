@@ -1,22 +1,48 @@
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { ApiCallGet } from '../Modules/CoreModules/ApiCall';
+import { ApiCallPost } from '../Modules/CoreModules/ApiCall';
 import Loading from '../Modules/UiModules/Core/Loading/Loading';
+import Toast from "../Modules/UiModules/Core/Toast/Toast";
 
 const Logout = () => {
+    const [loading, setLoading] = useState(false);
 
     const history = useHistory();
+    const logout = async (e) => {
 
+        try {
+            setLoading(true)
+            const result = await ApiCallPost('/auth/logout', {
+                "refreshToken": localStorage.getItem('refreshToken')
+            });
+            if (result.status === 204) {
+                console.log('====================================');
+                console.log(result);
+                console.log('====================================');
+                Toast("Logged Off Successfully", "success");
+                localStorage.removeItem('token')
+                localStorage.removeItem('refreshToken')
+                localStorage.removeItem('loggedIn')
+                localStorage.removeItem('email')
+                localStorage.removeItem('role')
+                localStorage.removeItem('id')
+                localStorage.removeItem('name')
+                localStorage.removeItem('user')
+                setLoading(false)
+                history.push('/login');
+            }
+
+        } catch (error) {
+            setLoading(false)
+
+            console.log(error);
+        }
+      
+
+    }
     useEffect(() => {
-        const logout = async () => {
-            const result = await ApiCallGet('/logout');
-            if (result.error) {
-                history.push('/error');
-            } else if(result.status === 201) { history.push('/login-oric')
-               } else{
-            history.push('/');
-       } }
+
         logout();
     }, [history]);
 
@@ -24,7 +50,8 @@ const Logout = () => {
 
         <>
 
-            <Loading />
+
+            {loading && <div style={{ marginTop: "220px" }}><Loading /></div>}
 
         </>
 

@@ -6,7 +6,9 @@ import axios from 'axios';
 import Log from './Modules/CoreModules/Log';
 import Logout from "./Auth/Logout";
 import ContainerToast from "./Modules/UiModules/Core/Toast/ContainerToast";
+
 import PageNotFound from "./Auth/PageNotFound/PageNotFound";
+import Toast from "./Modules/UiModules/Core/Toast/Toast";
 
 const Home = React.lazy(() => import('./Auth/Home/Home'));
 const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
@@ -25,27 +27,22 @@ const App = () => {
   }, []);
 
 
-  // const [loggedIn, updateStatus] = useState(localStorage.getItem("loggedIn"));
-  // axios.interceptors.response.use(function (response) {
-  //   return response;
-  // }, function (error) {
-  //   if (401 === error.response.status) {
-  //     toast.success("Your session has expired")
-  //     window.location = '/login';
-  //   } else {
-  //     return Promise.reject(error);
-  //   }
-  // });
+  const [loggedIn, updateStatus] = useState(localStorage.getItem("loggedIn"));
+
+8
 
   return (
     <>
       <Switch>
         <React.Suspense fallback={<Loading />}>
-          <Route exact path="/" component={() => <Home />} />
-          <Route exact path="/page" component={() => <PageNotFound />} />
+          {/* {loggedIn ? */}
+            <Route exact path="/" component={() => <Home />} />
+          {/* : */}
           <Route exact path="/login" component={() => <Login />} />
+          {/* } */}
           <Route exact path="/logout" component={() => <Logout />} />
-          <Route path="/main" component={() => <Dashboard />} />
+          <Route exact path="/page" component={() => <PageNotFound />} />
+            <Route path="/main" component={() => <Dashboard />} />
         </React.Suspense>
       </Switch>
       <ContainerToast />

@@ -1,40 +1,51 @@
 
 import axios from 'axios';
 import FileDownload from 'js-file-download';
-
-const baseUrl = "http://localhost:3000/v1";
+import React, { useState, useEffect } from 'react';
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
-const headers = { 'Content-Type': 'application/json', 'csrf_token': csrf_token };
-const fileHeaders = { 'csrf_token': csrf_token };
-const options = { headers: headers, withCredentials: true };
-const fileOptions = { headers: fileHeaders, responseType: "blob", withCredentials: true };
-
+import Toast from '../UiModules/Core/Toast/Toast';
+const baseUrl = "http://localhost:3000/v1"; // your base URL
 const getError = (error) => {
-
   if (error.response) {
-    if (error.response.status === 500) {
-      return { text: "Internal Server Error", error: error };
-    } else if (error.response.status === 422) {
-      return { text: "Cannot Process Please Try Again", error: error };
-    } else if (error.response.status === 405) {
-      return { text: "Not Found", error: error };
-    } else if (error.response.status === 406) {
-      return { text: "Already Exist", error: error };
-    } else if (error.response.status === 404) {
-      return { text: "API Not Found", error: error };
-    } else if (error.response.status === 444) {
-      return { text: "Invalid Data", error: error };
-    } else if (error.response.status === 430) {
-      return { text: error.response.data, error: error };
+    let status = error?.response?.data?.code
+    if (status === 401) {
+      // Toast("Your session has expired", "success")
+      // localStorage.removeItem("loggedIn")
+      // localStorage.removeItem("token")
+      // window.location = '/login';
     }
-    else {
-      return { text: "Unkown Error", error: error };
-    }
-  } else {
-    return { text: "No Internet Connection", error: error };
-  }
+    else if (status === 403)
+      Toast("This Role is restricted to access to this request.", "error")
+    else if (status === 500)
+      Toast("Internal Server Error", "error")
+    else if (status === 422)
+      Toast("Cannot Process Please Try Again", "error")
+    else if (status === 405)
+      Toast("Not Found", "error")
+    else if (status === 406)
+      Toast("Already Exist", "error")
+    else if (status === 404)
+      Toast("API Not Found", "error")
+    else if (status === 444)
+      Toast("Invalid Data", "error")
+    else if (status === 430)
+      Toast(error.response.data, "error")
+    else
+      Toast("Unkown Error", "error")
+  } else
+    Toast("No Internet Connection", "error")
 
 }
+const token = localStorage.getItem('token');
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "X-Requested-With",
+  "Content-type": "application/json; charset=UTF-8",
+  Authorization: `Bearer ${token}`
+};
+const fileHeaders = { 'csrf_token': csrf_token };
+const options = { headers, withCredentials: true };
+const fileOptions = { headers: fileHeaders, responseType: "blob", withCredentials: true };
 
 const getResponse = (response, redirect) => {
 
@@ -46,17 +57,6 @@ const getResponse = (response, redirect) => {
 
 }
 
-const ApiCallGet = (path, redirect = true) => {
-
-  return axios.get(baseUrl + path, options)
-    .then((response) => {
-      return getResponse(response, redirect);
-    })
-    .catch((error) => {
-      return getError(error);
-    });
-
-}
 
 const ApiCallPost = (path, data, redirect = true) => {
 
@@ -70,6 +70,30 @@ const ApiCallPost = (path, data, redirect = true) => {
 
 }
 
+const ApiCallDelete = (path,data, redirect = true) => {
+  return axios.delete(baseUrl + path, options)
+    .then((response) => {
+      console.log('%cResponse: ','background: red; color: white; font-size: 20px;', response);
+      return response;
+    })
+    .catch((error) => {
+      console.log(' %o\n%cError: ','background: red; color: white; font-size: 20px;', error);
+      return getError(error);
+    });
+
+}
+
+const ApiCallPatch = (path, data, redirect = true) => {
+  console.log(`%cdata=${data},path=${path}`, 'background: blue; color: white; font-size: 20px;margin: 30px;');
+  return axios.patch(baseUrl + path, data, options)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return getError(error);
+    });
+
+}
 const ApiCallGetDownloadFile = async (path, filename) => {
 
   const Filedownloads = await ApiCallGetFile(path);
@@ -81,12 +105,40 @@ const ApiCallGetFile = (path, redirect = true) => {
 
   return axios.get(baseUrl + path, fileOptions, options)
     .then((response) => {
+      console.log(`%cresponse=${response}`, 'background: red; color: white; font-size: 20px;margin: 30px;');
       return getResponse(response, redirect);
     })
     .catch((error) => {
+      console.log(`%cerror=${error}`, 'background: red; color: white; font-size: 20px;margin: 30px;');
       return getError(error);
     });
 
 }
 
-export { ApiCallGet, ApiCallPost, ApiCallGetFile, ApiCallGetDownloadFile };
+const ApiCallGet = (path,payload, redirect = true) => {
+
+  
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = () => {
+    setLoading(true);
+    return axios.get(baseUrl + path, options).then(res => setResponse(res.data))
+      .catch((error) => {
+        setError({ info: error?.response?.data, code: error?.response?.data?.code, message: error?.response?.data?.message });
+        getError(error)
+      }).finally(() => setLoading(false));
+  }
+
+
+  useEffect(() => {
+    fetchData();
+  }, [path, payload?.getUpdatedData]);
+  console.log('%cResponse: %o\n%cError:  %o\n%cpayload: ',
+    'background: red; color: white; font-size: 20px;', response,
+    'background: red; color: white; font-size: 20px;', error);
+  return { response, error, loading };
+};
+
+export { ApiCallGet, ApiCallPost, ApiCallPatch, ApiCallGetFile, ApiCallGetDownloadFile, ApiCallDelete };

@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import ReactApexChart from "react-apexcharts";
 import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 import HomePage from './HomePage';
-import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
+// import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
 const PieChart = (props) => {
 
@@ -12,7 +12,10 @@ const PieChart = (props) => {
     const [temp, setTemp] = useState();
     const [options, setOptions] = useState({
         labels: ["Gazzated", "Non Gazzated"],
-        colors: ['#1d3557','#9C3940', '#f48c06', '#168aad' ],
+        colors: ['#FFEB3B', '#000000', '#f48c06', '#168aad'],
+        xaxis: {
+            categories: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E']
+        },
         responsive: [
             {
                 breakpoint: 100,
@@ -49,8 +52,14 @@ const PieChart = (props) => {
             // console.log(result);
 
             let arr = [];
-            arr.push(props.data['gazetted_employees']);
-            arr.push(props.data['non_gazetted_employees']);
+            arr.push({
+                name: 'Jobs',
+                data: [10, 20, 30, 40, 50]
+            });
+            arr.push({
+                name: 'Jobs1',
+                data: [10, 20, 30, 40, 50] // array of data points
+            });
             setSeries(arr);
             console.log('abc',arr)
 
@@ -81,12 +90,12 @@ const PieChart = (props) => {
                 {series?.length > 0 ? <ReactApexChart
                     options={options}
                     series={series}
-                    type="pie"
-                    width="390"
+                    type="bar"
+                    width="1000"
                 /> : null}
             </div>
             <Popup title={temp} openPopup={popUp} setOpenPopup={setPopUp}>
-                <AllEmployees user={props.user} idR={value} />
+                {/* <AllEmployees user={props.user} idR={value} /> */}
             </Popup>
         </>
 

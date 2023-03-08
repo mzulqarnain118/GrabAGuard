@@ -8,16 +8,26 @@ components:
         email:
           type: string
           format: email
-        name:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address:
+          type: string
+        phone:
           type: string
         role:
           type: string
-          enum: [user, admin]
+          enum: [hirer,guard, admin]
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
-        name: fake name
-        role: user
+        firstName: fake first name
+        lastName: fake name name
+        address: fake name name
+        phone: fake name name
+        lastName: fake name name
+        role: hirer
 
     Token:
       type: object

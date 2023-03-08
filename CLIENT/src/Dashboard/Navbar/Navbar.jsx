@@ -24,7 +24,7 @@ const Navbar = ({
   styleClass,
   collapsed,
   handleCollapse,
-  userlog,
+  user,
 }) => {
   const location = useLocation();
 
@@ -46,8 +46,8 @@ const Navbar = ({
             links.map((link, index) => {
               return (
                 <>
-                  {(userlog?.role === "user" || userlog?.role === 'DVO') &&
-                    (userlog?.role === link.roles[0] || userlog?.role === link.roles[1]) ? (
+                  {["user", "hirer", "guard", "admin"].includes(user?.role)  &&
+                    (link.roles.includes(user?.role)) ? (
                     <Menu iconShape="circle" key={index}>
                       {link.sublinks.length > 0 ? (
                         <SubMenu
@@ -81,12 +81,12 @@ const Navbar = ({
                         </MenuItem>
                       )}
                     </Menu>
-                  ) : null}
+                  ) : <h1>hfhfh</h1>}
 
 
 
-                  {(userlog?.role === 'ORIC_ADM') &&
-                    (userlog?.role === link.roles[0] || userlog?.role === link.roles[1] || userlog?.role === link.roles[2] || userlog?.role === link.roles[3] || userlog?.role === link.roles[4] || userlog?.role === link.roles[5]) ? (
+                  {/* {(user?.role === 'ORIC_ADM') &&
+                    (user?.role === link.roles[0] || user?.role === link.roles[1] || user?.role === link.roles[2] || user?.role === link.roles[3] || user?.role === link.roles[4] || user?.role === link.roles[5]) ? (
                     <Menu iconShape="circle" key={index}>
                       {console.log('oric role')}
                       {link.sublinks.length > 0 ? (
@@ -124,12 +124,12 @@ const Navbar = ({
                         </MenuItem>
                       )}
                     </Menu>
-                  ) : null}
+                  ) : null} */}
 
 
 
-                  {(userlog?.role === 'ORIC_CP') &&
-                    (userlog?.role === link.roles[0] || userlog?.role === link.roles[1] || userlog?.role === link.roles[2] || userlog?.role === link.roles[3]) ? (
+                  {/* {(user?.role === 'ORIC_CP') &&
+                    (user?.role === link.roles[0] || user?.role === link.roles[1] || user?.role === link.roles[2] || user?.role === link.roles[3]) ? (
                     <Menu iconShape="circle" key={index}>
                       {console.log('oric role')}
                       {link.sublinks.length > 0 ? (
@@ -167,7 +167,7 @@ const Navbar = ({
                         </MenuItem>
                       )}
                     </Menu>
-                  ) : null}
+                  ) : null} */}
 
 
 
@@ -177,8 +177,8 @@ const Navbar = ({
 
 
 
-                  {(userlog?.role === 'HRM_ADM') &&
-                    (userlog?.role === link.roles[0] || userlog?.role === link.roles[1] || userlog?.role === link.roles[2]) ? (
+                  {/* {(user?.role === 'HRM_ADM') &&
+                    (user?.role === link.roles[0] || user?.role === link.roles[1] || user?.role === link.roles[2]) ? (
 
                     <Menu iconShape="circle" key={index}>
                       {console.log('link', link)}
@@ -216,14 +216,14 @@ const Navbar = ({
                         </MenuItem>
                       )}
                     </Menu>
-                  ) : null}
+                  ) : null} */}
 
 
 
 
 
 
-                  {userlog?.role === "ADM" ? (
+                  {/* {user?.role === "ADM" ? (
                     <Menu iconShape="circle" key={index}>
                       {link.sublinks.length > 0 ? (
                         <SubMenu
@@ -255,7 +255,7 @@ const Navbar = ({
                         </MenuItem>
                       )}
                     </Menu>
-                  ) : null}
+                  ) : null} */}
                 </>
               );
             })}

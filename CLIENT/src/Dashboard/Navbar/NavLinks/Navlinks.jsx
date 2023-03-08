@@ -10,7 +10,7 @@ function Navlinks(props) {
       <ul>
         {links.map((item, index) => {
           return (
-            <>{user.role === 'DEO' && item.roles[0] === user.role ? <li key={index}>
+            <>{["user", "hirer", "guard", "admin"].includes(user?.role) && item.roles[0] === user.role ? <li key={index}>
               <NavLinkItem
                 key={index}
                 Icon={item.Icon}

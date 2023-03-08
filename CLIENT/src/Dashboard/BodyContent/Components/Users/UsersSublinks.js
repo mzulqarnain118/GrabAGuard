@@ -8,7 +8,7 @@ const UsersSublinks = [
     {
         text: "Users",
         path: "/main/users/",
-        roles: ['user','HRM_ADM','ORIC_ADM','ORIC_CP'],
+        roles: ['user','hirer','guard','admin'],
     },
     // {
     //     text: "Reset Password",

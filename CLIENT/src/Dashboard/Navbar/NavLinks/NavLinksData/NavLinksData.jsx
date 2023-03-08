@@ -8,13 +8,11 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 
 //Sublinks
-import FormSublinks from "../../../BodyContent/Components/Forms/FormLinks";
 import HomeSublinks from "../../../BodyContent/Components/Home/HomeLinks";
 import FilesSublinks from "../../../BodyContent/Components/Files/FileLinks";
 import AdminSubLinks from "../../../BodyContent/Components/Admin/AdminLinks";
-import SanctionSublinks from "../../../BodyContent/Components/Sanctions/SanctionsLinks";
 import EmpFixSublinks from "../../../BodyContent/Components/EmployeeFix/EmployeeFixSublinks";
-import ReportSublinks from "../../../BodyContent/Components/Reports/ReportSublinks";
+// import ReportSublinks from "../../../BodyContent/Components/Reports/ReportSublinks";
 import UsersSublinks from "../../../BodyContent/Components/Users/UsersSublinks"
 import React from "react";
 import { AccountCircleOutlined } from "@mui/icons-material";
@@ -26,7 +24,7 @@ const links = [
     text: "Home",
     Icon: <HomeOutlinedIcon />,
     path: "/main/home",
-    roles: ['user','DEO', 'DVO','HRM_ADM', 'ADM'],
+    roles: ['user','hirer', 'guard','admin', 'ADM'],
     sublinks: HomeSublinks,
   },
   // {
@@ -36,46 +34,46 @@ const links = [
   //   roles: [],
   //   sublinks: FormSublinks,
   // },
-  {
-    text: "Employees",
-    Icon: <BadgeIcon />,
-    path: "/main/employee-fix",
-    roles: [ 'DEO', 'DVO','HRM_ADM', 'ADM'],
-    sublinks: EmpFixSublinks,
-  },
-  {
-    text: "Files",
-    Icon: <InsertDriveFileIcon />,
-    path: "/main/files",
-    roles: [ 'DEO','HRM_ADM', 'ADM'],
-    sublinks: FilesSublinks,
-  },
-  {
-    text: "Admin",
-    Icon: <AdminPanelSettingsIcon />,
-    path: "/main/admin-settings",
-    roles: [ 'DEO','HRM_ADM', 'ADM'],
-    sublinks: AdminSubLinks,
-  },
-  {
-    text: "Sanctions",
-    Icon: <AssuredWorkloadIcon />,
-    path: "/main/sanctions",
-    roles: ['DEO','HRM_ADM', 'ADM'],
-    sublinks: SanctionSublinks,
-  },
-  {
-    text: "Reports",
-    Icon: <InsightsIcon />,
-    path: "/main/reports",
-    roles: ['DEO', 'DVO','HRM_ADM', 'ADM'],
-    sublinks: ReportSublinks,
-  },
+  // {
+  //   text: "Employees",
+  //   Icon: <BadgeIcon />,
+  //   path: "/main/employee-fix",
+  //   roles: [ 'DEO', 'DVO','HRM_ADM', 'ADM'],
+  //   sublinks: EmpFixSublinks,
+  // },
+  // {
+  //   text: "Files",
+  //   Icon: <InsertDriveFileIcon />,
+  //   path: "/main/files",
+  //   roles: [ 'DEO','HRM_ADM', 'ADM'],
+  //   sublinks: FilesSublinks,
+  // },
+  // {
+  //   text: "Admin",
+  //   Icon: <AdminPanelSettingsIcon />,
+  //   path: "/main/admin-settings",
+  //   roles: [ 'DEO','HRM_ADM', 'ADM'],
+  //   sublinks: AdminSubLinks,
+  // },
+  // {
+  //   text: "Sanctions",
+  //   Icon: <AssuredWorkloadIcon />,
+  //   path: "/main/sanctions",
+  //   roles: ['DEO','HRM_ADM', 'ADM'],
+  //   sublinks: SanctionSublinks,
+  // },
+  // {
+  //   text: "Reports",
+  //   Icon: <InsightsIcon />,
+  //   path: "/main/reports",
+  //   roles: ['DEO', 'DVO','HRM_ADM', 'ADM'],
+  //   sublinks: ReportSublinks,
+  // },
   {
     text: "Users",
     Icon: <AccountCircleOutlined />,
     path: "/main/users",
-    roles: ['user', 'HRM_ADM', 'ADM', 'ORIC_ADM','ORIC_CP'],
+    roles: ['user', 'hirer', 'guard', 'admin','ORIC_CP'],
     sublinks: UsersSublinks,
   }
 ];

@@ -1,36 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import {
     ArrowUpward as ArrowUpwardIcon,
     Money as MoneyIcon,
     AccessTime as AccessTimeIcon
 } from '@mui/icons-material';
 import AccessibilityNewOutlinedIcon from '@mui/icons-material/AccessibilityNewOutlined';
-import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
-
 import PieChartHirerGuard from './PieChartHirerGuard';
 import PiChartGazzated from './PiChartGazzated'
-import PiChartEmployeeType from './PiChartEmployeeType'
 import ReteringEmployee from './ReteringEmployee';
-import EmployeeCount from './EmployeeCount';
 import { ApiCallGet, ApiCallPost } from '../../../../../Modules/CoreModules/ApiCall';
-// Shared components
-import {
-    Portlet,
-    PortletHeader,
-    PortletLabel,
-    PortletContent
-} from '../../../../../components';
-import { Form } from '../../../../../Modules/UiModules/Control/useForm';
 import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
-import AnalyticalChart from '../../../../../Modules/CoreModules/AnalyticalChart';
 
 // Component styles
 

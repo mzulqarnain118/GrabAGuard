@@ -38,7 +38,7 @@ const getError = (error) => {
 }
 const token = localStorage.getItem('token');
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
-const baseUrl = "http://localhost:3000/v1"; // your base URL
+const baseUrl = process.env.REACT_APP_API_BASE_URL ?? "http://localhost:3000/v1"; // your base URL
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "X-Requested-With",

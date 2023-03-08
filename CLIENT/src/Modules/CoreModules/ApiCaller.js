@@ -7,7 +7,7 @@ const ApiCaller = ({ endpoint, method, payload }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const baseUrl = "http://localhost:3000/v1";; // your base URL
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const getError = (error) => {
     if (error.response) {
       let status = error?.response?.data?.code

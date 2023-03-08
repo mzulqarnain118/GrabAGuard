@@ -20,10 +20,10 @@ components:
           type: string
           enum: [hirer,guard, admin]
       example:
-        # id: 5ebac534954b54139806c112
+        id: 5ebac534954b54139806c112
         email: fake@example.com
         firstName: fake first name
-        lastName: fake name name
+        lastName: fake lastName
         address: fake name name
         phone: fake name name
         lastName: fake name name

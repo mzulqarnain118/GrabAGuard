@@ -41,7 +41,8 @@ const getError = (error) => {
 }
 const token = localStorage.getItem('token');
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
-const baseUrl = process.env.REACT_APP_API_BASE_URL ?? "http://localhost:3000/v1"; // your base URL
+const baseUrl = "http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001/v1"
+  // process.env.REACT_APP_API_BASE_URL; // your base URL
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "X-Requested-With",
@@ -64,7 +65,6 @@ const getResponse = (response, redirect) => {
 
 
 const ApiCallPost = (path, data, redirect = true) => {
-
   return axios.post(baseUrl + path, data, options)
     .then((response) => {
       return getResponse(response, redirect);

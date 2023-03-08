@@ -44,7 +44,7 @@ app.use(cors({
 
 // add the following middleware to send the correct headers for preflight requests
 app.options('*', cors({
-  origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003','http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001/'],
+  origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003','http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001'],
   credentials: true,
 }));
 

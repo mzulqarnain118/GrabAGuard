@@ -2,9 +2,9 @@
 import axios from 'axios';
 import FileDownload from 'js-file-download';
 import React, { useState, useEffect } from 'react';
-const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
 import Toast from '../UiModules/Core/Toast/Toast';
-const baseUrl = "http://localhost:3000/v1"; // your base URL
+
+
 const getError = (error) => {
   if (error.response) {
     let status = error?.response?.data?.code
@@ -37,6 +37,8 @@ const getError = (error) => {
 
 }
 const token = localStorage.getItem('token');
+const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
+const baseUrl = "http://localhost:3000/v1"; // your base URL
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "X-Requested-With",

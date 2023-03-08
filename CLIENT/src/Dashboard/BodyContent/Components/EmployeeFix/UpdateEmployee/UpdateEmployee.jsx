@@ -408,9 +408,9 @@ export default function UpdateEmployee(props) {
                     <h5 className='mr-4 col-12 text-center'> ID:  {info?.emp_id ?? ''}</h5>
                     <h5 className='mr-4 col-12 text-center' >NAME: {info?.emp_name ?? ''}</h5>
                     <h5 className='mr-4 col-12 text-center'> NIC: {info?.nic ?? ''}</h5>
-                    <Button variant="contained" onClick={() => downloadForm(Desig, Personal, Qualification, Experience, Training, Study, Leave, Pic)}
+                    {/* <Button variant="contained" onClick={() => downloadForm(Desig, Personal, Qualification, Experience, Training, Study, Leave, Pic)}
                     >  <FaDownload className="download-icon" />
-                        Download Details</Button>
+                        Download Details</Button> */}
                 </div>
             </Card>
 {/* 

@@ -25,14 +25,14 @@ const QualificationForm = (props) => {
         phone: '',
     });
 
-    const handleChange = (e, format) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
 
         console.log(name, value);
 
         setValues({
             ...values,
-            [name]: (format === true) ? CurdateFormated(new Date(value)) : value
+            [name]:  value
         })
     }
     const updateUser = React.useCallback(

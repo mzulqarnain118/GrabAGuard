@@ -29,8 +29,6 @@ const App = () => {
 
   const [loggedIn, updateStatus] = useState(localStorage.getItem("loggedIn"));
 
-8
-
   return (
     <>
       <Switch>

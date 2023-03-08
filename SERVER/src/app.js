@@ -38,7 +38,7 @@ app.use(mongoSanitize());
 app.use(compression());
 
 app.use(cors({
-  origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003','http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000/'],
+  origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003','http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000'],
   credentials: true,
 }));
 

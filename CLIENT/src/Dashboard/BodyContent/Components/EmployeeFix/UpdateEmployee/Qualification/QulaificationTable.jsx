@@ -151,10 +151,10 @@ const QualificationTable = (props) => {
     };
     return (<>
         <form>
-            <Stack>
+            <Stack sx={{display:"block"}}>
                 <Popup title='All Users' openPopup={openPopup} setOpenPopup={handlePopup} >
-                    {addition ? <QualificationForm id={emp_id} setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Add'} submitAction={'Insert'} /> : null}
-                    {updation ? <QualificationForm id={emp_id} data={row} setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Update'} submitAction={'Update'} /> : null}
+                    {addition ? <QualificationForm  setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Add'} submitAction={'Insert'} /> : null}
+                    {updation ? <QualificationForm  data={row} setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Update'} submitAction={'Update'} /> : null}
                 </Popup>
                 <Button variant="contained" onClick={() => setUser(!user)}
                 > 

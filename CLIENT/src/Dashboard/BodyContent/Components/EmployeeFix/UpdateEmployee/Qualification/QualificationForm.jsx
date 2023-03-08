@@ -9,15 +9,7 @@ import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
 
 const QualificationForm = (props) => {
     const id=props?.data?.id
-    const initialFValues = {
-        email:  '',
-        firstName:  '',
-        lastName:  '',
-        address:  '',
-        phone:  '',
-    }
-
-    const [values, setValues] = useState({
+    const [values, setValues] = useState(props.data ??{
         email: '',
         firstName: '',
         lastName: '',
@@ -35,6 +27,8 @@ const QualificationForm = (props) => {
             [name]:  value
         })
     }
+    console.log(values,"values");
+
     const updateUser = React.useCallback(
 
         async () => {
@@ -47,10 +41,10 @@ const QualificationForm = (props) => {
                     phone: values.phone,
 
                 }
-
-                const response = await ApiCallPatch(`/users/${id}`, screenData);
                 console.log("==========================", screenData)
-debugger
+  
+                const response = await ApiCallPatch(`/users/${id}`, screenData);
+ 
                 if (response?.status === 200) {
                     console.log(response, "result")
                     Toast('Data Updated Successfully!', 'success')
@@ -62,19 +56,14 @@ debugger
                 Toast(error.message, "error");
             }
         },
-        []
+        [values]
     );
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(1)
         updateUser()
-
     }
-    useEffect(() => {
-        console.log("ma chl gya")
-    }, [])
 
     return (
         <>
@@ -88,7 +77,7 @@ debugger
                                     label="First Name"
                                     name="firstName"
                                     required
-                                    value={values?.firstName || props?.data?.firstName}
+                                    value={values?.firstName }
                                     onChange={(handleChange)}
                                 />
 
@@ -98,7 +87,7 @@ debugger
                                     label="Last Name"
                                     name="lastName"
                                     required
-                                value={values?.lastName || props?.data?.lastName}
+                                value={values?.lastName }
                                     onChange={handleChange}
                                 />
 
@@ -109,7 +98,7 @@ debugger
                                     label="Email."
                                     name="email"
                                     required
-                                value={values?.email ?? props?.data?.email}
+                                value={values?.email }
                                     onChange={handleChange}
                                 />
                             </div>
@@ -121,7 +110,7 @@ debugger
                                     label="Mobile Phone"
                                     name="phone"
                                     required
-                                value={values?.phone ?? props?.data?.phone}
+                                value={values?.phone }
                                     onChange={handleChange}
                                 />
 
@@ -134,7 +123,7 @@ debugger
                                     label="Address"
                                     name="address"
                                     required
-                                value={values?.address ?? props?.data?.address}
+                                value={values?.address }
                                     onChange={handleChange}
                                 />
 

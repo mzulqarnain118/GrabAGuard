@@ -73,23 +73,31 @@ const Login = () => {
       setValues({ ...values, passerror: true, passhelper: 'Invalid Password' });
       return;
     }
+    try {
+      
 
-    const result = await ApiCallPost('/auth/login', { email: values.username, password: values.password });
-    if (result.error) {
-      setValues({ ...values, usererror: true, userhelper: 'Invalid Username', passerror: true, passhelper: 'Invalid Password' });
-      Toast("Invalid Username or Password", "error");
-    } else {
-      console.log(result, result?.data?.tokens?.access?.token);
-      Toast("Logged In Successfully", "success");
-      localStorage.setItem('token', result?.data?.tokens?.access?.token)
-      localStorage.setItem('refreshToken', result?.data?.tokens?.refresh?.token)
-      localStorage.setItem('loggedIn', true)
-      localStorage.setItem('email', result?.data?.user?.email)
-      localStorage.setItem('role', result?.data?.user?.role)
-      localStorage.setItem('id', result?.data?.user?.id)
-      localStorage.setItem('name', result?.data?.user?.firstName)
-      localStorage.setItem('user', result?.data?.user)
-      history.push('/');
+      const result = await ApiCallPost('/auth/login', { email: values.username, password: values.password });
+      if (result?.status === 200) {
+        console.log(result, result?.data?.tokens?.access?.token);
+        localStorage.setItem('token', result?.data?.tokens?.access?.token)
+        localStorage.setItem('refreshToken', result?.data?.tokens?.refresh?.token)
+        localStorage.setItem('loggedIn', true)
+        localStorage.setItem('email', result?.data?.user?.email)
+        localStorage.setItem('role', result?.data?.user?.role)
+        localStorage.setItem('id', result?.data?.user?.id)
+        localStorage.setItem('name', result?.data?.user?.firstName)
+        localStorage.setItem('user', result?.data?.user)
+        Toast("Logged In Successfully", "success");
+        history.push('/');
+      }
+    } catch (error) {
+      console.log(error, "error")
+      if (result.error) {
+        setValues({ ...values, usererror: true, userhelper: 'Invalid Username', passerror: true, passhelper: 'Invalid Password' });
+        Toast("Invalid Username or Password", "error");
+        return
+      }
+      Toast(error.message, "error");
     }
     setDisable(false);
 

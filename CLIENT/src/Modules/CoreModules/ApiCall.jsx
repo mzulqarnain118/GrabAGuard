@@ -8,11 +8,14 @@ import Toast from '../UiModules/Core/Toast/Toast';
 const getError = (error) => {
   if (error.response) {
     let status = error?.response?.data?.code
+    let message = error?.response?.data?.message
     if (status === 401) {
-      Toast("Your session has expired", "success")
-      localStorage.removeItem("loggedIn")
-      localStorage.removeItem("token")
-      window.location = '/login';
+      Toast(message, "error")
+      if (localStorage.getItem("loggedIn")) {
+        localStorage.removeItem("loggedIn")
+        localStorage.removeItem("token")
+        window.location = '/login';
+      }
     }
     else if (status === 403)
       Toast("This Role is restricted to access to this request.", "error")
@@ -31,7 +34,7 @@ const getError = (error) => {
     else if (status === 430)
       Toast(error.response.data, "error")
     else
-      Toast("Unkown Error", "error")
+      Toast(message, "error")
   } else
     Toast("No Internet Connection", "error")
 

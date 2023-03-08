@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core';
 
 // Component styles
 const styles = (theme) => ({
-  root: {
+  root1: {
     alignItems: 'center',
     borderBottom: `1px solid ${theme.palette.border}`,
     display: 'flex',

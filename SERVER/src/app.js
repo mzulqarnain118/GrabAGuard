@@ -38,13 +38,13 @@ app.use(mongoSanitize());
 app.use(compression());
 
 app.use(cors({
-  origin: ['http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001'],
+  origin: ['http://localhost:3000', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000'],
   credentials: true,
 }));
 
 // add the following middleware to send the correct headers for preflight requests
 app.options('*', cors({
-  origin: ['http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001'],
+  origin: ['http://localhost:3000', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000'],
   credentials: true,
 }));
 

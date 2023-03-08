@@ -52,12 +52,8 @@ const useStyles = makeStyles({
         fontSize: "14px !important"
 
     },
-    container: {
-        // padding: "2rem",
-        background: '#E0F3FF',
-        padding: '1px'
-    },
     card__content: {
+        padding: "20px",
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center"
@@ -82,17 +78,15 @@ const useStyles = makeStyles({
         height: '300px'
     },
     headerBox: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItem: 'center',
-        paddingLeft: '25px',
-        paddingRight: '25px'
+        paddingLeft: '35px',
+        paddingRight: '35px',
+
     },
     header: {
         margin: '10px',
         backgroundColor: '#d9dddd',
         borderRadius: '30px',
-        height: '30px',
+        height: '64px',
         width: '375px',
     },
     headerText: {
@@ -100,7 +94,6 @@ const useStyles = makeStyles({
         borderRadius: '105px',
         height: '64px',
         width: '190px',
-        paddingRight: '30px'
     },
     stats: {
         marginTop: 16,
@@ -113,6 +106,20 @@ const useStyles = makeStyles({
     },
     deviceIcon: {
         color: "#E4E7EB"
+    },
+    titleClick: {
+        color: "white",
+        fontWeight: 1000
+    },
+    title: {
+        color: "black",
+        fontWeight: 500
+    },
+    root1: {
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent:"space-evenly",
+        height: '64px',
     }
 
 });
@@ -153,22 +160,7 @@ export default function HomePage(props) {
 
     useEffect(() => {
 
-        // const fetchData = async () => {
-        //     setLoading(true)
-        //     let result = await ApiCallGet('/get_dashboard_data');
-        //     console.log(result, "usjkskjk")
-        //     console.log(result.data);
-        //     if (result.error) {
 
-        //     }
-        //     else {
-        //         console.log(result);
-        //         setData(result.data);
-        //     }
-        //     setLoading(false);
-
-        // }
-        // fetchData();
         DashBoardData()
 
     }, [response]);
@@ -183,32 +175,14 @@ export default function HomePage(props) {
         //  setPiClick(undefined)
     }
 
-console.log('====================================');
-console.log(Data, "Data");
-console.log('====================================');
     return (
 
         <>
-
             {loading ? <div style={{ marginTop: "220px" }}><Loading /></div> :
-
-                <Form>
-
-
-                    <Grid container spacing={1} className={classes.container}>
-                        <Grid item xs={4} md={4} lg={4} onClick={() => { set_open_popup1(true) }} >
-                            {/* <Popup title='Total Active Employees' openPopup={open_popup1} setOpenPopup={set_open_popup1}>
-                                <AllEmployees user={props.user} idR={1} /> */}
-                            {/* <h1>Hellow</h1> */}
-                            {/* {DisplayPopup()} */}
-                            {/* </Popup> */}
-                            <Card>
-                                <CardActionArea >
-                                    <CardMedia
-                                        className={classes.root}
-
-                                    />
-                                    <CardContent className={classes.card__content}>
+                <>
+                    <Grid container spacing={1}>
+                        <Grid item xs={4} md={4} lg={4}  >
+                            <Card className={classes.card__content}>
                                         <MoneyIcon />
                                         <Typography gutterBottom variant="body1" component="span" className={classes.text}>
                                             TOTAL REVENUE
@@ -216,27 +190,12 @@ console.log('====================================');
                                         <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
                                             {Data?.revenue}
                                         </Typography>
-                                    </CardContent>
-                                   
-                                </CardActionArea>
-
-
                             </Card>
                         </Grid>
 
 
-                        <Grid item xs={4} md={4} lg={4} onClick={() => { set_open_popup2(true) }}>
-                            {/* <Popup title='Teaching Employees' openPopup={open_popup2} setOpenPopup={set_open_popup2}>
-                                <AllEmployees user={props.user} idR={2} />
-                            </Popup> */}
-                            <Card>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.root}
-
-                                    />
-                                    <CardContent className={classes.card__content}>
-
+                        <Grid item xs={4} md={4} lg={4} >
+                            <Card className={classes.card__content}>
                                         <AccessTimeIcon />
                                         <Typography gutterBottom variant="body1" component="div" body1 className={classes.text}>
                                             TOTAL HOURS WORKED
@@ -244,104 +203,55 @@ console.log('====================================');
                                         <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
                                             {Data?.hours}
                                         </Typography>
-                                    </CardContent>
-                                   
-                                </CardActionArea>
-
                             </Card>
                         </Grid>
 
-                        <Grid item xs={4} md={4} lg={4} onClick={() => { set_open_popup3(true) }}>
+                        <Grid item xs={4} md={4} lg={4}
+                            // onClick={() => { set_open_popup3(true) }}
+                        >
                             {/* <Popup title='Non Teaching Employees' openPopup={open_popup3} setOpenPopup={set_open_popup3}>
                                 <AllEmployees user={props.user} idR={3} />
                             </Popup> */}
-                            <Card>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.root}
-                                    />
-                                    <CardContent className={classes.card__content}>
+                            <Card className={classes.card__content}>
+                                {/* <CardActionArea> */}
+                                    {/* <CardMedia
+                                        
+                                    /> */}
                                         <AccessibilityNewOutlinedIcon />
                                         <Typography gutterBottom variant="body1" component="div" className={classes.text}>
                                             TOTAL GUARDS
                                         </Typography>
                                         <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
                                             {Data?.guards}
-                                        </Typography>
-                                    </CardContent>
-                                    
-                                </CardActionArea>
-
-
+                                        </Typography>                                    
+                                {/* </CardActionArea> */}
                             </Card>
                         </Grid>
-
-
-
-
-
-
-
                     </Grid>
 
                     {Data && <Grid item xs={12} md={12} lg={12}>
-
-                        <PortletHeader className={classes.header}>
+                        <div className={classes.header}>
+                            <div className={classes.root1}>
                             {buttons.map((item) => (
-                                <div
-                                    key={item.slug}
+                                <div key={item.slug}
                                     className={`${classes.headerBox} ${buttonSelected === item.slug && classes.headerText
                                         }`}
                                     onClick={async () => {
                                         setButtonSelected(item.slug);
                                     }}>
-                                    <PortletLabel
-                                        title={item.title}
-                                        click={buttonSelected === item.slug}
-                                    />
+                                    <div className={buttonSelected === item.slug ? classes.titleClick : classes.title}>{item.title}</div>
                                 </div>
                             ))}
-                        </PortletHeader>
-                        <Card sx={{ margin: '0.5rem', marginLeft: "1rem" }}>
-                            <CardActionArea>
-                                <CardMedia
-                                    className={classes.root}
-                                />
-                                <CardContent className={classes.card__content}>
-
-                                    <div className="mixed-chart">
-                                        {buttonSelected === 'Users' ? (
-                                            <>
-                                                <div className={classes.chartWrapper} style={{ float: "center" }}>
-                                                    <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />
-                                                   
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <PiChartGazzated user={props.user} data={Data} setData={setData} />
-                                        )}
-                                    </div>
-                                </CardContent>
-
-                            </CardActionArea>
-
+                            </div>
+                        </div>
+                        <Card className={classes.card__content}>
+                                        {buttonSelected === 'Users' ? 
+                                                    <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />:
+                                            <PiChartGazzated user={props.user} data={Data} setData={setData} />}
                         </Card>
                     </Grid>}
-              
-
-                    <Grid item xs={12} md={12} lg={12}>
                         <ReteringEmployee data={response?.results} ></ReteringEmployee>
-                    </Grid>
-
-
-                    {/* <Grid item xs={12} md={12} lg={6}>
-
-                            <EmployeeCount data={Data} setData={setData}></EmployeeCount>
-
-                        </Grid> */}
-                    {/* </div> */}
-
-                </Form>}
+                </>}
         </>
     );
 }

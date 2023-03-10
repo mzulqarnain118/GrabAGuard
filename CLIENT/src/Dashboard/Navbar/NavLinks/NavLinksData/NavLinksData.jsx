@@ -48,13 +48,7 @@ const links = [
   //   roles: [ 'DEO','HRM_ADM', 'ADM'],
   //   sublinks: FilesSublinks,
   // },
-  // {
-  //   text: "Admin",
-  //   Icon: <AdminPanelSettingsIcon />,
-  //   path: "/main/admin-settings",
-  //   roles: [ 'DEO','HRM_ADM', 'ADM'],
-  //   sublinks: AdminSubLinks,
-  // },
+
   // {
   //   text: "Sanctions",
   //   Icon: <AssuredWorkloadIcon />,
@@ -75,7 +69,14 @@ const links = [
     path: "/main/users",
     roles: ['user', 'hirer', 'guard', 'admin','ORIC_CP'],
     sublinks: UsersSublinks,
-  }
+  },
+  {
+    text: "Admin",
+    Icon: <AdminPanelSettingsIcon />,
+    path: "/main/admin-settings",
+    roles: ['user', 'hirer', 'guard', 'admin', 'ADM'],
+    sublinks: AdminSubLinks,
+  },
 ];
 
 const contextlinks = (pathname) => {

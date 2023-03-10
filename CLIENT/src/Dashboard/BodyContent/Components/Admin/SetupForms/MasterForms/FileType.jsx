@@ -21,31 +21,31 @@ const FileType = () => {
 
 
         {
-            title: "File Type",
+            title: "Query",
             editable: () => true,
-            field: "file_type_desc",
+            field: "query_desc",
             type: "string",
             cellStyle: { textAlign: "left" },
             headerStyle: { textAlign: "left" },
         },
 
         {
-            title: "Entered By",
-            field: "emp_name",
+            title: "Status",
+            field: "status",
             type: "string",
             editable: () => false,
             cellStyle: { textAlign: "left" },
             headerStyle: { textAlign: "left" },
         },
 
-        {
-            title: " Entery Time ",
-            field: "entry_datetime",
-            type: "date",
-            editable: () => false,
-            cellStyle: { textAlign: "left" },
-            headerStyle: { textAlign: "left" },
-        },
+        // {
+        //     title: " Entery Time ",
+        //     field: "entry_datetime",
+        //     type: "date",
+        //     editable: () => false,
+        //     cellStyle: { textAlign: "left" },
+        //     headerStyle: { textAlign: "left" },
+        // },
 
     ]
 

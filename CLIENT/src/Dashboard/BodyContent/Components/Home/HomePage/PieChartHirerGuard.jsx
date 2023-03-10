@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
 import ReactApexChart from "react-apexcharts";
+import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
 const PieChart = ({ hirers, guards }) => {
     const [options, setOptions] = useState({
@@ -34,45 +35,31 @@ const PieChart = ({ hirers, guards }) => {
     console.log('====================================');
     console.log(hirers, guards, 'hirers,guards');
     console.log('====================================');
-    const [popUp, setPopUp] = useState();
     const [series, setSeries] = useState([hirers, guards]);
 
 
     const [value, setValue] = useState();
     const [temp, setTemp] = useState();
 
-    // useEffect(() => {
-    //     if (value) {
-    //         setPopUp(true)
-    //     }
-    // }, [value]);
     useEffect(() => {
         setSeries([hirers, guards])
 
     }, [hirers, guards]);
-    // useEffect(() => {
-    //     if (!popUp) {
-    //         setValue(undefined);
-    //     }
-    // }, [popUp]);
 
 
 
 
     return (
         <>
-            <div id="chart" key={Math.random()}>
+            {series.length === 0 ?<Loading/>
+            : <div id="chart" >
                 <ReactApexChart
                     options={options}
                     series={series}
                     type="pie"
                     width="450"
                 />
-            </div>
-            <Popup title={temp} openPopup={popUp} setOpenPopup={setPopUp}>
-                {/* <AllEmployees user={props.user} idR={value} /> */}
-            </Popup>
-
+            </div>}
         </>
     );
 

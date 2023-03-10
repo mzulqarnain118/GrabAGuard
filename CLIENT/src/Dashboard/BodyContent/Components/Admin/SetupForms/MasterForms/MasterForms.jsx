@@ -30,6 +30,10 @@ import SelectionType from './SelectionType';
 import LeavingStatus from './LeavingStatus';
 import Nationality from './Nationality';
 import Domicile from './Domicile';
+import UploadFile from '../../../Files/UploadFile/UploadFile';
+import FAQS from '../../../Files/UploadFile/FAQS';
+import AboutApp from '../../../Files/UploadFile/AboutApp';
+import TermsAndConditions from '../../../Files/UploadFile/TermsAndConditions';
 
 
 
@@ -89,13 +93,11 @@ export default function MasterForms() {
 
                     sx={{ borderRight: 1, borderColor: 'divider', height: '100%' }}
                 >
-                    <Tab label="Board/University" {...a11yProps(0)} />
-                    <Tab label="Degree" {...a11yProps(1)} />
-
-
-                    <Tab label="Order Type" {...a11yProps(2)} />
-                    <Tab label="File Type" {...a11yProps(3)} />
-                    <Tab label="job Nature" {...a11yProps(4)} />
+                    <Tab label="About App" {...a11yProps(0)} />
+                    <Tab label="Terms & Conditions" {...a11yProps(1)} />
+                    <Tab label="Reports" {...a11yProps(2)} />
+                    <Tab label="FAQs" {...a11yProps(3)} />
+                    {/* <Tab label="job Nature" {...a11yProps(4)} />
                     <Tab label="Leave Type" {...a11yProps(5)} />
                     <Tab label="Package Type" {...a11yProps(6)} />
                     <Tab label="Scale Type" {...a11yProps(7)} />
@@ -119,24 +121,25 @@ export default function MasterForms() {
                     <Tab label="Selection Type" {...a11yProps(22)} />
                     <Tab label="Leaving Status" {...a11yProps(23)} />
                     <Tab label="Nationality" {...a11yProps(24)} />
-                    <Tab label="Domicile" {...a11yProps(25)} />
+                    <Tab label="Domicile" {...a11yProps(25)} /> */}
 
                 </Tabs>
-                <TabPanel value={value} index={0} sx={{ width: '100% !important' }}>
-                    <BoardUniversityTab></BoardUniversityTab>
+                 <TabPanel value={value} index={0} sx={{ width: '100% !important' }}>
+                    <AboutApp/>
                 </TabPanel>
                 <TabPanel value={value} index={1} sx={{ width: '100% !important' }}>
-                    <DegreeTab></DegreeTab>
+                    <TermsAndConditions/>
                 </TabPanel>
+               
 
 
                 <TabPanel value={value} index={2}>
-                    <OrderType></OrderType>
+                    <UploadFile/>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <FileType></FileType>
+                    <FAQS/>
                 </TabPanel>
-                <TabPanel value={value} index={4}>
+                {/* <TabPanel value={value} index={4}>
                     <JobNature></JobNature>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
@@ -224,7 +227,7 @@ export default function MasterForms() {
 
                 <TabPanel value={value} index={25}>
                     <Domicile></Domicile>
-                </TabPanel>
+                </TabPanel> */}
             </Box>
 
         </Card>

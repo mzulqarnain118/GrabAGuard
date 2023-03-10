@@ -64,7 +64,6 @@ const getResponse = (response, redirect) => {
 
 }
 
-
 const ApiCallPost = (path, data, redirect = true) => {
   return axios.post(baseUrl + path, data, options)
     .then((response) => {

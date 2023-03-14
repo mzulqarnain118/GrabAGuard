@@ -1,0 +1,37 @@
+# Define the name of the workflow
+name: CI/CD Pipeline
+
+# Define the trigger for the workflow
+on:
+  push:
+    branches: [main]
+
+# Define the jobs that will be executed
+jobs:
+  build:
+    runs-on: ubuntu-latest # Use an Ubuntu instance for running the job
+
+    steps:
+    # Step 1: Check out the latest code changes
+    - uses: actions/checkout@v2 # Use the GitHub Actions checkout action
+    # Step 2: Install Node.js
+    - name: Install Node.js
+      uses: actions/setup-node@v2 # Use the GitHub Actions setup-node action
+      with:
+        node-version: 14 # Specify the version of Node.js to install
+    # Step 3: Install backend dependencies
+    - name: Install backend dependencies
+      run: cd SERVER && npm ci # Change directory to the SERVER folder and install dependencies using npm ci
+    # Step 4: Build frontend
+    - name: Build frontend
+      run: cd CLIENT && npm ci && npm run build # Change directory to the CLIENT folder and install dependencies using npm ci, then build the frontend using npm run build
+    # Step 5: Test backend
+    - name: Test backend
+      run: cd SERVER && npm run test # Change directory to the SERVER folder and run the tests using npm run test
+    # Step 6: Deploy to EC2 instance
+    - name: Deploy to EC2 instance
+      run: |
+        # Use SSH to connect to the EC2 instance and execute deployment commands
+        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project && git pull origin main" # Pull the latest code changes from the repository
+        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project/SERVER && npm ci && npm run build && pm2 restart server.js" # Change directory to the SERVER folder, install dependencies using npm ci, build the backend, and restart it using PM2
+        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project/CLIENT && rm -rf build && cp -R ../build . && pm2 restart ecosystem.config.js" # Change directory to the CLIENT folder, remove the old build, copy the new build from the parent directory, and restart the frontend using PM2

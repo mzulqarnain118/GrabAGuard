@@ -80,6 +80,14 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    previousWork: {
+      type: String,
+      trim: true,
+    },
+    summary: {
+      type: String,
+      trim: true,
+    },
     isEmailVerified: {
       type: Boolean,
       default: false,

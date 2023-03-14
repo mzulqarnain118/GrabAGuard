@@ -15,7 +15,8 @@ const createUser = {
     companyName: Joi.string(),
     companyNumber: Joi.string(),
     position: Joi.string(),
-
+    previousWork: Joi.string(),
+    summary: Joi.string(),
     role: Joi.string().required().valid('hirer','guard', 'admin'),
   }),
 };

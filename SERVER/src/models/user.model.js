@@ -55,6 +55,31 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    dob: {
+      type: Date,
+      required: true,
+      trim: true,
+    },
+    height: {
+      type: String,
+      trim: true,
+    },
+    weight: {
+      type: String,
+      trim: true,
+    },
+    companyName: {
+      type: String,
+      trim: true,
+    },
+    companyNumber: {
+      type: String,
+      trim: true,
+    },
+    position: {
+      type: String,
+      trim: true,
+    },
     isEmailVerified: {
       type: Boolean,
       default: false,

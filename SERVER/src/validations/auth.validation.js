@@ -9,6 +9,12 @@ const register = {
     lastName: Joi.string().required(),
     address: Joi.string().required(),
     phone: Joi.string().required(),
+    dob: Joi.date().required(),
+    height: Joi.string(),
+    weight: Joi.string(),
+    companyName: Joi.string(),
+    companyNumber: Joi.string(),
+    position: Joi.string(),
     role: Joi.string().required().valid('hirer', 'guard', 'admin'),
   }),
 };

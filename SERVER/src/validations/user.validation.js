@@ -52,6 +52,8 @@ const updateUser = {
       lastName: Joi.string(),
       address: Joi.string(),
       phone: Joi.string(),
+      about: Joi.string(),
+      dob: Joi.date(),
     })
     .min(1),
 };

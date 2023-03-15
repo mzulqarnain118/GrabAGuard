@@ -88,6 +88,18 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    about: {
+      type: String,
+      trim: true,
+    },
+    status: {
+      type: String,
+      enum: ['Approved', 'Pending', 'Blocked'],
+    },
+    active: {
+      type: Boolean,
+      trim: true,
+    },
     isEmailVerified: {
       type: Boolean,
       default: false,

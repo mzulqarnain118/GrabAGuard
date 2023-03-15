@@ -18,6 +18,9 @@ const register = {
     previousWork: Joi.string(),
     summary: Joi.string(),
     role: Joi.string().required().valid('hirer', 'guard', 'admin'),
+    active: Joi.boolean(),
+    about: Joi.string(),
+    status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
   }),
 };
 

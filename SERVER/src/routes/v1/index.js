@@ -2,6 +2,7 @@ const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const queryRoute = require('./queries.route');
+const bugRoute = require('./bugs.route');
 const seatRoute = require('./seats.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -20,6 +21,10 @@ const defaultRoutes = [
   {
     path: '/queries',
     route: queryRoute,
+  },
+  {
+    path: '/bugs',
+    route: bugRoute,
   },
   {
     path: '/seats',

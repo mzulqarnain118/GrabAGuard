@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
+const validator = require('validator');
 const bugsSchema = mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Invalid email');
+        }
+      },
+    },
     description: {
       type: String,
       required: true,

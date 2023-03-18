@@ -7,6 +7,7 @@ const seatRoute = require('./seats.route');
 const FileRoute = require('./files.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
+const hiredGuardsRoute = require('./hiredGuards.route');
 
 const router = express.Router();
 
@@ -34,6 +35,10 @@ const defaultRoutes = [
   {
     path: '/files',
     route: FileRoute,
+  },
+  {
+    path: '/hiredGuards',
+    route: hiredGuardsRoute,
   },
 ];
 

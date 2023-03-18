@@ -4,4 +4,5 @@ module.exports.Queries = require('./queries.model');
 module.exports.Bugs = require('./bugs.model');
 module.exports.Seats = require('./seats.model');
 module.exports.Files = require('./files.model');
+module.exports.HiredGuard = require('./hiredGuards.model');
 

@@ -16,6 +16,11 @@ const getUsers = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getActiveGuardUsers = catchAsync(async (req, res) => {
+  const result = await userService.getActiveGuardUsers();
+  res.send(result);
+});
+
 const getUser = catchAsync(async (req, res) => {
   const user = await userService.getUserById(req.params.userId);
   if (!user) {
@@ -40,4 +45,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  getActiveGuardUsers
 };

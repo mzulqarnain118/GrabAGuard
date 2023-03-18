@@ -5,9 +5,10 @@ const validate = require('../../middlewares/validate');
 
 const router = express.Router();
 
+router.get('/:id', fileController.getFile);
+
 router
   .route('/')
-  .post( validate(fileValidation.fileSchema), fileController.uploadFile)
-  .get('/:id', fileController.getFile);
+  .post(validate(fileValidation.fileSchema), fileController.uploadFile);
 
 module.exports = router;

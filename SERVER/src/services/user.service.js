@@ -28,6 +28,15 @@ const queryUsers = async (filter, options) => {
   return users;
 };
 
+const getActiveGuardUsers = async () => {
+    const query = {
+      role: "guard",
+      active: true
+    };
+    const options = {};
+    const result = await User.find(query, options);
+    return result;
+}
 /**
  * Get user by id
  * @param {ObjectId} id
@@ -86,4 +95,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  getActiveGuardUsers
 };

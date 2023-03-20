@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const hiredGuardSchema = new mongoose.Schema({
   from: {
-    type: String,
+    type: Date,
     required: true,
   },
   to: {
-    type: String,
+    type: Date,
     required: true,
   },
   location: {
@@ -16,6 +16,9 @@ const hiredGuardSchema = new mongoose.Schema({
   jobRole: {
     type: String,
     required: true,
+  },
+  skill: {
+    type: String,
   },
 });
 

@@ -55,6 +55,7 @@ const updateUser = {
       phone: Joi.string(),
       about: Joi.string(),
       dob: Joi.date(),
+      active:Joi.boolean(),
     })
     .min(1),
 };

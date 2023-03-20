@@ -55,7 +55,8 @@ const updateUser = {
       phone: Joi.string(),
       about: Joi.string(),
       dob: Joi.date(),
-      active:Joi.boolean(),
+      active: Joi.boolean(),
+      skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
     })
     .min(1),
 };

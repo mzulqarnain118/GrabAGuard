@@ -21,6 +21,8 @@ const register = {
     active: Joi.boolean(),
     about: Joi.string().allow(''),
     location: Joi.string().allow(''),
+    longitude: Joi.string().allow(''),
+    latitude: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
   }),
 };

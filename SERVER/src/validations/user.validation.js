@@ -21,6 +21,8 @@ const createUser = {
     active: Joi.boolean(),
     about: Joi.string().allow(''),
     location: Joi.string().allow(''),
+    longitude: Joi.string().allow(''),
+    latitude: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
   }),
 };
@@ -57,6 +59,7 @@ const updateUser = {
       dob: Joi.date(),
       active: Joi.boolean(),
       skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
+      status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
     })
     .min(1),
 };

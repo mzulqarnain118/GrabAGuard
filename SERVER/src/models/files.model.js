@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
 
-const FileSchema = new mongoose.Schema({
+const fileSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  fileType: {
     type: String,
     required: true
   },
-  fileUrl: {
+  type: {
+    type: String,
+    required: true
+  },
+  url: {
     type: String,
     required: true
   },
@@ -20,4 +19,6 @@ const FileSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('File', FileSchema);
+const File = mongoose.model('File', fileSchema);
+
+module.exports = File;

@@ -13,7 +13,19 @@ const hiredGuardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  longitude: {
+    type: String,
+    trim: true,
+  },
+  latitude: {
+    type: String,
+    trim: true,
+  },
   jobRole: {
+    type: String,
+    required: true,
+  },
+  guard_id: {
     type: String,
     required: true,
   },

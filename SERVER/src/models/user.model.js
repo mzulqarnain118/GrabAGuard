@@ -96,6 +96,14 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    longitude: {
+      type: String,
+      trim: true,
+    },
+    latitude: {
+      type: String,
+      trim: true,
+    },
     status: {
       type: String,
       enum: ['Approved', 'Pending', 'Blocked'],

@@ -1,8 +1,13 @@
 const Joi = require('joi');
 
-// Define Joi validation schema
-exports.fileSchema = Joi.object({
+const fileSchema = Joi.object({
   userId: Joi.string().required(),
-  fileType: Joi.string().required().valid('profile_picture', 'recognition_picture', 'bug_report'),
+  type: Joi.string().required(),
   file: Joi.any().required()
 });
+
+function validateFile(file) {
+  return fileSchema.validate(file);
+}
+
+module.exports = { validateFile };

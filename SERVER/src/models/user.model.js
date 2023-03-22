@@ -104,6 +104,10 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    fcmToken: {
+      type: String,
+      trim: true,
+    },
     status: {
       type: String,
       enum: ['Approved', 'Pending', 'Blocked'],

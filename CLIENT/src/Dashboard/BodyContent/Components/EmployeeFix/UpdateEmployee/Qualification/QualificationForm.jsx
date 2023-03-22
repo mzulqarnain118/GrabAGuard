@@ -8,6 +8,7 @@ import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
 
 
 const QualificationForm = (props) => {
+    console.log(props, "props")
     const id=props?.data?.id
     const [values, setValues] = useState(props.data ??{
         email: '',
@@ -15,7 +16,9 @@ const QualificationForm = (props) => {
         lastName: '',
         address: '',
         phone: '',
+        status: '',
     });
+    const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,7 +42,7 @@ const QualificationForm = (props) => {
                     lastName: values.lastName,
                     address: values.address,
                     phone: values.phone,
-
+                    status: values.status==1?"Approved":values.status==2?"Pending":"Blocked",
                 }
                 console.log("==========================", screenData)
   
@@ -128,7 +131,17 @@ const QualificationForm = (props) => {
                                 />
 
                             </div>
-                           
+                        <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Controls.Select fullWidth
+
+                                name="status"
+                                label="Change Status"
+                                value={values?.status === "Pending" ? 2 : values?.status === "Approved" ? 1 : values?.status === "Blocked" ? 3 : values?.status}
+                                onChange={handleChange}
+                                options={statusLookup}
+
+                            />
+                        </div>
                             <div className={`${guidelines.inputclass}`}>
                                 <Button
                                     fullWidth

@@ -35,8 +35,6 @@ const UploadComponent = (props) => {
 const UploadFile = (props) => {
 
     console.log(props);
-
-    const fileIdRef = useRef('');
     const fileDescriptionRef = useRef('');
     const [files, setFiles] = useState([]);
 
@@ -46,21 +44,14 @@ const UploadFile = (props) => {
             return;
         }
         try {
-
             let formData = new FormData();
-            formData.append("fileNo", fileIdRef.current.value);
-            formData.append("fileDescription", fileDescriptionRef.current.value);
-            formData.append("file", files[0].file, files[0].file.name);
-            console.log(formData);
-            debugger
+            formData.append("userId", localStorage.getItem('id'));
+            formData.append("type", fileDescriptionRef.current.value);
+            formData.append("file", files[0].file);
             try {
-                const result = await ApiCallPost('/insertfile', formData);
+                const result = await ApiCallPost('/files', formData);
                 console.log('Result: ', result)
-                if (result.status === 200) {
-                    console.log(result.data);
-                    if (props.setopenPopup) {
-                        props.setopenPopup(false);
-                    }
+                if (result.status === 201) {
                     Toast("Form Submitted Successfully", "success");
                 }
                 else

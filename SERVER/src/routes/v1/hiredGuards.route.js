@@ -4,6 +4,7 @@ const hiredGuardController = require('../../controllers/hiredGuards.controller')
 const router = express.Router();
 
 router.post('/', hiredGuardController.create);
+router.get('/guard/:guardId', hiredGuardController.findByGuardId);
 
 router.get('/', hiredGuardController.findAll);
 

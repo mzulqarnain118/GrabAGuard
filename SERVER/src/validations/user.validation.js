@@ -59,6 +59,10 @@ const updateUser = {
       about: Joi.string(),
       dob: Joi.date(),
       active: Joi.boolean(),
+      location: Joi.string(),
+      longitude: Joi.string(),
+      latitude: Joi.string(),
+      fcmToken: Joi.string(),
       skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
     })

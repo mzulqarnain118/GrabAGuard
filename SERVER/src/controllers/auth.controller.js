@@ -1,6 +1,12 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService } = require('../services');
+const { authService, userService, tokenService, emailService, } = require('../services');
+
+const sendOtpToPhone = catchAsync(async (req, res) => {
+  const phone = req.body.phone;
+  const otp = await authService.sendOtpToPhoneByAwsSNS(phone);
+  res.send({ otp });
+});
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -56,4 +62,5 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  sendOtpToPhone
 };

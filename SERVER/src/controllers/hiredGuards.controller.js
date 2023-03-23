@@ -1,4 +1,5 @@
 const { hiredGuardService } = require('../services');
+const { HiredGuard,User } = require('../models');
 
 exports.create = async (req, res) => {
   try {
@@ -9,6 +10,24 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.findByGuardId= async (req, res) => {
+  try {
+    const hiredGuard = await HiredGuard.findOne({ guard_id: req.params.guardId });
+    if (!hiredGuard) {
+      return res.status(404).json({ message: 'Guard not found' });
+    }
+    const { hirer_id } = hiredGuard;
+    const [guard, hirer] = await Promise.all([
+      HiredGuard.findById(hiredGuard._id),
+      User.findById(hirer_id),
+    ]);
+    console.log(guard, hirer,"a gya bro");
+    return res.json({ guard, hirer });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: err });
+  }
+};
 exports.findAll = async (req, res) => {
   try {
     const hiredGuards = await hiredGuardService.findAll();

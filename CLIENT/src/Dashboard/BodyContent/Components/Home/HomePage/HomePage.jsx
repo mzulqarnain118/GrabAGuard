@@ -92,7 +92,8 @@ const useStyles = makeStyles({
     },
     titleClick: {
         color: "white",
-        fontWeight: 1000
+        fontWeight: 1000,
+        marginTop: 19,
     },
     title: {
         color: "black",

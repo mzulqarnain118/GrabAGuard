@@ -6,17 +6,17 @@ const ApiError = require('../utils/ApiError');
 const { SNS } = require('../aws-config');
 const { tokenTypes } = require('../config/tokens');
 const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER } = process.env;
-const twilio = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN); // Replace accountSid and authToken with your Twilio credentials
+// const twilio = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN); // Replace accountSid and authToken with your Twilio credentials
 const otpGenerator = require('otp-generator');
 const AWS = require('aws-sdk');
 
 const sendOtpToPhoneByTwilio = async (phone) => {
   const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-  await twilio.messages.create({
-    body: `Your OTP is ${otp}`,
-    from: TWILIO_PHONE_NUMBER,
-    to: phone
-  });
+  // await twilio.messages.create({
+  //   body: `Your OTP is ${otp}`,
+  //   from: TWILIO_PHONE_NUMBER,
+  //   to: phone
+  // });
   return otp;
 };
 

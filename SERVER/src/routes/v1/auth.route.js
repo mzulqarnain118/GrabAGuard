@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/send-otp-to-phone', validate(authValidation.sendOtpToPhone),authController.sendOtpToPhone);
 router.post('/register', validate(authValidation.register), authController.register);
+router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);

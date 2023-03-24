@@ -3,6 +3,10 @@ const { toJSON, paginate } = require('./plugins');
 const validator = require('validator');
 const bugsSchema = mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true
+    },
     email: {
       type: String,
       required: true,
@@ -17,8 +21,13 @@ const bugsSchema = mongoose.Schema(
     description: {
       type: String,
       required: true,
-    }
+    },
+    url: {
+      type: String,
+      required: true
+    },
   },
+  
   {
     timestamps: true,
   }

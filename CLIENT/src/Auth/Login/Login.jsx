@@ -76,7 +76,7 @@ const Login = () => {
     try {
       
 
-      const result = await ApiCallPost('/auth/login', { email: values.username, password: values.password });
+      const result = await ApiCallPost('/auth/admin-panel-login', { email: values.username, password: values.password });
       if (result?.status === 200) {
         console.log(result, result?.data?.tokens?.access?.token);
         localStorage.setItem('token', result?.data?.tokens?.access?.token)

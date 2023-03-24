@@ -7,6 +7,7 @@ const userController = require('../../controllers/user.controller');
 const router = express.Router();
 
 router.get('/getActiveGuards', userController.getActiveGuardUsers);
+router.get('/skill-counts', userController.getSkillCounts);
 
 router
   .route('/')

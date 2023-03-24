@@ -124,6 +124,10 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'],
     },
+    jobStatus: {
+      type: String,
+      enum: ['Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed']
+    },
   },
   {
     timestamps: true,

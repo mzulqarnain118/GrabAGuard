@@ -25,6 +25,8 @@ const register = {
     latitude: Joi.string().allow(''),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
+    skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
+    jobStatus: Joi.string().valid('Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed'),
   }),
 };
 
@@ -36,6 +38,13 @@ const sendOtpToPhone = {
 };
 
 const login = {
+  body: Joi.object().keys({
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+  }),
+};
+
+const adminPanelLogin = {
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
@@ -83,5 +92,6 @@ module.exports = {
   forgotPassword,
   resetPassword,
   verifyEmail,
-  sendOtpToPhone
+  sendOtpToPhone,
+  adminPanelLogin
 };

@@ -34,6 +34,16 @@ const updateUser = catchAsync(async (req, res) => {
   res.send(user);
 });
 
+
+const getSkillCounts = async (req, res, next) => {
+  try {
+    const skillCounts = await userService.getSkillCounts();
+    res.json(skillCounts);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const deleteUser = catchAsync(async (req, res) => {
   await userService.deleteUserById(req.params.userId);
   res.status(httpStatus.NO_CONTENT).send();
@@ -45,5 +55,6 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
-  getActiveGuardUsers
+  getActiveGuardUsers,
+  getSkillCounts
 };

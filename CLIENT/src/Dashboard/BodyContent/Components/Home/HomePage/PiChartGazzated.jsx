@@ -4,9 +4,8 @@ import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 import HomePage from './HomePage';
 // import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
-const PieChart = (props) => {
-
-
+const PieChart = ({ data }) => {
+    const data1 = data;
     const [popUp, setPopUp] = useState();
     const [value, setValue] = useState();
     const [temp, setTemp] = useState();
@@ -14,7 +13,7 @@ const PieChart = (props) => {
         labels: ["Gazzated", "Non Gazzated"],
         colors: ['#FFEB3B', '#000000', '#f48c06', '#168aad'],
         xaxis: {
-            categories: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E']
+            categories: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection']
         },
         responsive: [
             {
@@ -44,45 +43,19 @@ const PieChart = (props) => {
 
 
     const [series, setSeries] = useState([])
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            // var result = await ApiCallGet('/get_dashboard_data');
-            // console.log(result);
-
-            let arr = [];
-            arr.push({
-                name: 'Jobs',
-                data: [10, 20, 30, 40, 50]
-            });
-            arr.push({
-                name: 'Jobs1',
-                data: [10, 20, 30, 40, 50] // array of data points
-            });
-            setSeries(arr);
-            console.log('abc',arr)
-
-
-            // console.log(Data);
-
-
-        }
-        fetchData();
-
-
-    }, []);
-    useEffect(() => {
-        if (value) {
-            setPopUp(true)
-        }
-    }, [value]);
-    useEffect(() => {
-        if (!popUp) {
-            setValue(undefined);
-        }
-    }, [popUp]);
-    console.log(series)
+    const fetchData = async () => {
+        let arr = [];
+        arr.push({
+            name: 'Completed',
+            data: data[0]
+        });
+        arr.push({
+            name: 'Pending',
+            data: data[1] // array of data points
+        });
+        setSeries(arr);
+    }
+    fetchData()
 
     return (
         <>

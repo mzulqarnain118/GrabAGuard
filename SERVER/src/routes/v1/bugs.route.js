@@ -8,9 +8,8 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), validate(bugValidation.createBug), bugsController.createBug)
-  .get(auth('getUsers'), validate(bugValidation.getBugs), bugsController.getBugs);
-
+  .post(auth('manageUsers'), bugsController.createBug)
+  .get(auth('getUsers'),  bugsController.getBugs);
 
 module.exports = router;
 

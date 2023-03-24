@@ -41,8 +41,8 @@ const getError = (error) => {
 }
 const token = localStorage.getItem('token');
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
-const baseUrl = "http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001/v1" //*! Production */FOR PRODUCTION
-// const baseUrl = "http://localhost:3001/v1" //*! Development */FOR DEVELOPMENT
+// const baseUrl = "http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001/v1" //*! Production */FOR PRODUCTION
+const baseUrl = "http://localhost:3001/v1" //*! Development */FOR DEVELOPMENT
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -146,4 +146,15 @@ const ApiCallGet = (path,payload, redirect = true) => {
   return { response, error, loading };
 };
 
-export { ApiCallGet, ApiCallPost, ApiCallPatch, ApiCallGetFile, ApiCallGetDownloadFile, ApiCallDelete };
+const ApiCallGetSimple = (path, redirect = true) => {
+
+  return axios.get(baseUrl + path, options)
+    .then((response) => {
+      return getResponse(response, redirect);
+    })
+    .catch((error) => {
+      return getError(error);
+    });
+
+}
+export { ApiCallGet, ApiCallGetSimple, ApiCallPost, ApiCallPatch, ApiCallGetFile, ApiCallGetDownloadFile, ApiCallDelete };

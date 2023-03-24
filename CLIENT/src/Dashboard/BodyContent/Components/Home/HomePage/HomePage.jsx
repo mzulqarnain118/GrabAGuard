@@ -12,7 +12,7 @@ import AccessibilityNewOutlinedIcon from '@mui/icons-material/AccessibilityNewOu
 import PieChartHirerGuard from './PieChartHirerGuard';
 import PiChartGazzated from './PiChartGazzated'
 import ReteringEmployee from './ReteringEmployee';
-import { ApiCallGet, ApiCallPost } from '../../../../../Modules/CoreModules/ApiCall';
+import { ApiCallGet, ApiCallGetSimple } from '../../../../../Modules/CoreModules/ApiCall';
 import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
 
 // Component styles
@@ -127,6 +127,28 @@ export default function HomePage(props) {
     ]
     const [loading, setLoading] = useState(false);
     const [Data, setData] = useState();
+    const [jobChartData, setJobChartData] = useState();
+
+    const getJobChartData = async () => {
+        try {
+            setLoading(true)
+            let res = await ApiCallGetSimple('/users/skill-counts');
+            if (res.status == 200) {
+                const arr = [];
+ 
+                // arr.push([res.data[0].Completed['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']])
+                // arr.push([res.data[0].Pending['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']])
+                setJobChartData(arr)
+                const [a,b,c,d,e] = [res.data[0].Completed['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']]
+                console.log("<===================RESPONSE==Policies===================>", res.data[0].Completed["Door Supervisors"], a, b, c, d, e);
+                setLoading(false)
+            }
+            return;
+        } catch (error) {
+            console.log('ERROR==getJobChartData', error)
+            setLoading(false)
+        }
+    };
     const DashBoardData = React.useCallback(() => {
         setLoading(true)
         const hirers = response?.results?.filter((item) => item.role === "hirer")
@@ -146,7 +168,7 @@ export default function HomePage(props) {
 
 
         DashBoardData()
-
+        getJobChartData()
     }, [response]);
  
 
@@ -231,7 +253,7 @@ export default function HomePage(props) {
                         <Card className={classes.card__content}>
                                         {buttonSelected === 'Users' ? 
                                                     <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />:
-                                            <PiChartGazzated user={props.user} data={Data} setData={setData} />}
+                                            <PiChartGazzated user={props.user} data={jobChartData}  />}
                         </Card>
                     </Grid>}
                         <ReteringEmployee data={response?.results} ></ReteringEmployee>

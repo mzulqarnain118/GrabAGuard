@@ -29,6 +29,40 @@ const queryUsers = async (filter, options) => {
   return users;
 };
 
+const getSkillCounts = async () => {
+  const skills = ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'];
+
+  const completedJobs = await User.countDocuments({ jobStatus: "Completed" });
+  const pendingJobs = await User.countDocuments({ jobStatus: "Pending" });
+
+  const skillCountCompleted = {};
+  const skillCountPending = {};
+
+  for (const skill of skills) {
+    const countCompleted = await User.countDocuments({ skill, jobStatus: "Completed" });
+    skillCountCompleted[skill] = countCompleted;
+
+    const countPending = await User.countDocuments({ skill, jobStatus: "Pending" });
+    skillCountPending[skill] = countPending;
+  }
+
+  const result = [
+    { 'Completed': [] },
+    { 'Pending': [] }
+  ];
+
+  for (const skill of skills) {
+    const countCompleted = skillCountCompleted[skill];
+    result[0]['Completed'].push({ [skill]: countCompleted });
+
+    const countPending = skillCountPending[skill];
+    result[1]['Pending'].push({ [skill]: countPending });
+  }
+
+  return result;
+
+};
+
 const getActiveGuardUsers = async () => {
     const query = {
       role: "guard",
@@ -96,5 +130,6 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
-  getActiveGuardUsers
+  getActiveGuardUsers,
+  getSkillCounts
 };

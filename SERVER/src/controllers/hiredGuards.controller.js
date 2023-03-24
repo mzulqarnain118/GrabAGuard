@@ -12,17 +12,20 @@ exports.create = async (req, res) => {
 
 exports.findByGuardId= async (req, res) => {
   try {
-    const hiredGuard = await HiredGuard.findOne({ guard_id: req.params.guardId });
+    const hiredGuard = await HiredGuard.find({ guard_id: req.params.guardId });
     if (!hiredGuard) {
       return res.status(404).json({ message: 'Guard not found' });
     }
-    const { hirer_id } = hiredGuard;
-    const [guard, hirer] = await Promise.all([
-      HiredGuard.findById(hiredGuard._id),
-      User.findById(hirer_id),
-    ]);
-    console.log(guard, hirer,"a gya bro");
-    return res.json({ guard, hirer });
+    // console.log(hiredGuard,"a gya bro");
+    // const { hirer_id } = hiredGuard;
+    // const [guard, hirer] = await Promise.all([
+    //   HiredGuard.findById(hiredGuard._id),
+    //   User.findById(hirer_id),
+    // ]);
+    // console.log(guard, hirer,"a gya bro");
+    // return res.json({ guard, hirer });
+    return res.status(200).json(hiredGuard);
+
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err });

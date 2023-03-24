@@ -15,7 +15,7 @@ import ReteringEmployee from './ReteringEmployee';
 import { ApiCallGet, ApiCallGetSimple } from '../../../../../Modules/CoreModules/ApiCall';
 import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
 
-// Component styles
+// Component stylesπ
 
 const useStyles = makeStyles({
     root: {
@@ -168,7 +168,7 @@ export default function HomePage(props) {
 
 
         DashBoardData()
-        getJobChartData()
+        // getJobChartData()
     }, [response]);
  
 
@@ -253,7 +253,7 @@ export default function HomePage(props) {
                         <Card className={classes.card__content}>
                                         {buttonSelected === 'Users' ? 
                                                     <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />:
-                                            <PiChartGazzated user={props.user} data={jobChartData}  />}
+                                            <PiChartGazzated user={props.user}   />}
                         </Card>
                     </Grid>}
                         <ReteringEmployee data={response?.results} ></ReteringEmployee>

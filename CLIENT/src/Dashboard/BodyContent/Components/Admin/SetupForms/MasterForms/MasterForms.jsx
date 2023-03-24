@@ -29,7 +29,7 @@ import MeritalStatus from './MaritalStatus'
 import SelectionType from './SelectionType';
 import LeavingStatus from './LeavingStatus';
 import Nationality from './Nationality';
-import Domicile from './Domicile';
+import Reports from './Reports';
 import UploadFile from '../../../Files/UploadFile/UploadFile';
 import FAQS from '../../../Files/UploadFile/FAQS';
 import AboutApp from '../../../Files/UploadFile/AboutApp';
@@ -134,7 +134,7 @@ export default function MasterForms() {
 
 
                 <TabPanel value={value} index={2}>
-                    <UploadFile/>
+                    <Reports />
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     <FAQS/>

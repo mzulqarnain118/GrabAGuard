@@ -47,15 +47,19 @@ const PieChart = ({ data }) => {
         let arr = [];
         arr.push({
             name: 'Completed',
-            data: data[0]
+            data: [2,0,0,1,0]
         });
         arr.push({
             name: 'Pending',
-            data: data[1] // array of data points
+            data: [1, 0, 2, 0, 0]
         });
         setSeries(arr);
     }
-    fetchData()
+    useEffect(() => {
+
+        fetchData();
+
+    }, [])
 
     return (
         <>

@@ -5,7 +5,8 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [main]
-
+# Define permission from actions of github
+permissions: read-all
 # Define the jobs that will be executed
 jobs:
   build:

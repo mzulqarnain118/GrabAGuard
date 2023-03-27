@@ -10,24 +10,16 @@ import MaterialReactTable from 'material-react-table';
 import { Button } from '@mui/material';
 import { FaDownload } from 'react-icons/fa';
 const QualificationTable = (props) => {
-
     const emp_id = props.id
-
     const [updation, setUpdation] = useState(false);
     const [user, setUser] = useState(false);
-
     const [addition, setAddition] = useState(false);
-
     const [tableUpdated, setTableUpdated] = useState(0);
-
-    
     const { response, error } = ApiCallGet('/users', { getUpdatedData: tableUpdated });
     console.log('====================================');
     console.log(response, "IN COMPONENT");
     console.log('====================================');
     const [tableData, setTableData] = useState([]);
-
-
     const [openPopup, setopenPopup] = useState(false);
 
     const handlePopup = (value) => {
@@ -35,8 +27,6 @@ const QualificationTable = (props) => {
         setAddition(value);
         setUpdation(value);
     }
-
-
     const [row, setRow] = useState({});
     const columns = [
 
@@ -125,7 +115,6 @@ const QualificationTable = (props) => {
 
     ]
   
-
     const onDelete = React.useCallback(
 
         async (row) => {

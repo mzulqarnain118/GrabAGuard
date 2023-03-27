@@ -112,6 +112,10 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ['Approved', 'Pending', 'Blocked'],
     },
+    userBlock: {
+      type: Boolean,
+      default: false
+    },
     active: {
       type: Boolean,
       trim: true,

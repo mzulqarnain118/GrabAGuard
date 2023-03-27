@@ -49,6 +49,18 @@ const hiredGuardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  paymentStatus: {
+    type: Boolean,
+    default: false,
+  },
+  fcmToken: {
+    type: String,
+    trim: true,
+  },
+  payment: {
+    type: String,
+    trim: true,
+  },
   skill: {
     type: String,
     enum: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'],

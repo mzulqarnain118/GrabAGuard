@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/', hiredGuardController.create);
 router.get('/guard/:guardId', hiredGuardController.findByGuardId);
+router.get('/hirer/:hirerId', hiredGuardController.hirerBookings);
 
 router.get('/', hiredGuardController.findAll);
 

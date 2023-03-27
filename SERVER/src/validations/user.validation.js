@@ -64,6 +64,7 @@ const updateUser = {
       longitude: Joi.string(),
       latitude: Joi.string(),
       fcmToken: Joi.string(),
+      userBlock:Joi.boolean(),
       skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
       jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"),

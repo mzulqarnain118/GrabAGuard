@@ -20,6 +20,8 @@ const QualificationForm = (props) => {
     });
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
     const { response, error } = ApiCallGet(`/files/${id}`);
+    console.log(response, "ImageDisplayPayload")
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 

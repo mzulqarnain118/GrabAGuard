@@ -32,6 +32,6 @@ jobs:
     - name: Deploy to EC2 instance
       run: |
         # Use SSH to connect to the EC2 instance and execute deployment commands
-        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project && git pull origin main" # Pull the latest code changes from the repository
-        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project/SERVER && npm ci && npm run build && pm2 restart server.js" # Change directory to the SERVER folder, install dependencies using npm ci, build the backend, and restart it using PM2
-        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-instance-ip-address "cd /path/to/your/project/CLIENT && rm -rf build && cp -R ../build . && pm2 restart ecosystem.config.js" # Change directory to the CLIENT folder, remove the old build, copy the new build from the parent directory, and restart the frontend using PM2
+        ssh -o StrictHostKeyChecking=no ec2-user@ec2-52-56-60-201.eu-west-2.compute.amazonaws.com "cd GrabAGuard && git pull origin main" # Pull the latest code changes from the repository
+        ssh -o StrictHostKeyChecking=no ec2-user@ec2-52-56-60-201.eu-west-2.compute.amazonaws.com "cd GrabAGuard/SERVER && npm ci && npm start" # Change directory to the SERVER folder, install dependencies using npm ci, build the backend, and restart it using PM2
+        ssh -o StrictHostKeyChecking=no ec2-user@ec2-52-56-60-201.eu-west-2.compute.amazonaws.com "cd GrabAGuard/CLIENT && rm -rf build && cp -R ../build . && pm2 restart ecosystem.config.js" # Change directory to the CLIENT folder, remove the old build, copy the new build from the parent directory, and restart the frontend using PM2

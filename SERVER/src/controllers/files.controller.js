@@ -9,4 +9,14 @@ async function getFiles(req, res, next) {
     next(err);
   }
 }
-module.exports = {  getFiles };
+
+async function getUserFiles(req, res, next) {
+  try {
+    const { userId } = req.params;
+    const files = await File.find({ userId });
+    res.json(files);
+  } catch (err) {
+    next(err);
+  }
+}
+module.exports = { getFiles, getUserFiles };

@@ -147,7 +147,6 @@ const QualificationTable = (props) => {
         []
     );
     useEffect(() => {
-        console.log("table updated",response?.results);
     }, [tableUpdated]);
     const handleSaveRow = async ({ exitEditingMode, row, values }) => {
         //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
@@ -166,11 +165,11 @@ const QualificationTable = (props) => {
                 <Button variant="contained" onClick={() => setUser(!user)}
                 > 
                     {user?"Guard":"Hirer"}</Button>
-                <MatTable
+                {response  && <MatTable
                     actionsAtStart={true}
-                    title="Employee Qualification"
+                    title="All Users"
                     columns={columns}
-                    data={tableData.length !== 0 ? tableData : response?.results}
+                    data={tableData.length !== 0 ? tableData : response }
                     onDelete={onDelete}
                     // onUpdate={update}
                     // customAdd={() => { setAddition(true); setopenPopup(true); }}
@@ -183,7 +182,7 @@ const QualificationTable = (props) => {
                     // editingMode="modal" //default
                     // enableEditing
                     // onEditingRowSave={handleSaveRow}
-                />
+                />}
 
             </Stack>
 

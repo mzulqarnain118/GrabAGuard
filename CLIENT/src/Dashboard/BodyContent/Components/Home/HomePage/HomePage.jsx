@@ -112,7 +112,7 @@ const useStyles = makeStyles({
 
 export default function HomePage(props) {
     const { response, error } = ApiCallGet('/users');
-    console.log(`%cIN-COMPONENT--------response=${response},error=${error}`, 'background: blue; color: white; font-size: 20px;margin: 30px;');
+    console.log(response)
     const [open_popup1, set_open_popup1] = React.useState(false);
     const [open_popup2, set_open_popup2] = React.useState(false);
     const [open_popup3, set_open_popup3] = React.useState(false);
@@ -256,7 +256,7 @@ export default function HomePage(props) {
                                             <PiChartGazzated user={props.user}   />}
                         </Card>
                     </Grid>}
-                        <ReteringEmployee data={response?.results} ></ReteringEmployee>
+                    {response  && <ReteringEmployee data={response} ></ReteringEmployee>}
                 </>}
         </>
     );

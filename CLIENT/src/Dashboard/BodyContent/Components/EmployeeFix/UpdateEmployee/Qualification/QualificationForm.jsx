@@ -5,7 +5,7 @@ import guidelines from '../../../../../../Modules/Guidelines/Guidelines';
 import Controls from '../../../../../../Modules/UiModules/Control/Controls';
 import { ApiCallGet, ApiCallPatch } from '../../../../../../Modules/CoreModules/ApiCall';
 import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
-
+import { Link } from 'react-router-dom';
 
 const QualificationForm = (props) => {
     console.log(props, "props")
@@ -19,7 +19,7 @@ const QualificationForm = (props) => {
         status: '',
     });
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
-
+    const { response, error } = ApiCallGet(`/files/${id}`);
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -141,6 +141,19 @@ const QualificationForm = (props) => {
                                 options={statusLookup}
 
                             />
+                        </div>
+                        <div className={`${guidelines.inputclass}`}>
+                            <Link to={{ pathname: 'showDocs', state: { data: response } }}>
+                                 <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                            >
+                                Check Docs
+                            </Button>
+                            </Link>
+                           
                         </div>
                             <div className={`${guidelines.inputclass}`}>
                                 <Button

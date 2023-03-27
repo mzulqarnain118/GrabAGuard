@@ -1,6 +1,6 @@
 
 const express = require('express');
-const { getFiles } = require('../../controllers/files.controller');
+const { getFiles, getUserFiles } = require('../../controllers/files.controller');
 const router = express.Router();
 const multer = require('multer');
 const { S3_BUCKET_NAME} = process.env;
@@ -8,6 +8,8 @@ const File = require('../../models/files.model');
 const { S3 } = require('../../aws-config');
 const upload = multer({});
 router.get('/:userId/:fileType', getFiles);
+router.get('/:userId', getUserFiles);
+
 router.post('/', upload.single('file'), (req, res) => {
   try {
     const { userId } = req.body;

@@ -10,6 +10,7 @@ import { ApiCallGet } from '../../../../Modules/CoreModules/ApiCall';
 import QualificationTable from '../EmployeeFix/UpdateEmployee/Qualification/QulaificationTable';
 import axios from 'axios';
 import UpdateEmployee from '../EmployeeFix/UpdateEmployee/UpdateEmployee';
+import ImageDisplay from '../EmployeeFix/UpdateEmployee/Qualification/DisplayDocs';
 
 const Users = () => {
     const match = useRouteMatch();
@@ -37,6 +38,7 @@ const Users = () => {
 
             >
                 <AnimatedRoute exact path={`${match.url}/`} component={QualificationTable} />
+                <AnimatedRoute exact path={`${match.url}/showDocs`} component={ImageDisplay} />
                 <AnimatedRoute exact path={`${match.url}/reset-paswsword`} component={ResetPassword} />
                 <AnimatedRoute exact path={`${match.url}/change_password`} component={QualificationTable} />
                 <AnimatedRoute exact path={`${match.url}/add-users`} render={() => <AddUser user={user} />} />

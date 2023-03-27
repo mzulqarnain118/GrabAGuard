@@ -25,6 +25,7 @@ const createUser = {
     latitude: Joi.string().allow(''),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
+    
   }),
 };
 

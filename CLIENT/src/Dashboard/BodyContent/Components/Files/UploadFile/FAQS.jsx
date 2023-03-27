@@ -40,7 +40,7 @@ const FAQS = () => {
   return (
     <>
       <Formheading label="FAQS" />
-      {localStorage.getItem("role") ==="hirer" && <Stack>
+      {localStorage.getItem("role") ==="admin" && <Stack>
         <div className='row align-items-center'>
           <div className='col-6 col-lg-6 col-md-12 col-sm-12'>
             <TextArea

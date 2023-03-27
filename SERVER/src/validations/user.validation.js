@@ -25,7 +25,7 @@ const createUser = {
     latitude: Joi.string().allow(''),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-    
+
   }),
 };
 
@@ -66,7 +66,7 @@ const updateUser = {
       fcmToken: Joi.string(),
       skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-      jobStatus: Joi.string().valid('Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed'),
+      jobStatus: Joi.string().valid('Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed', "Rejected"),
       guardRating: Joi.number().valid(1, 2, 3, 4, 5),
     })
     .min(1),

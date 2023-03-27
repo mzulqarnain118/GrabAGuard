@@ -126,7 +126,7 @@ const userSchema = mongoose.Schema(
     },
     jobStatus: {
       type: String,
-      enum: ['Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed']
+      enum: ['Pending', 'Accepted', 'Checked in', 'Checked out', 'Completed', "Rejected"],
     }
   },
   {

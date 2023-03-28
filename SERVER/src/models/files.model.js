@@ -8,7 +8,7 @@ const fileSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['profilePic', 'frontId', 'backId', 'liscenseFront', 'liscenseBack']
+    enum: ['profilePic', 'frontId', 'backId', 'liscenseFront', 'liscenseBack','proofOfAddress', 'other']
   },
   url: {
     type: String,

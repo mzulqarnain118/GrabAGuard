@@ -22,13 +22,14 @@ exports.findByGuardId= async (req, res) => {
     return res.status(200).json({ orders:hiredGuard, guardData:userData});
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ message: "check the payload properly" });
   }
 };
 
 exports.hirerBookings = async (req, res) => {
   try {
-    const hiredGuard = await HiredGuard.find({ hirer_id: req.params.hirerId });
+    const id = req.params.hirerId;
+    const hiredGuard = await HiredGuard.find({ hirer_id: id });
     if (hiredGuard.length === 0) {
       return res.status(404).json({ message: 'Hirer not found' });
     }

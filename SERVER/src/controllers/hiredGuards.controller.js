@@ -1,5 +1,5 @@
-const { hiredGuardService } = require('../services');
-const { HiredGuard,User } = require('../models');
+const { hiredGuardService, userService } = require('../services');
+const { HiredGuard } = require('../models');
 
 exports.create = async (req, res) => {
   try {
@@ -12,11 +12,14 @@ exports.create = async (req, res) => {
 
 exports.findByGuardId= async (req, res) => {
   try {
-    const hiredGuard = await HiredGuard.find({ guard_id: req.params.guardId });
-    if (!hiredGuard) {
+    const id= req.params.guardId;
+    const hiredGuard = await HiredGuard.find({ guard_id: id });
+    if (hiredGuard.length === 0) {
       return res.status(404).json({ message: 'Guard not found' });
     }
-    return res.status(200).json(hiredGuard);
+    const userData = await userService.getUserById(id);
+    console.log('userData', userData, hiredGuard);
+    return res.status(200).json({ orders:hiredGuard, guardData:userData});
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err });
@@ -26,11 +29,12 @@ exports.findByGuardId= async (req, res) => {
 exports.hirerBookings = async (req, res) => {
   try {
     const hiredGuard = await HiredGuard.find({ hirer_id: req.params.hirerId });
-    if (!hiredGuard) {
+    if (hiredGuard.length === 0) {
       return res.status(404).json({ message: 'Hirer not found' });
     }
-    return res.status(200).json(hiredGuard);
-  } catch (err) {
+    const userData = await userService.getUserById(id);
+    console.log('userData', userData, hiredGuard);
+    return res.status(200).json({ orders: hiredGuard, HirerData: userData });  } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err });
   }

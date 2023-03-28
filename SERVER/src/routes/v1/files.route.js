@@ -5,6 +5,7 @@ const router = express.Router();
 const multer = require('multer');
 const { S3_BUCKET_NAME} = process.env;
 const File = require('../../models/files.model');
+const User = require('../../models/user.model');
 const { S3 } = require('../../aws-config');
 const upload = multer({});
 router.get('/:userId/:fileType', getFiles);
@@ -22,15 +23,25 @@ router.post('/', upload.single('file'), (req, res) => {
       if (err) {
         res.status(500).json({ error: 'Error -> ' + err });
       } else {
-          console.log("RESPONSE UPLOAD",data)
+        console.log("RESPONSE UPLOAD", data)
         const newFile = new File({
           userId,
           type: type,
           url: data.Location,
         });
         await newFile.save();
-        res.status(201).json(newFile);
+        if (type === "profilePic") {
+          User.findByIdAndUpdate(userId, { profilePic: data.Location }, { new: true }, (error, updatedDocument) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(updatedDocument, "profile pic updated in User Model");
+            }
+          });
         }
+          res.status(201).json(newFile);
+         }
+         
     });
   }
   catch (err) {

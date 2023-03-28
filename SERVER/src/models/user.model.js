@@ -133,8 +133,12 @@ const userSchema = mongoose.Schema(
     jobStatus: {
       type: String,
       enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"],
-      default: 'Pending',
-    }
+    },
+    profilePic: {
+      type: String,
+      trim: true,
+      default: ''
+    },
   },
   {
     timestamps: true,

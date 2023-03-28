@@ -8,7 +8,11 @@ const router = express.Router();
 
 router.post('/send-otp-to-phone', validate(authValidation.sendOtpToPhone),authController.sendOtpToPhone);
 router.post('/register', validate(authValidation.register), authController.register);
+//LOGIN
 router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
+router.post('/google-login', authController.googleLogin);
+router.post('/facebook-login', authController.facebookLogin);
+router.post('/apple-login', authController.facebookLogin);
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
@@ -16,6 +20,8 @@ router.post('/forgot-password', validate(authValidation.forgotPassword), authCon
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
 router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
+
+
 
 module.exports = router;
 

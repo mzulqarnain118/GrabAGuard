@@ -28,6 +28,7 @@ const hiredGuardSchema = new mongoose.Schema({
   jobStatus: {
     type: String,
     enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"],
+    default: 'Pending',
   },
   guardRating: {
     type: Number,
@@ -56,6 +57,7 @@ const hiredGuardSchema = new mongoose.Schema({
   fcmToken: {
     type: String,
     trim: true,
+    default: ''
   },
   payment: {
     type: String,

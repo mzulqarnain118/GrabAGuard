@@ -28,6 +28,28 @@ const adminPanelLogin = catchAsync(async (req, res) => {
   res.send({ user, tokens });
 });
 
+// write google login
+const googleLogin = catchAsync(async (req, res) => {
+  const { email, name, googleId } = req.body;
+  const user = await authService.googleLoginUser(email, name, googleId);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
+});
+
+const facebookLogin = catchAsync(async (req, res) => {
+  const { email, name, facebookId } = req.body;
+  const user = await authService.facebookLoginUser(email, name, facebookId);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
+});
+
+const appleLogin = catchAsync(async (req, res) => {
+  const { email, name, appleId } = req.body;
+  const user = await authService.appleLoginUser(email, name, appleId);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
+});
+
 const logout = catchAsync(async (req, res) => {
   await authService.logout(req.body.refreshToken);
   res.status(httpStatus.NO_CONTENT).send();
@@ -70,5 +92,8 @@ module.exports = {
   sendVerificationEmail,
   verifyEmail,
   sendOtpToPhone,
-  adminPanelLogin
+  adminPanelLogin,
+  googleLogin,
+  facebookLogin,
+  appleLogin,
 };

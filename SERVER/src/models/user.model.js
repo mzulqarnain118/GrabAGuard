@@ -107,10 +107,12 @@ const userSchema = mongoose.Schema(
     fcmToken: {
       type: String,
       trim: true,
+      default: ''
     },
     status: {
       type: String,
       enum: ['Approved', 'Pending', 'Blocked'],
+      default: 'Pending',
     },
     userBlock: {
       type: Boolean,
@@ -118,7 +120,7 @@ const userSchema = mongoose.Schema(
     },
     active: {
       type: Boolean,
-      trim: true,
+      default: true,
     },
     isEmailVerified: {
       type: Boolean,
@@ -131,6 +133,7 @@ const userSchema = mongoose.Schema(
     jobStatus: {
       type: String,
       enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"],
+      default: 'Pending',
     }
   },
   {

@@ -79,6 +79,32 @@ const adminPanelLoginUserWithEmailAndPassword = async (email, password) => {
   return user;
 };
 
+const loginUserWithFacebook = async (email, name, facebookId) => {
+  const user = await userService.getUserByEmail(email);
+  if (!user) {
+    const user = await userService.createUser({ email, name, facebookId });
+    return user;
+  }
+  return user;
+};
+
+const loginUserWithGoogle = async (email, name, googleId) => {
+  const user = await userService.getUserByEmail(email);
+  if (!user) {
+    const user = await userService.createUser({ email, name, googleId });
+    return user;
+  }
+  return user;
+};
+
+const loginUserWithApple = async (email, name, appleId) => {
+  const user = await userService.getUserByEmail(email);
+  if (!user) {
+    const user = await userService.createUser({ email, name, appleId });
+    return user;
+  }
+  return user;
+};
 
 /**
  * Logout
@@ -159,5 +185,8 @@ module.exports = {
   verifyEmail,
   sendOtpToPhoneByTwilio,
   sendOtpToPhoneByAwsSNS,
-  adminPanelLoginUserWithEmailAndPassword
+  adminPanelLoginUserWithEmailAndPassword,
+  loginUserWithFacebook,
+  loginUserWithGoogle,
+  loginUserWithApple,
 };

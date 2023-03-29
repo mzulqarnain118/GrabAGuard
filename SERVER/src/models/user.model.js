@@ -139,6 +139,7 @@ const userSchema = mongoose.Schema(
       trim: true,
       default: ''
     },
+    blockedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   },
   {
     timestamps: true,

@@ -50,6 +50,31 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+
+const blockUser = catchAsync(async (req, res) => {
+  const userId = req.params.userId;
+  const blockedUserId = req.body.blockedUserId;
+
+  try {
+    const user = await userService.blockUser(userId, blockedUserId);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+const unblockUser = catchAsync(async (req, res) => {
+  const userId = req.params.userId;
+  const blockedUserId = req.body.blockedUserId;
+
+  try {
+    const user = await userService.unblockUser(userId, blockedUserId);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = {
   createUser,
   getUsers,
@@ -57,5 +82,7 @@ module.exports = {
   updateUser,
   deleteUser,
   getActiveGuardUsers,
-  getSkillCounts
+  getSkillCounts,
+  blockUser,
+  unblockUser,
 };

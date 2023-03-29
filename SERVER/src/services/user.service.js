@@ -123,6 +123,28 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+const blockUser = async (userId, blockedUserId) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error(`User with id ${userId} not found`);
+  }
+  if (!user.blockedUsers.includes(blockedUserId)) {
+    user.blockedUsers.push(blockedUserId);
+    await user.save();
+  }
+  return user;
+};
+
+const unblockUser = async (userId, blockedUserId) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error(`User with id ${userId} not found`);
+  }
+  user.blockedUsers = user.blockedUsers.filter(id => id != blockedUserId);
+  console.log(user.blockedUsers, "user.blockedUsers")
+  await user.save();
+  return user;
+};
 module.exports = {
   createUser,
   queryUsers,
@@ -131,5 +153,7 @@ module.exports = {
   updateUserById,
   deleteUserById,
   getActiveGuardUsers,
-  getSkillCounts
+  getSkillCounts,
+  blockUser,
+  unblockUser
 };

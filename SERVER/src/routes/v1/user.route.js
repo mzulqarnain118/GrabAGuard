@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/getActiveGuards', userController.getActiveGuardUsers);
 router.get('/skill-counts', userController.getSkillCounts);
+router.post('/:userId/block', userController.blockUser);
+router.post('/:userId/unblock', userController.unblockUser);
 
 router
   .route('/')

@@ -8,8 +8,8 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), bugsController.createBug)
-  .get(auth('getUsers'),  bugsController.getBugs);
+  .post(validate(bugValidation.createBug),bugsController.createBug)//auth('manageUsers') can be used for setting restrictions of access
+  .get(bugsController.getBugs);//auth('getUsers') can be used for setting restrictions of access
 
 module.exports = router;
 

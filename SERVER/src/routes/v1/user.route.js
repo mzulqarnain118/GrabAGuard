@@ -14,7 +14,7 @@ router.post('/:userId/unblock', userController.unblockUser);
 router
   .route('/')
   .post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
-  .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers)
+  .get(validate(userValidation.getUsers), userController.getUsers)//auth('getUsers'),
 
 
 router

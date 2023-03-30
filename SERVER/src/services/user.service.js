@@ -123,13 +123,17 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
-const blockUser = async (userId, blockedUserId) => {
+const blockUser = async (userId, blockedUserId, blockedUserName) => {
+
   const user = await User.findById(userId);
   if (!user) {
     throw new Error(`User with id ${userId} not found`);
   }
-  if (!user.blockedUsers.includes(blockedUserId)) {
-    user.blockedUsers.push(blockedUserId);
+  if (!user.blockedUsers.some(item=>item?.id===blockedUserId)) {
+    user.blockedUsers.push({id:blockedUserId,name:blockedUserName});
+
+    console.log("🚀 ~ file: user.service.js:138 ~ blockUser ~ user.blockedUsers:", user.blockedUsers)
+
     await user.save();
   }
   return user;
@@ -140,7 +144,7 @@ const unblockUser = async (userId, blockedUserId) => {
   if (!user) {
     throw new Error(`User with id ${userId} not found`);
   }
-  user.blockedUsers = user.blockedUsers.filter(id => id != blockedUserId);
+  user.blockedUsers = user.blockedUsers.filter(item => item?.id != blockedUserId);
   console.log(user.blockedUsers, "user.blockedUsers")
   await user.save();
   return user;

@@ -54,9 +54,9 @@ const deleteUser = catchAsync(async (req, res) => {
 const blockUser = catchAsync(async (req, res) => {
   const userId = req.params.userId;
   const blockedUserId = req.body.blockedUserId;
-
+  const blockedUserName = req.body.blockedUserName;
   try {
-    const user = await userService.blockUser(userId, blockedUserId);
+    const user = await userService.blockUser(userId, blockedUserId, blockedUserName);
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });

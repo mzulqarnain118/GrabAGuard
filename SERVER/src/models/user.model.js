@@ -133,15 +133,22 @@ const userSchema = mongoose.Schema(
     jobStatus: {
       type: String,
       enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"],
-      default: '',
     },
     profilePic: {
       type: String,
       trim: true,
       default: ''
     },
-    blockedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  },
+    blockedUsers: [{
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      name: {
+        type: String,
+        trim: true
+      }
+    }]  },
   {
     timestamps: true,
   }

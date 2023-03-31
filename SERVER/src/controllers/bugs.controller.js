@@ -6,13 +6,12 @@ const { bugsService } = require('../services');
 const multer = require('multer');
 const { S3_BUCKET_NAME } = process.env;
 const { S3 } = require('../aws-config');
-const upload = multer({});
-const createBug = (upload.single('file'), async (req, res) => {
+const createBug = async (req, res) => {
     try {
-      const { userId, email } = req.body;
-      const description = req.body.description.replace(/ /g, "_")
-      const file = req.file;
-      console.log("PAYLOAD", req.file, req.body)
+      const { userId, email } = req?.body;
+      const description = req?.body?.description?.replace(/ /g, "_")
+      const file = req?.file;
+      console.log("PAYLOAD", req?.file, req?.body)
       const key = `${userId}/bugs/${description}`;
       const params = { Bucket: S3_BUCKET_NAME, Key: key, Body: file.buffer, ContentType: file.mimetype };
       S3.upload(params, async (err, data) => {
@@ -31,7 +30,7 @@ const createBug = (upload.single('file'), async (req, res) => {
     }
 
   
-});
+};
 
 const getBugs = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name', 'role']);

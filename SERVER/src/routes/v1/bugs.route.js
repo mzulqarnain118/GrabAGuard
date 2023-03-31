@@ -3,12 +3,13 @@ const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const bugValidation = require('../../validations/bugs.validation');
 const bugsController = require('../../controllers/bugs.controller');
-
+const multer = require('multer');
+const upload = multer({});
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(bugValidation.createBug),bugsController.createBug)//auth('manageUsers') can be used for setting restrictions of access
+  .post( upload.single('file'), bugsController.createBug)//auth('manageUsers'),validate(bugValidation.createBug), can be used for setting restrictions of access
   .get(bugsController.getBugs);//auth('getUsers') can be used for setting restrictions of access
 
 module.exports = router;

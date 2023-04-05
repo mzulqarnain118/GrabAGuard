@@ -47,6 +47,14 @@ const hiredGuardSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  guard_name: {
+    type: String,
+    required: true,
+  },
+  hirer_name: {
+    type: String,
+    required: true,
+  },
   paymentStatus: {
     type: Boolean,
     default: false,

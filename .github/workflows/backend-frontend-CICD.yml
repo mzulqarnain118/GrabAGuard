@@ -25,7 +25,7 @@ jobs:
       run: cd SERVER && npm i # Change directory to the SERVER folder and install dependencies using npm ci
     # Step 4: Build frontend
     - name: Build frontend
-      run: cd CLIENT && npm ci && npm run build # Change directory to the CLIENT folder and install dependencies using npm ci, then build the frontend using npm run build
+      run: cd CLIENT && npm i && npm run build # Change directory to the CLIENT folder and install dependencies using npm ci, then build the frontend using npm run build
     # Step 5: Test backend
     - name: Test backend
       run: cd SERVER && npm run test # Change directory to the SERVER folder and run the tests using npm run test

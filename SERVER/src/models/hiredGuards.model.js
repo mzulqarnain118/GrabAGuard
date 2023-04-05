@@ -55,6 +55,14 @@ const hiredGuardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hirer_profile_pic: {
+    type: String,
+    trim: true,
+  },
+  guard_profile_pic: {
+    type: String,
+    trim: true,
+  },
   paymentStatus: {
     type: Boolean,
     default: false,

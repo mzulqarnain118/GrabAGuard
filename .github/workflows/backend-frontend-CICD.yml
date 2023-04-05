@@ -22,7 +22,7 @@ jobs:
         node-version: 14 # Specify the version of Node.js to install
     # Step 3: Install backend dependencies
     - name: Install backend dependencies
-      run: cd SERVER && npm ci # Change directory to the SERVER folder and install dependencies using npm ci
+      run: cd SERVER && npm i # Change directory to the SERVER folder and install dependencies using npm ci
     # Step 4: Build frontend
     - name: Build frontend
       run: cd CLIENT && npm ci && npm run build # Change directory to the CLIENT folder and install dependencies using npm ci, then build the frontend using npm run build

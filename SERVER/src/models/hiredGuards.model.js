@@ -38,27 +38,13 @@ const hiredGuardSchema = new mongoose.Schema({
     enum: [1, 2, 3, 4, 5]
   },
   guard_id: {
-    type: String,
-    required: true,
-  },
-  guard_name: {
-    type: String,
-    required: true,
-  },
-  guard_profile_pic: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   hirer_id: {
-    type: String,
-    required: true,
-  },
-  hirer_name: {
-    type: String,
-    required: true,
-  },
-  hirer_profile_pic: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   paymentStatus: {
@@ -81,7 +67,6 @@ const hiredGuardSchema = new mongoose.Schema({
 },
   {
     timestamps: true,
-  }
-);
+  });
 
 module.exports = mongoose.model('HiredGuard', hiredGuardSchema);

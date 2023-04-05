@@ -1,14 +1,42 @@
 const { hiredGuardService, userService } = require('../services');
 const { HiredGuard } = require('../models');
+const socketIo = require('socket.io');
+const express = require('express');
+const server = express().listen(3000);
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('A client connected');
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+
+  socket.on('newHiredGuard', (data) => {
+    console.log('newHiredGuard', data);
+    io.emit('newHiredGuard', data); // Broadcast the event to all connected clients
+  });
+
+  socket.on('updateHiredGuard', (data) => {
+    console.log('updateHiredGuard', data);
+    io.emit('updateHiredGuard', data); // Broadcast the event to all connected clients
+  });
+});
 
 exports.create = async (req, res) => {
   try {
     const hiredGuard = await hiredGuardService.create(req.body);
+    io.emit('newHiredGuard', hiredGuard);
     res.status(201).json(hiredGuard);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (err.name === 'ValidationError') {
+      res.status(400).json({ message: err.message });
+    } else {
+      res.status(500).json({ message: err.message });
+    }
   }
 };
+
 
 exports.findByGuardId= async (req, res) => {
   try {
@@ -66,6 +94,10 @@ exports.update = async (req, res) => {
     const hiredGuard = await hiredGuardService.update(req.params.id, req.body);
     if (!hiredGuard) {
       return res.status(404).json({ message: 'Hired guard not found' });
+    }
+    if (req.body.jobStatus === 'Accepted') {
+      // Emit the updated hiredGuard object to all clients
+      io.emit('updateHiredGuard', hiredGuard);
     }
     res.json(hiredGuard);
   } catch (err) {

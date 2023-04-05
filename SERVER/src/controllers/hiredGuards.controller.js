@@ -2,7 +2,7 @@ const { hiredGuardService, userService } = require('../services');
 const { HiredGuard } = require('../models');
 const socketIo = require('socket.io');
 const express = require('express');
-const server = express().listen(3000);
+const server = express().listen(3002);
 const io = socketIo(server);
 
 io.on('connection', (socket) => {

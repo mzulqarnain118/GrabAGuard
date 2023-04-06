@@ -10,7 +10,7 @@ permissions: read-all
 # Define the jobs that will be executed
 jobs:
   build:
-    runs-on: ubuntu-latest # Use an Ubuntu instance for running the job
+    runs-on: macos-latest # Use an Ubuntu instance for running the job
 
     steps:
     # Step 1: Check out the latest code changes

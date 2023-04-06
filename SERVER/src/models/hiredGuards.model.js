@@ -55,6 +55,14 @@ const hiredGuardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  guard_phone: {
+    type: String,
+    required: true,
+  },
+  hirer_phone: {
+    type: String,
+    required: true,
+  },
   hirer_profile_pic: {
     type: String,
     trim: true,

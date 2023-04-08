@@ -1,8 +1,10 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const Joi = require('joi');
-
 dotenv.config({ path: path.join(__dirname, '../../.env') });
+//create 2fa secret
+const speakeasy = require('speakeasy');
+const two_fa_secret = speakeasy.generateSecret({ name: "wearedevs" });
 
 const envVarsSchema = Joi.object()
   .keys({
@@ -62,4 +64,5 @@ module.exports = {
     },
     from: envVars.EMAIL_FROM,
   },
+  TWO_FACTOR_SECRET: two_fa_secret,
 };

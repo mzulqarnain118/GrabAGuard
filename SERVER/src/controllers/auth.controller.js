@@ -2,6 +2,8 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService, } = require('../services');
 const { getAuth, signInWithCredential, GoogleAuthProvider } = require('firebase/auth');
+const { TWO_FACTOR_SECRET } = require('../config/config')
+const qrcode = require('qrcode');
 
 const sendOtpToPhone = catchAsync(async (req, res) => {
   const phone = req.body.phone;
@@ -26,11 +28,28 @@ const adminPanelLogin = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.adminPanelLoginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.send({ user, tokens });
+  const qrCode = await qrcode.toDataURL(TWO_FACTOR_SECRET.otpauth_url);// Generate a QR code image
+  res.send({ user, tokens, qrCode});
+});
+
+const verify2FAToken = catchAsync(async (req, res) => {
+  const { email, password, token2FA } = req.body;
+  const user = await authService.adminPanelLoginUserWithEmailAndPassword(email, password);
+  const verified = speakeasy.totp.verify({
+    secret:TWO_FACTOR_SECRET.ascii,
+    encoding: 'ascii',
+    token: token2FA
+  });
+  if (verified) {
+    const tokens = await tokenService.generateAuthTokens(user);
+    res.send({ user, tokens });
+  } else {
+    res.send({ message: "Invalid 2FA Token" });
+  }
 });
 
 const googleLogin = catchAsync(async (req, res) => {
-  const id_token=req.body.id_token;
+  const id_token = req.body.id_token;
   // Build Firebase credential with the Google ID token.
   const credential = GoogleAuthProvider.credential(id_token);
   // Sign in with credential from the Google user.
@@ -115,4 +134,5 @@ module.exports = {
   googleLogin,
   facebookLogin,
   appleLogin,
+  verify2FAToken
 };

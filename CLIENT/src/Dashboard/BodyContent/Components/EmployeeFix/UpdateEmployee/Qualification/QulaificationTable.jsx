@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useMemo } from 'react'
 import MatTable from '../../../../../../Modules/MaterialTable/MaterialTable';
 import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
 import { Stack } from "@mui/material";
 import Popup from '../../../../../../Modules/UiModules/Core/Popup';
 import { ApiCallPost, ApiCallGet, ApiCallDelete } from '../../../../../../Modules/CoreModules/ApiCall';
 import QualificationForm from './QualificationForm';
-import DateTimeGetter from '../../../../../../Modules/UiModules/Core/DateTimeGetter';
-import MaterialReactTable from 'material-react-table';
 import { Button } from '@mui/material';
-import { FaDownload } from 'react-icons/fa';
 const QualificationTable = (props) => {
-    const emp_id = props.id
     const [updation, setUpdation] = useState(false);
     const [user, setUser] = useState(false);
     const [addition, setAddition] = useState(false);
@@ -19,7 +15,9 @@ const QualificationTable = (props) => {
     console.log('====================================');
     console.log(response, "IN COMPONENT");
     console.log('====================================');
-    const [tableData, setTableData] = useState([]);
+
+    const Hirers = useMemo(() => response?.filter((item) => item.role === "hirer"), [response]);
+    const Guards = useMemo(() => response?.filter((item) => item.role === "guard"), [response]);
     const [openPopup, setopenPopup] = useState(false);
 
     const handlePopup = (value) => {
@@ -137,13 +135,6 @@ const QualificationTable = (props) => {
     );
     useEffect(() => {
     }, [tableUpdated]);
-    const handleSaveRow = async ({ exitEditingMode, row, values }) => {
-        //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-        tableData[row.index] = values;
-        //send/receive api updates here
-        setTableData([...tableData]);
-        exitEditingMode(); //required to exit editing mode
-    };
     return (<>
         <form>
             <Stack sx={{display:"block"}}>
@@ -154,24 +145,19 @@ const QualificationTable = (props) => {
                 <Button variant="contained" onClick={() => setUser(!user)}
                 > 
                     {user?"Guard":"Hirer"}</Button>
-                {response  && <MatTable
+                <MatTable
                     actionsAtStart={true}
                     title="All Users"
                     columns={columns}
-                    data={tableData.length !== 0 ? tableData : response }
+                    data={user ? Guards : Hirers }
                     onDelete={onDelete}
-                    // onUpdate={update}
-                    // customAdd={() => { setAddition(true); setopenPopup(true); }}
                     onRowClick={(event, rowData) => {
                         console.log(event.target, rowData);
                         setRow(rowData);
                         setUpdation(true);
                         setopenPopup(true);
                     }}
-                    // editingMode="modal" //default
-                    // enableEditing
-                    // onEditingRowSave={handleSaveRow}
-                />}
+                />
 
             </Stack>
 

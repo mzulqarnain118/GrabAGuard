@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@mui/material';
-import guidelines from '../../../../../../Modules/Guidelines/Guidelines';
 import MatTable from '../../../../../../Modules/MaterialTable/MaterialTable';
 import { ApiCallPost, ApiCallGet } from "../../../../../../Modules/CoreModules/ApiCall";
-import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
+import Loading from '../../../../../../Modules/UiModules/Core/Loading/Loading';
 
 const Reports = () => {
     const { response, error } = ApiCallGet('/bugs');
-console.log(response);
-    const [values, setvalues] = React.useState('');
-    const [record, setrecord] = React.useState([]);
-    const [errors, setErrors] = useState({});
-    const [updated, setUpdated] = useState(0);
-
-
+console.log(response?.[0]);
     const columns = [
 
 
@@ -45,22 +37,13 @@ console.log(response);
         },
 
     ]
-
-
-
-
     return (
-
         <>
-
-            <div className="w-100" style={{ display: 'flex', flexDirection: 'column' }}>
-
+            {!response?<Loading/>: <div className="w-100" style={{ display: 'flex', flexDirection: 'column' }}>
                 <MatTable title="Reports" columns={columns} style={{ margin: '1rem' }}
-                    data={response[0]}
+                    data={response}
                      />
-
-
-            </div>
+            </div>}
         </>);
 
 

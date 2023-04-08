@@ -65,18 +65,7 @@ const ReteringEmployee = ({data}) => {
 
             <MatTable title="Active Jobs" columns={columns} style={{ margin: '1rem' }}
                 data={data}
-                bodyHeight="75.5vh"
-
-                // onRowClick={(event, rowData) => {
-                //     console.log(props.user);
-                //     if (props.user?.role !== 'DVO') {
-                //         console.log(event.target, rowData);
-                //         console.log(rowData.emp_id);
-                //         handleClick(rowData.emp_id)
-                //     }
-                // }}
-
-            />
+                bodyHeight="75.5vh" />
 
 
         </div>

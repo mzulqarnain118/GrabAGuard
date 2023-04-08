@@ -9,6 +9,11 @@ const createUser = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(user);
 });
 
+const getDashboardData = catchAsync(async (req, res) => {
+  const result = await userService.getDashboardData();
+  res.send(result);
+});
+
 const getUsers = catchAsync(async (req, res) => {
   // const filter = pick(req.query, ['name', 'role']);
   // const options = pick(req.query, ['sortBy', 'limit', 'page']);
@@ -85,4 +90,5 @@ module.exports = {
   getSkillCounts,
   blockUser,
   unblockUser,
+  getDashboardData,
 };

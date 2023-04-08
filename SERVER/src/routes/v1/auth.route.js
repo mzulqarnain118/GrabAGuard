@@ -10,6 +10,7 @@ router.post('/send-otp-to-phone', validate(authValidation.sendOtpToPhone),authCo
 router.post('/register', validate(authValidation.register), authController.register);
 //LOGIN
 router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
+router.post('/login/verify2FAToken', validate(authValidation.login), authController.verify2FAToken);
 router.post('/google-login', authController.googleLogin);
 router.post('/facebook-login', authController.facebookLogin);
 router.post('/apple-login', authController.facebookLogin);

@@ -6,6 +6,7 @@ const userController = require('../../controllers/user.controller');
 
 const router = express.Router();
 
+router.get('/getDashboardData', userController.getDashboardData);
 router.get('/getActiveGuards', userController.getActiveGuardUsers);
 router.get('/skill-counts', userController.getSkillCounts);
 router.post('/:userId/block', userController.blockUser);

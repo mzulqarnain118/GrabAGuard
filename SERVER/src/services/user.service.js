@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User } = require('../models');
+const { User,HiredGuard } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -63,6 +63,43 @@ const getSkillCounts = async () => {
 
 };
 
+const getDashboardData = async () => {
+  const dashboardData = await User.aggregate([
+    {
+      $group: {
+        _id: "$role",
+        count: { $sum: 1 }
+      }
+    },
+    {
+      $group: {
+        _id: null,
+        hirers: { $sum: { $cond: { if: { $eq: ["$_id", "hirer"] }, then: "$count", else: 0 } } },
+        guards: { $sum: { $cond: { if: { $eq: ["$_id", "guard"] }, then: "$count", else: 0 } } }
+      }
+    },
+    {
+      $lookup: {
+        from: "hirerGuard",
+        localField: "_id",
+        foreignField: "hirerGuardId",
+        as: "hirerGuard"
+      }
+    },
+    {
+      $project: {
+        hirers: 1,
+        guards: 1,
+        jobs: { $size: "$hirerGuard" },
+        revenue: { $sum: "$hirerGuard.payment" },
+        hours: { $sum: { $subtract: [{ $arrayElemAt: ["$hirerGuard.to", 0] }, { $arrayElemAt: ["$hirerGuard.from", 0] }] } }
+      }
+    }
+  ])
+
+  console.log(dashboardData, "dashboardData")
+ return dashboardData;
+}
 const getActiveGuardUsers = async () => {
     const query = {
       role: "guard",
@@ -159,5 +196,6 @@ module.exports = {
   getActiveGuardUsers,
   getSkillCounts,
   blockUser,
-  unblockUser
+  unblockUser,
+  getDashboardData
 };

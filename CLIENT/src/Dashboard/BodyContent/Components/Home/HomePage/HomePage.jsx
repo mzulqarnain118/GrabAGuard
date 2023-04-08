@@ -127,6 +127,9 @@ export default function HomePage(props) {
     ]
     const [loading, setLoading] = useState(false);
     const [Data, setData] = useState();
+
+    console.log("🚀 ~ file: HomePage.jsx:131 ~ HomePage ~ Data:", Data)
+
     const [jobChartData, setJobChartData] = useState();
 
     const getJobChartData = async () => {
@@ -153,6 +156,9 @@ export default function HomePage(props) {
         setLoading(true)
         const hirers = response?.results?.filter((item) => item.role === "hirer")
         const guards = response?.results?.filter((item) => item.role === "guard")
+
+        console.log("🚀 ~ file: HomePage.jsx:160 ~ DashBoardData ~ guards:", guards)
+
         const obj = {
             hirers: hirers?.length,
             guards: guards?.length,
@@ -165,8 +171,6 @@ export default function HomePage(props) {
     }, [response])
 
     useEffect(() => {
-
-
         DashBoardData()
         // getJobChartData()
     }, [response]);

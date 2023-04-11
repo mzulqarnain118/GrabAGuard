@@ -30,6 +30,38 @@ const register = {
   }),
 };
 
+const socialRegister = {
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    password: Joi.string().required().custom(password),
+    address: Joi.string().required(),
+    phone: Joi.string().required(),
+    dob: Joi.date().required(),
+    height: Joi.string().allow(''),
+    weight: Joi.string().allow(''),
+    companyName: Joi.string().allow(''),
+    companyNumber: Joi.string().allow(''),
+    position: Joi.string().allow(''),
+    previousWork: Joi.string().allow(''),
+    summary: Joi.string().allow(''),
+    role: Joi.string().required().valid('hirer', 'guard', 'admin'),
+    active: Joi.boolean(),
+    accessToken: Joi.string().allow(''),
+    refreshToken: Joi.string().allow(''),
+    socialAuth: Joi.boolean(),
+    expires: Joi.string().allow(''),
+    about: Joi.string().allow(''),
+    location: Joi.string().allow(''),
+    longitude: Joi.string().allow(''),
+    latitude: Joi.string().allow(''),
+    fcmToken: Joi.string().allow(''),
+    status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
+    skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
+    jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"),
+  }),
+};
 
 const sendOtpToPhone = {
   body: Joi.object().keys({
@@ -93,5 +125,6 @@ module.exports = {
   resetPassword,
   verifyEmail,
   sendOtpToPhone,
-  adminPanelLogin
+  adminPanelLogin,
+  socialRegister
 };

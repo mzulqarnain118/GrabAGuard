@@ -38,7 +38,7 @@ const saveToken = async (token, userId, expires, type, blacklisted = false) => {
   const tokenDoc = await Token.create({
     token,
     user: userId,
-    expires: expires.toDate(),
+    expires: expires?.toDate(),
     type,
     blacklisted,
   });
@@ -85,6 +85,18 @@ const generateAuthTokens = async (user) => {
   };
 };
 
+const saveSocialAuthToken = async (id, accessToken, refreshToken,expires) => {
+  await Token.create({ token: refreshToken, user: id, type: tokenTypes.SOCIAL, expires , blacklisted: false});
+  return {
+    access: {
+      token: accessToken,
+    },
+    refresh: {
+      token: refreshToken,
+    },
+  };
+};
+
 /**
  * Generate reset password token
  * @param {string} email
@@ -120,4 +132,5 @@ module.exports = {
   generateAuthTokens,
   generateResetPasswordToken,
   generateVerifyEmailToken,
+  saveSocialAuthToken
 };

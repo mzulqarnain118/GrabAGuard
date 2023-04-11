@@ -9,9 +9,11 @@ AWS.config.update({
 
 const S3 = new AWS.S3();
 const SNS = new AWS.SNS();
+const SES= new AWS.SES();
 
 module.exports = {
   AWS,
   S3,
-  SNS
+  SNS,
+  SES
 };

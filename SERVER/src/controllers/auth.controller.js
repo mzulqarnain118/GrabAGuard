@@ -17,6 +17,14 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
+const socialRegister = catchAsync(async (req, res) => {
+    const { accessToken, refreshToken,expires } = req.body;
+    delete req.body.accessToken;
+    delete req.body.refreshToken;
+    const user = await userService.createUser(req.body);
+  const tokens = await tokenService.saveSocialAuthToken(user.id, accessToken, refreshToken ?? "facebookRegister", expires ?? "01/01/1980");
+    res.status(httpStatus.CREATED).send({ user, tokens });
+});
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
@@ -134,5 +142,6 @@ module.exports = {
   googleLogin,
   facebookLogin,
   appleLogin,
-  verify2FAToken
+  verify2FAToken,
+  socialRegister
 };

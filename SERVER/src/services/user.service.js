@@ -64,7 +64,7 @@ const getSkillCounts = async () => {
 };
 
 const getDashboardData = async () => {
-  const dashboardData = await User.aggregate([
+  const usersData = await User.aggregate([
     {
       $group: {
         _id: "$role",
@@ -77,25 +77,35 @@ const getDashboardData = async () => {
         hirers: { $sum: { $cond: { if: { $eq: ["$_id", "hirer"] }, then: "$count", else: 0 } } },
         guards: { $sum: { $cond: { if: { $eq: ["$_id", "guard"] }, then: "$count", else: 0 } } }
       }
-    },
+    }
+  ]);
+
+  const hirerGuardData = await HiredGuard.aggregate([
     {
-      $lookup: {
-        from: "hirerGuard",
-        localField: "_id",
-        foreignField: "hirerGuardId",
-        as: "hirerGuard"
+      $group: {
+        _id: null,
+        jobs: { $sum: 1 },
+        revenue: { $sum: "$payment" },
+        hours: { $sum: { $subtract: ["$to", "$from"] } }
       }
     },
     {
       $project: {
-        hirers: 1,
-        guards: 1,
-        jobs: { $size: "$hirerGuard" },
-        revenue: { $sum: "$hirerGuard.payment" },
-        hours: { $sum: { $subtract: [{ $arrayElemAt: ["$hirerGuard.to", 0] }, { $arrayElemAt: ["$hirerGuard.from", 0] }] } }
+        _id: 0
       }
     }
-  ])
+  ]);
+
+
+
+
+  const dashboardData = {
+    hirers: usersData[0].hirers,
+    guards: usersData[0].guards,
+    jobs: hirerGuardData[0].jobs,
+    revenue: hirerGuardData[0].revenue,
+    hours: hirerGuardData[0].hours
+  };
 
   console.log(dashboardData, "dashboardData")
  return dashboardData;

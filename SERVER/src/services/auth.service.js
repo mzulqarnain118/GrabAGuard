@@ -3,9 +3,9 @@ const tokenService = require('./token.service');
 const userService = require('./user.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
-const { SNS } = require('../aws-config');
+const { SNS,SES } = require('../aws-config');
 const { tokenTypes } = require('../config/tokens');
-const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER } = process.env;
+const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, } = process.env;
 // const twilio = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN); // Replace accountSid and authToken with your Twilio credentials
 const otpGenerator = require('otp-generator');
 const AWS = require('aws-sdk');
@@ -41,6 +41,42 @@ const sendOtpToPhoneByAwsSNS = async (phone) => {
     throw new Error('Failed to send OTP');
   }
 };
+
+const sendEmailWithSES = async (email) => {
+  // define the email parameters
+  const params = {
+    Destination: {
+      ToAddresses: email
+    },
+    Message: {
+      Body: {
+        Html: {
+          Charset: 'UTF-8',
+          Data: 'HTML_FORMAT_BODY'
+        },
+        Text: {
+          Charset: 'UTF-8',
+          Data: 'PLAIN_TEXT_BODY'
+        }
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: 'EMAIL_SUBJECT'
+      }
+    },
+    Source: 'SENDER_EMAIL_ADDRESS',
+  };
+
+  // send the email
+  SES.sendEmail(params, function (err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    } else {
+      console.log(data);
+    }
+  });
+};
+
 const verifyOtp = async (phone, otp) => {
   // You can implement your own logic here to verify the OTP
   // In this example, we're just checking if the OTP matches the expected value

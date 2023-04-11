@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/send-otp-to-phone', validate(authValidation.sendOtpToPhone),authController.sendOtpToPhone);
 router.post('/register', validate(authValidation.register), authController.register);
+router.post('/register/social', validate(authValidation.socialRegister), authController.socialRegister);
 //LOGIN
 router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
 router.post('/login/verify2FAToken', validate(authValidation.login), authController.verify2FAToken);

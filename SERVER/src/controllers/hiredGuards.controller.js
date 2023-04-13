@@ -14,12 +14,10 @@ io.on('connection', (socket) => {
 
   socket.on('newHiredGuard', (data) => {
     console.log('newHiredGuard', data);
-    io.emit('newHiredGuard', data); // Broadcast the event to all connected clients
   });
 
   socket.on('updateHiredGuard', (data) => {
     console.log('updateHiredGuard', data);
-    io.emit('updateHiredGuard', data); // Broadcast the event to all connected clients
   });
 });
 
@@ -96,8 +94,7 @@ exports.update = async (req, res) => {
       return res.status(404).json({ message: 'Hired guard not found' });
     }
     if (req.body.jobStatus === 'Accepted') {
-      // Emit the updated hiredGuard object to all clients
-      io.emit('updateHiredGuard', hiredGuard);
+      io.emit('updateHiredGuard', hiredGuard); // Emit the updated hiredGuard object to all clients
     }
     res.json(hiredGuard);
   } catch (err) {

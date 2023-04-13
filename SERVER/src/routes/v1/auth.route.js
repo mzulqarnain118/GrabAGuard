@@ -12,7 +12,7 @@ router.post('/register/social', validate(authValidation.socialRegister), authCon
 //LOGIN
 router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
 router.post('/login/verify2FAToken', validate(authValidation.login), authController.verify2FAToken);
-router.post('/google-login', authController.googleLogin);
+router.post('/login/social', authController.socialLogin);
 router.post('/facebook-login', authController.facebookLogin);
 router.post('/apple-login', authController.facebookLogin);
 router.post('/login', validate(authValidation.login), authController.login);

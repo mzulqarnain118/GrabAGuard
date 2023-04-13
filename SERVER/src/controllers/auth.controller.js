@@ -56,30 +56,11 @@ const verify2FAToken = catchAsync(async (req, res) => {
   }
 });
 
-const googleLogin = catchAsync(async (req, res) => {
-  const id_token = req.body.id_token;
-  // Build Firebase credential with the Google ID token.
-  const credential = GoogleAuthProvider.credential(id_token);
-  // Sign in with credential from the Google user.
-  const auth = getAuth();
-  signInWithCredential(auth, credential).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-
-    console.log("🚀 ~ file: auth.controller.js:47 ~ googleLogin ~ credential:", credential)
-    
-    // ...
-  });
-  // const { email, name, googleId } = req.body;
-  // const user = await authService.googleLoginUser(email, name, googleId);
-  // const tokens = await tokenService.generateAuthTokens(user);
-  // res.send({ user, tokens });
+const socialLogin = catchAsync(async (req, res) => {
+  const { email } = req.body;
+  const user = await authService.loginUserWithSocialAuth(email);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
 });
 
 const facebookLogin = catchAsync(async (req, res) => {
@@ -139,9 +120,9 @@ module.exports = {
   verifyEmail,
   sendOtpToPhone,
   adminPanelLogin,
-  googleLogin,
   facebookLogin,
   appleLogin,
   verify2FAToken,
-  socialRegister
+  socialRegister,
+  socialLogin
 };

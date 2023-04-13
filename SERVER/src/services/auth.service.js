@@ -103,6 +103,14 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   return user;
 };
 
+const loginUserWithSocialAuth = async (email) => {
+  const user = await userService.getUserByEmail(email);
+  if (!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email');
+  }
+  return user;
+};
+
 const adminPanelLoginUserWithEmailAndPassword = async (email, password) => {
   const user = await userService.getUserByEmail(email);
   if (!user || !(await user.isPasswordMatch(password))) {
@@ -225,4 +233,5 @@ module.exports = {
   loginUserWithFacebook,
   loginUserWithGoogle,
   loginUserWithApple,
+  loginUserWithSocialAuth
 };

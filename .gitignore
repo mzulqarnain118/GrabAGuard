@@ -1,6 +1,7 @@
 # Dependencies
 node_modules
 /CLIENT/node_modules
+/CLIENT/constants.js
 /SERVER/node_modules/*
 # yarn error logs
 yarn-error.log
@@ -11,7 +12,6 @@ yarn-error.log
 
 # Code coverage
 coverage
-
 
 .pnp
 .pnp.js

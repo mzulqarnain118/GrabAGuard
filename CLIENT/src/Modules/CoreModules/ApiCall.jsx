@@ -3,7 +3,7 @@ import axios from 'axios';
 import FileDownload from 'js-file-download';
 import React, { useState, useEffect } from 'react';
 import Toast from '../UiModules/Core/Toast/Toast';
-import { API_BASE_URL } from '../../../constants';
+import { API_BASE_URL } from '../../constants';
 
 const getError = (error) => {
   if (error.response) {

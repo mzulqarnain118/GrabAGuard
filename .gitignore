@@ -1,7 +1,7 @@
 # Dependencies
 node_modules
 /CLIENT/node_modules
-/CLIENT/constants.js
+#/CLIENT/src/constants.js
 /SERVER/node_modules/*
 # yarn error logs
 yarn-error.log

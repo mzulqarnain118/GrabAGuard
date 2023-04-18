@@ -71,6 +71,14 @@ const QualificationTable = (props) => {
             headerStyle: { textAlign: "left" },hidden:user
         },
         {
+            title: "Skill",
+            field: "skill",
+            type: "string",
+            editable: () => false,
+            cellStyle: { textAlign: "left" },
+            headerStyle: { textAlign: "left" }, hidden: !user
+        },
+        {
             title: "Status",
             field: "status",
             type: "text",

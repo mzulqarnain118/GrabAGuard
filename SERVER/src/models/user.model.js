@@ -143,6 +143,11 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false
     },
+    hourlyRate: {
+      type: String,
+      trim: true,
+      default: ''
+    },
     blockedUsers: [{
       id: {
         type: mongoose.Schema.Types.ObjectId,

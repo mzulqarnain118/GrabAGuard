@@ -1,24 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Card, CardContent, Stack, TextField, Button } from '@mui/material';
 import guidelines from "../../../../../Modules/Guidelines/Guidelines";
-import Chip from '@mui/material/Chip';
-import { styled } from '@mui/material/styles';
 import TextArea from "../../../../../Modules/UiModules/Core/TextArea";
 import FileUploader from '../../../../../Modules/FileUploader/FileUploader';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import DatePicker from '@mui/lab/DatePicker/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import Toast from '../../../../../Modules/UiModules/Core/Toast/Toast';
 import { ApiCallGet, ApiCallPost } from '../../../../../Modules/CoreModules/ApiCall';
-import { useForm, Form } from '../../../../../Modules/UiModules/Control/useForm';
-import Select from '../../../../../Modules/UiModules/Control/Select';
-// import selectFormat from "../../../../../Modules/Utility/SelectFormatter";
-import listformatter from '../../../../../Modules/Utility/ListFormatter';
-import styles from "./UploadFile.module.css";
-// import { MenuItem } from '@mui/material';
-import { Autocomplete, createFilterOptions } from '@mui/material';
 import Formheading from '../../../../../Modules/UiModules/Control/Formheading';
-import Controls from '../../../../../Modules/UiModules/Control/Controls';
 
 const UploadComponent = (props) => {
 
@@ -32,9 +19,9 @@ const UploadComponent = (props) => {
 
 }
 
-const UploadFile = (props) => {
+const UploadFile = ({type,accept}) => {
 
-    console.log(props);
+    console.log(type);
     const fileDescriptionRef = useRef('');
     const [files, setFiles] = useState([]);
 
@@ -46,7 +33,7 @@ const UploadFile = (props) => {
         try {
             let formData = new FormData();
             formData.append("userId", localStorage.getItem('id'));
-            formData.append("type", fileDescriptionRef.current.value);
+            formData.append("type", type ?? fileDescriptionRef.current.value);
             formData.append("file", files[0].file);
             try {
                 const result = await ApiCallPost('/files', formData);
@@ -72,20 +59,23 @@ const UploadFile = (props) => {
                 <Stack>
                        
                     <div className='row align-items-center'>
-                        <div className='col-6 col-lg-6 col-md-12 col-sm-12'>
+                    {!type && <div className='col-6 col-lg-6 col-md-12 col-sm-12'>
                             <TextArea
                                 required
                                 label="Description" name="description"
                                 inputRef={fileDescriptionRef}
                             />
-                        </div>
+                        </div>}
 
-                        <div className="col-6 col-lg-6 col-md-12 col-sm-12 pl-4 pr-4 pt-1 pb-2">
+                    {type?<div className="col-12 pl-4 pr-4 pt-1 pb-2">
                             <FileUploader files={files} setFiles={setFiles} label='Upload File'
-                                accept="image/*,.pdf" limit={1}
-                            />
+                                accept={accept ?? "image/*,.pdf"} limit={1}
+                        /></div>
+                        :<div className="col-6 col-lg-6 col-md-12 col-sm-12 pl-4 pr-4 pt-1 pb-2">
+                            <FileUploader files={files} setFiles={setFiles} label='Upload File'
+                                accept={accept ?? "image/*,.pdf"} limit={1}
+                            /></div>}
 
-                        </div>
                     </div>
                     <Button variant="contained" style={{
                         float: 'right', backgroundColor: '#872b26', alignItems: 'right', marginTop: '1rem'

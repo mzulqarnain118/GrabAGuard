@@ -127,9 +127,6 @@ export default function HomePage(props) {
     ]
     const [loading, setLoading] = useState(false);
     const [Data, setData] = useState();
-
-    console.log("🚀 ~ file: HomePage.jsx:131 ~ HomePage ~ Data:", Data)
-
     const [jobChartData, setJobChartData] = useState();
 
     const getJobChartData = async () => {
@@ -137,13 +134,8 @@ export default function HomePage(props) {
             setLoading(true)
             let res = await ApiCallGetSimple('/users/skill-counts');
             if (res.status == 200) {
-                const arr = [];
- 
-                // arr.push([res.data[0].Completed['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']])
-                // arr.push([res.data[0].Pending['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']])
-                setJobChartData(arr)
-                const [a,b,c,d,e] = [res.data[0].Completed['Door Supervisors'], res.data[0].Completed['Key Holding and Alarm Response'], res.data[0].Completed['Dog Handling Service'], res.data[0].Completed['CCTV Monitoring'], res.data[0].Completed['VIP Close Protection']]
-                console.log("<===================RESPONSE==Policies===================>", res.data[0].Completed["Door Supervisors"], a, b, c, d, e);
+                console.log("<===================RESPONSE==getJobChartData===================>", [{ name: "Pending", data: res.data[0].Pending }, { name: "Completed", data: res.data[0].Completed }]);
+                setJobChartData([{name:"Pending", data:res.data[0].Pending},{name:"Completed", data:res.data[0].Completed}])
                 setLoading(false)
             }
             return;
@@ -152,27 +144,26 @@ export default function HomePage(props) {
             setLoading(false)
         }
     };
-    const DashBoardData = React.useCallback(() => {
+    const DashBoardData = React.useCallback(async() => {
         setLoading(true)
-        const hirers = response?.results?.filter((item) => item.role === "hirer")
-        const guards = response?.results?.filter((item) => item.role === "guard")
-
-        console.log("🚀 ~ file: HomePage.jsx:160 ~ DashBoardData ~ guards:", guards)
-
-        const obj = {
-            hirers: hirers?.length,
-            guards: guards?.length,
-            jobs: response?.results?.length,
-            revenue: response?.results?.length,
-            hours: response?.results?.length,
+        try {
+            setLoading(true)
+            let res = await ApiCallGetSimple('/users/getDashboardData');
+            if (res.status == 200) {
+                setData(res.data)
+                setLoading(false)
+            }
+                console.log("🚀 ~ file: HomePage.jsx:166 ~ DashBoardData ~ res.data:", res?.data)
+            return;
+        } catch (error) {
+            console.log('ERROR==getJobChartData', error)
+            setLoading(false)
         }
-        setData(obj)
-        setLoading(false)
-    }, [response])
+    }, [Data])
 
     useEffect(() => {
         DashBoardData()
-        // getJobChartData()
+        getJobChartData()
     }, [response]);
  
 
@@ -257,7 +248,7 @@ export default function HomePage(props) {
                         <Card className={classes.card__content}>
                                         {buttonSelected === 'Users' ? 
                                                     <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />:
-                                            <PiChartGazzated user={props.user}   />}
+                                <PiChartGazzated data={jobChartData}   />}
                         </Card>
                     </Grid>}
                     {response  && <ReteringEmployee data={response} ></ReteringEmployee>}

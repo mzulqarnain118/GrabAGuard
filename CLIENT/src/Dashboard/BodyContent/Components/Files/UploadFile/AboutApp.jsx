@@ -10,6 +10,8 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import { UploadFile } from './UploadFile';
+import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "800px",
@@ -46,14 +48,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 function AboutApp() {
+
+  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/AboutApp`);
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-        <Box className={classes.section}>
-        <Typography variant="h4" className={classes.title}>
+      <Box className={classes.section}>
+        <UploadFile type="AboutApp" accept=".doc,.pdf" />
+        <iframe src={response?.[0]?.url} width="100%" height="1000px"></iframe>
+        {/* <Typography variant="h4" className={classes.title}>
           About Grab A Guard
         </Typography>
         <Typography variant="body1">
@@ -100,7 +105,7 @@ function AboutApp() {
           <Typography variant="body1" ml={1}>
             <Link href="tel">1-800-GRABAGUARD</Link>
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

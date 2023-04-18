@@ -53,12 +53,12 @@ const getSkillCounts = async () => {
 
   for (const skill of skills) {
     const countCompleted = skillCountCompleted[skill];
-    result[0]['Completed'].push({ [skill]: countCompleted });
-
+    result[0]['Completed'].push( countCompleted);
     const countPending = skillCountPending[skill];
-    result[1]['Pending'].push({ [skill]: countPending });
+    // result[1]['Pending'].push({ [skill]: countPending });
+        result[1]['Pending'].push( countPending);
   }
-
+console.log(result,"result")
   return result;
 
 };

@@ -7,7 +7,8 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-
+import { UploadFile } from './UploadFile';
+import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "800px",
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 function TermsAndConditions() {
   const classes = useStyles();
   const [agree, setAgree] = useState(false);
+  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/TermsAndConditions`);
 
   const handleAgreeChange = (event) => {
     setAgree(event.target.checked);
@@ -57,7 +59,9 @@ function TermsAndConditions() {
 
   return (
     <Box className={classes.root}>
-      <Typography variant="h4" className={classes.title}>
+      <UploadFile type="TermsAndConditions" accept=".doc,.pdf" />
+      <iframe src={response?.[0]?.url} width="100%" height="1000px"></iframe>
+      {/* <Typography variant="h4" className={classes.title}>
         Terms and Conditions
       </Typography>
       <Typography variant="body1">
@@ -139,7 +143,7 @@ function TermsAndConditions() {
         <Link href="#" className={classes.link} underline="always" disabled={!agree}>
           Continue
         </Link>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

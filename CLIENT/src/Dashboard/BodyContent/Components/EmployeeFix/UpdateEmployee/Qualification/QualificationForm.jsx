@@ -17,8 +17,10 @@ const QualificationForm = (props) => {
         address: '',
         phone: '',
         status: '',
+        skill: '',
     });
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
+    const [skillsLookup, setskillsLookup] = useState([{ id: 1, title: 'Door Supervisors' }, { id: 2, title: 'Key Holding and Alarm Response' }, { id: 3, title: 'Dog Handling Service' }, { id: 4, title: 'CCTV Monitoring' }, { id: 5, title: 'VIP Close Protection' }]);
     const { response, error } = ApiCallGet(`/files/${id}`);
     console.log(response, "ImageDisplayPayload")
 
@@ -44,7 +46,8 @@ const QualificationForm = (props) => {
                     lastName: values.lastName,
                     address: values.address,
                     phone: values.phone,
-                    status: values.status==1?"Approved":values.status==2?"Pending":"Blocked",
+                    status: values.status == 1 ? "Approved" : values.status == 2 ? "Pending" : "Blocked",
+                    skill: values.skill == 1 ? "Door Supervisors" : values.skill == 2 ? "Key Holding and Alarm Response" : values.skill == 3 ? "Dog Handling Service" : values.skill == 4 ? "CCTV Monitoring" : "VIP Close Protection",
                 }
                 console.log("==========================", screenData)
   
@@ -144,6 +147,18 @@ const QualificationForm = (props) => {
 
                             />
                         </div>
+
+                      {props?.data?.role==="guard" &&  <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Controls.Select fullWidth
+
+                                name="skill"
+                                label="Change Skill"
+                                value={values?.skill === "Door Supervisors"? 1 : values?.skill === "Key Holding and Alarm Response" ? 2 : values?.skill === "Dog Handling Service" ? 3 : values?.skill === "CCTV Monitoring" ? 4 : values?.skill === "VIP Close Protection" ? 5 : values?.skill}
+                                onChange={handleChange}
+                                options={skillsLookup}
+
+                            />
+                        </div>}
                         <div className={`${guidelines.inputclass}`}>
                             <Link to={{ pathname: 'showDocs', state: { data: response } }}>
                                  <Button

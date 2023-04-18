@@ -8,6 +8,26 @@
   src: url(https://fonts.gstatic.com/s/materialicons/v117/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
 
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  font-size: 14px;
+}
+
+.custom-file-upload:hover {
+  border-color: #aaa;
+}
+
+.custom-file-upload:active {
+  background-color: #ddd;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

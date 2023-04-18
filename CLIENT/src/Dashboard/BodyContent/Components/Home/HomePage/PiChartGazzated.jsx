@@ -5,7 +5,10 @@ import HomePage from './HomePage';
 // import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
 const PieChart = ({ data }) => {
-    const data1 = data;
+
+    console.log("🚀 ~ file: PiChartGazzated.jsx:9 ~ PieChart ~ data:", data)
+
+    
     const [popUp, setPopUp] = useState();
     const [value, setValue] = useState();
     const [temp, setTemp] = useState();
@@ -53,13 +56,11 @@ const PieChart = ({ data }) => {
             name: 'Pending',
             data: [1, 0, 2, 0, 0]
         });
-        setSeries(arr);
+        
     }
     useEffect(() => {
-
-        fetchData();
-
-    }, [])
+        setSeries(data);
+    }, [data])
 
     return (
         <>

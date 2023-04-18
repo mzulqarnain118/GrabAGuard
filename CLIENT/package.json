@@ -37,6 +37,7 @@
         "material-table": "1.62.0",
         "moment": "^2.29.4",
         "node-sass": "^7.0.1",
+        "pdfjs": "^2.4.7",
         "pdfmake": "^0.2.4",
         "react": "^17.0.2",
         "react-apexcharts": "^1.4.0",
@@ -71,7 +72,7 @@
         "react-error-overlay": "6.0.9"
     },
     "scripts": {
-        "start": "vite",
+        "start": "vite --port 3003",
         "start-react": "react-scripts start",
         "build": "react-scripts build",
         "build-vite": "vite build",

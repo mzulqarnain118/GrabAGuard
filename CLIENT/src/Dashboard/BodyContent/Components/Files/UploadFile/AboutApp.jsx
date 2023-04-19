@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { UploadFile } from './UploadFile';
 import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
+import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "800px",
@@ -51,14 +52,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AboutApp() {
   const [tableUpdated, setTableUpdated] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/AboutApp`, { getUpdatedData: tableUpdated });
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
       <Box className={classes.section}>
-        <UploadFile type="AboutApp" accept=".doc,.pdf" setTableUpdated={setTableUpdated} />
-        <iframe src={response?.[0]?.url} width="100%" height="1000px"></iframe>
+        <UploadFile type="AboutApp" accept=".doc,.pdf" setTableUpdated={setTableUpdated} setLoading={setLoading} isExists={response?.length !== 0 ? response?.[0]?._id :false} />
+        {loading ? <Loading /> : <iframe src={response?.[0]?.url} width="100%" height="1000px" />}
         {/* <Typography variant="h4" className={classes.title}>
           About Grab A Guard
         </Typography>

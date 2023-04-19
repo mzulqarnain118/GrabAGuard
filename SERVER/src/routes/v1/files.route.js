@@ -53,30 +53,32 @@ router.post('/', upload.single('file'), (req, res) => {
 router.patch('/:id', upload.single('file'), async(req, res) => {
   try {
     console.log("PAYLOAD", req.params.id, req.params)
-    const file = await File.findById(req.params.id);
-    if (!file) {
-      throw new Error('File not found');
-    }
-    console.log("PAYLOAD", file)
-
-    const { userId, type } = file;
+    const { userId } = req.body;
+    const fileId= req.params.id;
+    const type = req.body.type.replace(/ /g, "_")
+    const file = req.file;
     const key = `${userId}/${type}`;
-    const params = { Bucket: S3_BUCKET_NAME, Key: key, Body: file.buffer, ContentType: file.mimetype, ACL: 'public-read' };
+    const params = { Bucket: S3_BUCKET_NAME, Key: key, Body: file.buffer, ContentType: file.mimetype };
     S3.upload(params, async (err, data) => {
       if (err) {
         res.status(500).json({ error: 'Error -> ' + err });
       } else {
-        console.log("RESPONSE UPLOAD", data)
-        Object.assign(File, {
-          url: data.Location,
+    
+        const newFile=await File.findByIdAndUpdate(fileId, { url: data.Location }, { new: true }, (error, updatedDocument) => {
+            if (error) {
+              console.log("🚀 ~ file: files.route.js:70 ~ newFile ~ error:", error)
+            } else {
+              console.log("🚀 ~ file: files.route.js:73 ~ newFile ~ updatedDocument:", updatedDocument)
+            }
         });
-        await file.save();
-        res.status(200).json(file);      }
+        console.log("🚀 ~ file: files.route.js:75 ~ newFile ~ newFile:", newFile)
+        res.status(200).json(newFile);
+      }
+
     });
   }
   catch (err) {
     console.log("error", err)
   }
-
 });
 module.exports = router;

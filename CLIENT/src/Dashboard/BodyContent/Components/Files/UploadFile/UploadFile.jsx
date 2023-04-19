@@ -4,7 +4,7 @@ import guidelines from "../../../../../Modules/Guidelines/Guidelines";
 import TextArea from "../../../../../Modules/UiModules/Core/TextArea";
 import FileUploader from '../../../../../Modules/FileUploader/FileUploader';
 import Toast from '../../../../../Modules/UiModules/Core/Toast/Toast';
-import { ApiCallGet, ApiCallPost } from '../../../../../Modules/CoreModules/ApiCall';
+import { ApiCallGet, ApiCallPatch, ApiCallPost } from '../../../../../Modules/CoreModules/ApiCall';
 import Formheading from '../../../../../Modules/UiModules/Control/Formheading';
 
 const UploadComponent = (props) => {
@@ -19,41 +19,41 @@ const UploadComponent = (props) => {
 
 }
 
-const UploadFile = ({ type, accept, setTableUpdated }) => {
-
-    console.log(type);
+const UploadFile = ({ type, accept, setTableUpdated, setLoading, isExists }) => {
     const fileDescriptionRef = useRef('');
     const [files, setFiles] = useState([]);
-
     const handleSubmit = async (e) => {
         if (files.length == 0) {
             Toast("Please Upload atleast one file!!", "error")
             return;
         }
         try {
+            setLoading(true);
             let formData = new FormData();
-            formData.append("userId", localStorage.getItem('id'));
+            const id = localStorage.getItem('id')
+            formData.append("userId", id);
             formData.append("type", type ?? fileDescriptionRef.current.value);
             formData.append("file", files[0].file);
-            try {
-                const result = await ApiCallPost('/files', formData);
-                console.log('Result: ', result)
-                if (result.status === 201) {
-                    Toast("Form Submitted Successfully", "success");
+                let result;
+                if (isExists) {
+                    result = await ApiCallPatch(`/files/${isExists}`, formData)
+                }
+                else {
+                    result = await ApiCallPost('/files', formData);
+                }
+                console.log('Result: ', result, result.status)
+                if (result.status === 201 || result.status === 200) {
+                    Toast("File Uploaded Successfully", "success");
                     setTableUpdated(old => old + 1);
-
+                    setLoading(false);
                 }
                 else
                     Toast("Could Not Upload File", "error");
-
-            } catch (error) {
-                Toast("Something went wrong", "error");
-            }
-
+                setLoading(false);
         } catch (error) {
             Toast("Something went wrong", "error");
+            setLoading(false);
         }
-
     }
 
     return (

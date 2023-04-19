@@ -10,10 +10,12 @@ import {
 } from '@mui/icons-material';
 import AccessibilityNewOutlinedIcon from '@mui/icons-material/AccessibilityNewOutlined';
 import PieChartHirerGuard from './PieChartHirerGuard';
-import PiChartGazzated from './PiChartGazzated'
+import PiChartGazzated from './JobsBarChart'
 import ReteringEmployee from './ReteringEmployee';
 import { ApiCallGet, ApiCallGetSimple } from '../../../../../Modules/CoreModules/ApiCall';
 import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
+import JobsBarChart from './JobsBarChart';
+import RevenueChart from './RevenueChart';
 
 // Component stylesπ
 
@@ -128,19 +130,33 @@ export default function HomePage(props) {
     const [loading, setLoading] = useState(false);
     const [Data, setData] = useState();
     const [jobChartData, setJobChartData] = useState();
+    const [revenueChartData, setRevenueChartData] = useState();
 
     const getJobChartData = async () => {
         try {
             setLoading(true)
             let res = await ApiCallGetSimple('/users/skill-counts');
             if (res.status == 200) {
-                console.log("<===================RESPONSE==getJobChartData===================>", [{ name: "Pending", data: res.data[0].Pending }, { name: "Completed", data: res.data[0].Completed }]);
-                setJobChartData([{name:"Pending", data:res.data[0].Pending},{name:"Completed", data:res.data[0].Completed}])
+                setJobChartData([{ name: "Pending", data: res?.data?.[1]?.data?.Pending }, { name: "Completed", data: res?.data?.[0]?.data?.Completed }])
                 setLoading(false)
             }
             return;
         } catch (error) {
             console.log('ERROR==getJobChartData', error)
+            setLoading(false)
+        }
+    };
+    const getRevenueChartData = async () => {
+        try {
+            setLoading(true)
+            let res = await ApiCallGetSimple('/users/revenueByMonthYear');
+            if (res.status == 200) {
+                setRevenueChartData(res.data)
+                setLoading(false)
+            }
+            return;
+        } catch (error) {
+            console.log('ERROR==getRevenueChartData', error)
             setLoading(false)
         }
     };
@@ -164,6 +180,7 @@ export default function HomePage(props) {
     useEffect(() => {
         DashBoardData()
         getJobChartData()
+        getRevenueChartData()
     }, [response]);
  
 
@@ -246,9 +263,10 @@ export default function HomePage(props) {
                             </div>
                         </div>
                         <Card className={classes.card__content}>
-                                        {buttonSelected === 'Users' ? 
-                                                    <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} />:
-                                <PiChartGazzated data={jobChartData}   />}
+                            {buttonSelected === 'Users' ?
+                                <PieChartHirerGuard hirers={Data?.hirers} guards={Data?.guards} /> :
+                                buttonSelected === 'Jobs' ? <JobsBarChart data={jobChartData} categories={['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection']} /> :
+                                    <RevenueChart data={revenueChartData} categories={["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}/>}
                         </Card>
                     </Grid>}
                     {response  && <ReteringEmployee data={response} ></ReteringEmployee>}

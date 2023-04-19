@@ -4,19 +4,23 @@ import { ApiCallGet } from '../../../../../Modules/CoreModules/ApiCall';
 import HomePage from './HomePage';
 // import AllEmployees from '../../EmployeeFix/AllEmployees/AllEmployees';
 import Popup from '../../../../../Modules/UiModules/Core/Popup';
-const PieChart = ({ data }) => {
+const JobsBarChart = ({ data,categories }) => {
 
-    console.log("🚀 ~ file: PiChartGazzated.jsx:9 ~ PieChart ~ data:", data)
+    console.log("🚀 ~ file: PiChartGazzated.jsx:9 ~ JobsBarChart ~ data:", data, categories)
 
     
     const [popUp, setPopUp] = useState();
     const [value, setValue] = useState();
     const [temp, setTemp] = useState();
+    const [series, setSeries] = useState([])
+    useEffect(() => {
+        setSeries(data);
+    }, [data, categories])
     const [options, setOptions] = useState({
-        labels: ["Gazzated", "Non Gazzated"],
+        labels: categories,
         colors: ['#FFEB3B', '#000000', '#f48c06', '#168aad'],
         xaxis: {
-            categories: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection']
+            categories: categories
         },
         responsive: [
             {
@@ -45,23 +49,6 @@ const PieChart = ({ data }) => {
     })
 
 
-    const [series, setSeries] = useState([])
-    const fetchData = async () => {
-        let arr = [];
-        arr.push({
-            name: 'Completed',
-            data: [2,0,0,1,0]
-        });
-        arr.push({
-            name: 'Pending',
-            data: [1, 0, 2, 0, 0]
-        });
-        
-    }
-    useEffect(() => {
-        setSeries(data);
-    }, [data])
-
     return (
         <>
             <div id="chart">
@@ -81,4 +68,4 @@ const PieChart = ({ data }) => {
 
 }
 
-export default PieChart;
+export default JobsBarChart;

@@ -12,3 +12,5 @@ exports.findOne = (id) => HiredGuard.findById(id);
 exports.update = (id, data) => HiredGuard.findByIdAndUpdate(id, data, { new: true });
 
 exports.delete = (id) => HiredGuard.findByIdAndDelete(id);
+
+exports.findByGuardId = (id, skill) => HiredGuard.updateMany({ guard_id: id }, { skill: skill });

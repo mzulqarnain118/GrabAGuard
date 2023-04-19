@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/getDashboardData', userController.getDashboardData);
 router.get('/getActiveGuards', userController.getActiveGuardUsers);
 router.get('/skill-counts', userController.getSkillCounts);
+router.get('/revenueByMonthYear', userController.getRevenueByMonthYear);
 router.post('/:userId/block', userController.blockUser);
 router.post('/:userId/unblock', userController.unblockUser);
 

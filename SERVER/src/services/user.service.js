@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const { User,HiredGuard } = require('../models');
 const ApiError = require('../utils/ApiError');
-
+const { findByGuardId }=require('./hiredGuards.service');
 /**
  * Create a user
  * @param {Object} userBody
@@ -29,39 +29,128 @@ const queryUsers = async (filter, options) => {
   return users;
 };
 
-const getSkillCounts = async () => {
-  const skills = ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'];
+const getRevenueByMonthYear = async () => {
+  const revenue = await HiredGuard.aggregate([
+    {
+      $addFields: {
+        month: { $dateToString: { format: "%m", date: "$from" } },
+        year: { $dateToString: { format: "%Y", date: "$from" } }
+      }
+    },
+    {
+      $group: {
+        _id: { month: "$month", year: "$year" },
+        paymentSum: { $sum: { $toInt: "$payment" } }
+      }
+    },
+    {
+      $sort: {
+        "_id.year": 1,
+        "_id.month": 1
+      }
+    },
+    {
+      $group: {
+        _id: "$_id.year",
+        data: {
+          $push: {
+            name: "$_id.year",
+            data: "$paymentSum"
+          }
+        }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        name: "$_id",
+        data: "$data.data"
+      }
+    }
+  ]);
 
-  const completedJobs = await User.countDocuments({ jobStatus: "Completed" });
-  const pendingJobs = await User.countDocuments({ jobStatus: "Pending" });
-
-  const skillCountCompleted = {};
-  const skillCountPending = {};
-
-  for (const skill of skills) {
-    const countCompleted = await User.countDocuments({ skill, jobStatus: "Completed" });
-    skillCountCompleted[skill] = countCompleted;
-
-    const countPending = await User.countDocuments({ skill, jobStatus: "Pending" });
-    skillCountPending[skill] = countPending;
-  }
-
-  const result = [
-    { 'Completed': [] },
-    { 'Pending': [] }
-  ];
-
-  for (const skill of skills) {
-    const countCompleted = skillCountCompleted[skill];
-    result[0]['Completed'].push( countCompleted);
-    const countPending = skillCountPending[skill];
-    // result[1]['Pending'].push({ [skill]: countPending });
-        result[1]['Pending'].push( countPending);
-  }
-console.log(result,"result")
-  return result;
+  return revenue;
 
 };
+
+
+const getSkillCounts = async () => {
+  const skillData = await HiredGuard.aggregate([
+    {
+      $group: {
+        _id: "$jobStatus",
+        DoorSupervisors: {
+          $sum: {
+            $cond: {
+              if: { $in: ["Door Supervisors", { $split: ["$skill", ","] }] },
+              then: 1,
+              else: 0
+            }
+          }
+        },
+        KeyHoldingandAlarmResponse: {
+          $sum: {
+            $cond: {
+              if: { $in: ["Key Holding and Alarm Response", { $split: ["$skill", ","] }] },
+              then: 1,
+              else: 0
+            }
+          }
+        },
+        DogHandlingService: {
+          $sum: {
+            $cond: {
+              if: { $in: ["Dog Handling Service", { $split: ["$skill", ","] }] },
+              then: 1,
+              else: 0
+            }
+          }
+        },
+        CCTVMonitoring: {
+          $sum: {
+            $cond: {
+              if: { $in: ["CCTV Monitoring", { $split: ["$skill", ","] }] },
+              then: 1,
+              else: 0
+            }
+          }
+        },
+        VIPCloseProtection: {
+          $sum: {
+            $cond: {
+              if: { $in: ["VIP Close Protection", { $split: ["$skill", ","] }] },
+              then: 1,
+              else: 0
+            }
+          }
+        }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        data: {
+          $switch: {
+            branches: [
+              {
+                case: { $eq: ["$_id", "Completed"] },
+                then: { Completed: ["$DoorSupervisors", "$KeyHoldingandAlarmResponse", "$DogHandlingService", "$CCTVMonitoring", "$VIPCloseProtection"] }
+              },
+              {
+                case: { $eq: ["$_id", "Pending"] },
+                then: { Pending: ["$DoorSupervisors", "$KeyHoldingandAlarmResponse", "$DogHandlingService", "$CCTVMonitoring", "$VIPCloseProtection"] }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]);
+  return skillData;
+
+};
+
+
 
 const getDashboardData = async () => {
   const usersData = await User.aggregate([
@@ -134,6 +223,7 @@ const getUserByEmail = async (email) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
+
 const updateUserById = async (userId, updateBody) => {
   const user = await getUserById(userId);
   if (!user) {
@@ -143,6 +233,9 @@ const updateUserById = async (userId, updateBody) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   Object.assign(user, updateBody);
+  if (updateBody?.skill && user?.role==="guard") {
+     const results= await findByGuardId(userId,updateBody.skill);
+  }
   await user.save();
   return user;
 };
@@ -198,5 +291,6 @@ module.exports = {
   getSkillCounts,
   blockUser,
   unblockUser,
-  getDashboardData
+  getDashboardData,
+  getRevenueByMonthYear
 };

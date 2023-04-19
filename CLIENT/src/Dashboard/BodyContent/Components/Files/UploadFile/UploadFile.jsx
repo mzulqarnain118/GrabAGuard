@@ -19,7 +19,7 @@ const UploadComponent = (props) => {
 
 }
 
-const UploadFile = ({type,accept}) => {
+const UploadFile = ({ type, accept, setTableUpdated }) => {
 
     console.log(type);
     const fileDescriptionRef = useRef('');
@@ -40,6 +40,8 @@ const UploadFile = ({type,accept}) => {
                 console.log('Result: ', result)
                 if (result.status === 201) {
                     Toast("Form Submitted Successfully", "success");
+                    setTableUpdated(old => old + 1);
+
                 }
                 else
                     Toast("Could Not Upload File", "error");

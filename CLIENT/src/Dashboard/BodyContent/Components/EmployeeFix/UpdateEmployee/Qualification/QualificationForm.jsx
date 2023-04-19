@@ -46,8 +46,8 @@ const QualificationForm = (props) => {
                     lastName: values.lastName,
                     address: values.address,
                     phone: values.phone,
-                    status: values.status == 1 ? "Approved" : values.status == 2 ? "Pending" : "Blocked",
-                    skill: values.skill == 1 ? "Door Supervisors" : values.skill == 2 ? "Key Holding and Alarm Response" : values.skill == 3 ? "Dog Handling Service" : values.skill == 4 ? "CCTV Monitoring" : "VIP Close Protection",
+                    status: values.status == 1 ? "Approved" : values.status == 2 ? "Pending" : values.status == 3 ? "Blocked" : values.status,
+                    skill: values.skill == 1 ? "Door Supervisors" : values.skill == 2 ? "Key Holding and Alarm Response" : values.skill == 3 ? "Dog Handling Service" : values.skill == 4 ? "CCTV Monitoring" : values.skill===5?"VIP Close Protection":values.skill,
                 }
                 console.log("==========================", screenData)
   

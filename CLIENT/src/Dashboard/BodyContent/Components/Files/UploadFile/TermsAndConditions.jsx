@@ -50,8 +50,9 @@ const useStyles = makeStyles((theme) => ({
 
 function TermsAndConditions() {
   const classes = useStyles();
+  const [tableUpdated, setTableUpdated] = useState(0);
   const [agree, setAgree] = useState(false);
-  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/TermsAndConditions`);
+  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/TermsAndConditions`, { getUpdatedData: tableUpdated });
 
   const handleAgreeChange = (event) => {
     setAgree(event.target.checked);
@@ -59,7 +60,7 @@ function TermsAndConditions() {
 
   return (
     <Box className={classes.root}>
-      <UploadFile type="TermsAndConditions" accept=".doc,.pdf" />
+      <UploadFile type="TermsAndConditions" accept=".doc,.pdf" setTableUpdated={setTableUpdated} />
       <iframe src={response?.[0]?.url} width="100%" height="1000px"></iframe>
       {/* <Typography variant="h4" className={classes.title}>
         Terms and Conditions

@@ -85,29 +85,20 @@ const getDashboardData = async () => {
       $group: {
         _id: null,
         jobs: { $sum: 1 },
-        revenue: { $sum: "$payment" },
         hours: { $sum: { $subtract: ["$to", "$from"] } }
-      }
-    },
-    {
-      $project: {
-        _id: 0
       }
     }
   ]);
 
-
-
-
+  const hirerGuardData1 = await HiredGuard.find();
   const dashboardData = {
     hirers: usersData[0].hirers,
     guards: usersData[0].guards,
     jobs: hirerGuardData[0].jobs,
-    revenue: hirerGuardData[0].revenue,
-    hours: hirerGuardData[0].hours
+    revenue: hirerGuardData1.reduce((acc, item) => acc + Number(item.payment), 0),
+    hours: hirerGuardData[0].hours,
   };
-
-  console.log(dashboardData, "dashboardData")
+  console.log("🚀 ~ file: user.service.js:103 ~ getDashboardData ~ dashboardData:", dashboardData)
  return dashboardData;
 }
 const getActiveGuardUsers = async () => {

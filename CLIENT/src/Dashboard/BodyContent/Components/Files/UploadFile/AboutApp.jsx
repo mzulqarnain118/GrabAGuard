@@ -4,6 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailIcon from '@mui/icons-material/Mail';
 import PhoneIcon from '@mui/icons-material/Phone';
+import React, { useState } from "react";
 import {
   Box,
   Link,
@@ -49,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function AboutApp() {
-
-  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/AboutApp`);
+  const [tableUpdated, setTableUpdated] = useState(0);
+  const { response, error } = ApiCallGet(`/files/${localStorage.getItem("id")}/AboutApp`, { getUpdatedData: tableUpdated });
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
       <Box className={classes.section}>
-        <UploadFile type="AboutApp" accept=".doc,.pdf" />
+        <UploadFile type="AboutApp" accept=".doc,.pdf" setTableUpdated={setTableUpdated} />
         <iframe src={response?.[0]?.url} width="100%" height="1000px"></iframe>
         {/* <Typography variant="h4" className={classes.title}>
           About Grab A Guard

@@ -8,12 +8,14 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Lock from '@mui/icons-material/Lock';
+import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { NavLink } from 'react-router-dom';
 import { ApiCallPost } from '../../Modules/CoreModules/ApiCall'
 import { Grid } from '@mui/material';
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selected, setSelected] = React.useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -28,7 +30,7 @@ export default function AccountMenu() {
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Profile Information">
                     <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                        <Avatar sx={{ width: 32, height: 32 }}>HR</Avatar>
+                        <Avatar sx={{ width: 32, height: 32 }}><Settings fontSize="small" /></Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -87,7 +89,14 @@ export default function AccountMenu() {
                 </div>
 
                 <Divider />
-
+                <NavLink to="/main/home/enable-2fa">
+                    <MenuItem>
+                        <ListItemIcon>
+                            <Lock fontSize="small" />
+                        </ListItemIcon>
+                        2FA Authentication
+                    </MenuItem>
+                </NavLink>
                 {/* <NavLink to="/main/home/personal-profile">
                     <MenuItem>
                         <Avatar />Profile Info

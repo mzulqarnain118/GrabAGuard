@@ -15,7 +15,7 @@ import { useRouteMatch } from "react-router";
 
 
 const Login = () => {
- 
+
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
@@ -74,11 +74,10 @@ const Login = () => {
       return;
     }
     try {
-      
+
 
       const result = await ApiCallPost('/auth/admin-panel-login', { email: values.username, password: values.password });
       if (result?.status === 200) {
-        console.log(result, result?.data?.tokens?.access?.token);
         localStorage.setItem('token', result?.data?.tokens?.access?.token)
         localStorage.setItem('refreshToken', result?.data?.tokens?.refresh?.token)
         localStorage.setItem('loggedIn', true)
@@ -87,6 +86,8 @@ const Login = () => {
         localStorage.setItem('id', result?.data?.user?.id)
         localStorage.setItem('name', result?.data?.user?.firstName)
         localStorage.setItem('user', result?.data?.user)
+        localStorage.setItem('2FA_qrCode', result?.data?.qrCode)
+        localStorage.setItem('is2FAEnabled', result?.data?.user?.is2FAEnabled)
         Toast("Logged In Successfully", "success");
         history.push('/');
       }
@@ -117,8 +118,8 @@ const Login = () => {
                 >
                   <div className={styles.row}>
                     <div className="col-md-11 col-lg-11 mx-auto mb-2">
- 
-                        <img className={styles.image} src={logo} alt="bgimg" />
+
+                      <img className={styles.image} src={logo} alt="bgimg" />
 
 
                       <Typography className={styles.heading} variant="body2">

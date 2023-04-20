@@ -105,7 +105,7 @@ const saveSocialAuthToken = async (id, accessToken, refreshToken,expires) => {
 const generateResetPasswordToken = async (email) => {
   const user = await userService.getUserByEmail(email);
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'No users found with this email');
+    throw new ApiError(httpStatus.NOT_FOUND, `No users found with this ${email} email`);
   }
   const expires = moment().add(config.jwt.resetPasswordExpirationMinutes, 'minutes');
   const resetPasswordToken = generateToken(user.id, expires, tokenTypes.RESET_PASSWORD);
@@ -113,6 +113,16 @@ const generateResetPasswordToken = async (email) => {
   return resetPasswordToken;
 };
 
+const generateResetPasswordTokenWithPhone = async (phone) => {
+  const user = await userService.getUserByPhone(phone);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, `No users found with this ${phone} Phone Number`);
+  }
+  const expires = moment().add(config.jwt.resetPasswordExpirationMinutes, 'minutes');
+  const resetPasswordToken = generateToken(user.id, expires, tokenTypes.RESET_PASSWORD);
+  await saveToken(resetPasswordToken, user.id, expires, tokenTypes.RESET_PASSWORD);
+  return resetPasswordToken;
+};
 /**
  * Generate verify email token
  * @param {User} user
@@ -132,5 +142,6 @@ module.exports = {
   generateAuthTokens,
   generateResetPasswordToken,
   generateVerifyEmailToken,
-  saveSocialAuthToken
+  saveSocialAuthToken,
+  generateResetPasswordTokenWithPhone
 };

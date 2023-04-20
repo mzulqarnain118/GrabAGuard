@@ -467,3 +467,88 @@ button:focus {
   -webkit-box-shadow: rgb(136 165 191 / 48%) 0px 83px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
   border-right: 1px solid var(--navbar-color-divider);
 }
+
+.container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #872b26;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #872b26;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}
+
+input[type="checkbox"] {
+margin-right: 10px;
+cursor: pointer;
+}
+
+label[for="enable-2fa"] {
+font-weight: bold;
+color: #333;
+}
+
+img {
+width: 200px;
+height: 200px;
+margin-bottom: 10px;
+}
+
+label[for="code"] {
+display: block;
+margin-bottom: 10px;
+color: #333;
+font-weight: bold;
+}
+
+input[type="text"] {
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 10px;
+width: 100%;
+box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+outline: none;
+border-color: #872b26;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+.form {
+max-width: 400px;
+margin: 0 auto;
+}
+
+img {
+width: 100%;
+height: auto;
+}
+}

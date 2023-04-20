@@ -148,6 +148,10 @@ const userSchema = mongoose.Schema(
       trim: true,
       default: ''
     },
+    is2FAEnabled: {
+      type: Boolean,
+      default: false
+    },
     blockedUsers: [{
       id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -157,7 +161,8 @@ const userSchema = mongoose.Schema(
         type: String,
         trim: true
       }
-    }]  },
+    }]
+  },
   {
     timestamps: true,
   }

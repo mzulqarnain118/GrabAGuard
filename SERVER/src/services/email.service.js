@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
+const { SES } = require('../aws-config');
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
@@ -55,9 +56,44 @@ If you did not create an account, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
 
+const sendEmailWithSES = async (email) => {
+  // define the email parameters
+  const params = {
+    Destination: {
+      ToAddresses: email
+    },
+    Message: {
+      Body: {
+        Html: {
+          Charset: 'UTF-8',
+          Data: 'HTML_FORMAT_BODY'
+        },
+        Text: {
+          Charset: 'UTF-8',
+          Data: 'PLAIN_TEXT_BODY'
+        }
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: 'EMAIL_SUBJECT'
+      }
+    },
+    Source: 'SENDER_EMAIL_ADDRESS',
+  };
+
+  // send the email
+  SES.sendEmail(params, function (err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    } else {
+      console.log(data);
+    }
+  });
+};
 module.exports = {
   transport,
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
+  sendEmailWithSES
 };

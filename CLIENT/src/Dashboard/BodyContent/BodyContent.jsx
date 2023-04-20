@@ -4,6 +4,7 @@ import styles from "./BodyContent.module.css";
 import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 import Loading from "../../Modules/UiModules/Core/Loading/Loading";
 import Card from "../../Modules/UiModules/Core/Card";
+import TwoFactorAuthentication from "../../Auth/Login/TwoFactorAuthentication";
 const Home = React.lazy(() => import("./Components/Home/Home"));
 const AdminSettings = React.lazy(() => import("./Components/Admin/AdminSettings"));
 const Users = React.lazy(() => import("./Components/Users/Users"));
@@ -38,6 +39,7 @@ const BodyContent = (props) => {
               ["user", "hirer", "guard", "admin"].includes(user?.role) ? <Switch>
                 <Route exact path={`${match.url}`} render={() => <Redirect from={`${match.url}`} to={`${match.url}/home`} />} />
                 <Route path={`${match.url}/admin-settings`} component={AdminSettings} />
+                <Route path={`${match.url}/enable-2fa`} component={TwoFactorAuthentication} />
                 <Route path={`${match.url}/home`} render={() => <Home user={user} />} />
                 <Route path={`${match.url}/users`} component={Users} />
               </Switch> : null}

@@ -5,6 +5,7 @@ import EmployeeDetails from './EmployeeDetails/EmployeeDetails';
 import HomePage from './HomePage/HomePage';
 import Loading from '../../../../Modules/UiModules/Core/Loading/Loading';
 import AddNewPassword from '../Users/PasswordSettings/AddNewPassword';
+import TwoFactorAuthentication from '../../../../Auth/Login/TwoFactorAuthentication';
 
 const Home = (props) => {
     const match = useRouteMatch();
@@ -20,6 +21,7 @@ const Home = (props) => {
                 >
                     <AnimatedRoute exact path={`${match.url}`} render={() => <Redirect exact from={`${match.url}`} to={`${match.url}/dashboard`} />} />
                     <AnimatedRoute exact path={`${match.url}/dashboard`} render={() => <HomePage user={props.user} />} />
+                    <AnimatedRoute exact path={`${match.url}/enable-2fa`} render={() => <TwoFactorAuthentication />} />
                     <AnimatedRoute exact path={`${match.url}/personal-profile`} component={EmployeeDetails} />
                     <AnimatedRoute exact path={`${match.url}/new-password`} component={AddNewPassword} />
                 </AnimatedSwitch>

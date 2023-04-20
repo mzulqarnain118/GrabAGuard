@@ -78,6 +78,14 @@ const login = {
   }),
 };
 
+const verify2FAToken = {
+  body: Joi.object().keys({
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+    token2FA: Joi.string().required(),
+  }),
+};
+
 const adminPanelLogin = {
   body: Joi.object().keys({
     email: Joi.string().required(),
@@ -103,6 +111,11 @@ const forgotPassword = {
   }),
 };
 
+const forgotPasswordWithPhone = {
+  body: Joi.object().keys({
+    phone: Joi.string().required(),
+  }),
+};
 const resetPassword = {
   query: Joi.object().keys({
     token: Joi.string().required(),
@@ -128,5 +141,7 @@ module.exports = {
   verifyEmail,
   sendOtpToPhone,
   adminPanelLogin,
-  socialRegister
+  socialRegister,
+  forgotPasswordWithPhone,
+  verify2FAToken
 };

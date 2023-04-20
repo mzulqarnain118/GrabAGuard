@@ -208,6 +208,7 @@ const getUserById = async (id) => {
   return User.findById(id);
 };
 
+
 /**
  * Get user by email
  * @param {string} email
@@ -217,6 +218,9 @@ const getUserByEmail = async (email) => {
   return User.findOne({ email });
 };
 
+const getUserByPhone = async (phone) => {
+  return User.findOne({ phone });
+};
 /**
  * Update user by id
  * @param {ObjectId} userId
@@ -292,5 +296,6 @@ module.exports = {
   blockUser,
   unblockUser,
   getDashboardData,
-  getRevenueByMonthYear
+  getRevenueByMonthYear,
+  getUserByPhone
 };

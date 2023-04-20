@@ -11,7 +11,7 @@ router.post('/register', validate(authValidation.register), authController.regis
 router.post('/register/social', validate(authValidation.socialRegister), authController.socialRegister);
 //LOGIN
 router.post('/admin-panel-login', validate(authValidation.login), authController.adminPanelLogin);
-router.post('/login/verify2FAToken', validate(authValidation.login), authController.verify2FAToken);
+router.post('/login/verify2FAToken', validate(authValidation.verify2FAToken), authController.verify2FAToken);
 router.post('/login/social', authController.socialLogin);
 router.post('/facebook-login', authController.facebookLogin);
 router.post('/apple-login', authController.facebookLogin);
@@ -19,6 +19,7 @@ router.post('/login', validate(authValidation.login), authController.login);
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
+router.post('/forgot-password-with-phone', validate(authValidation.forgotPasswordWithPhone), authController.forgotPasswordWithPhone);
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
 router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);

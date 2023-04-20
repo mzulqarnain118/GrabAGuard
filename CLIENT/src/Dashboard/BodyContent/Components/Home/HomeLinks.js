@@ -3,8 +3,8 @@ const HomeSublinks = [
     {
         text: "Dashboard",
         path: "/main/home/dashboard",
-        roles: ['user'],
-    },
+        roles: ['user',"admin"],
+    }
     // {
     //     text: "Personal Profile",
     //     path: "/main/home/personal-profile",

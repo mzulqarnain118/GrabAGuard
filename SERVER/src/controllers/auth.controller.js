@@ -1,13 +1,13 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService, } = require('../services');
-const { getAuth, signInWithCredential, GoogleAuthProvider } = require('firebase/auth');
+const { authService, userService, tokenService, emailService, phoneNumberService, } = require('../services');
 const { TWO_FACTOR_SECRET } = require('../config/config')
 const qrcode = require('qrcode');
+const speakeasy = require('speakeasy');
 
 const sendOtpToPhone = catchAsync(async (req, res) => {
   const phone = req.body.phone;
-  const otp = await authService.sendOtpToPhoneByAwsSNS(phone);
+  const otp = await phoneNumberService.sendOtpToPhoneByAwsSNS(phone);
   res.send({ otp });
 });
 
@@ -49,10 +49,11 @@ const verify2FAToken = catchAsync(async (req, res) => {
     token: token2FA
   });
   if (verified) {
+    await userService.updateUserById(user.id, { is2FAEnabled: true })
     const tokens = await tokenService.generateAuthTokens(user);
-    res.send({ user, tokens });
+    res.status(200).send({ user, tokens });
   } else {
-    res.send({ message: "Invalid 2FA Token" });
+    res.status(500).send({ message: "Invalid 2FA Token" });
   }
 });
 
@@ -93,6 +94,12 @@ const forgotPassword = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const forgotPasswordWithPhone = catchAsync(async (req, res) => {
+  const resetPasswordToken = await tokenService.generateResetPasswordTokenWithPhone(req.body.phone);
+  const ResetPasswordScreenLink =await phoneNumberService.sendResetPasswordPhoneNumber(req.body.phone, resetPasswordToken);
+  res.send({ ResetPasswordScreenLink });
+});
+
 const resetPassword = catchAsync(async (req, res) => {
   await authService.resetPassword(req.query.token, req.body.password);
   res.status(httpStatus.NO_CONTENT).send();
@@ -122,6 +129,7 @@ module.exports = {
   adminPanelLogin,
   facebookLogin,
   appleLogin,
+  forgotPasswordWithPhone,
   verify2FAToken,
   socialRegister,
   socialLogin

@@ -33,7 +33,7 @@ const TwoFactorAuthentication = () => {
         console.log("==========================", screenData)
 
         const result = await ApiCallPost(`/auth/login/verify2FAToken`, screenData);
-        if (response?.status === 200) {
+        if (result?.status === 200) {
           console.log("🚀 ~ file: TwoFactorAuthentication.jsx:38 ~ response:", result)
           localStorage.setItem('token', result?.data?.tokens?.access?.token)
           localStorage.setItem('refreshToken', result?.data?.tokens?.refresh?.token)

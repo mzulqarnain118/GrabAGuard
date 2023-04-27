@@ -33,9 +33,17 @@ const hiredGuardSchema = new mongoose.Schema({
     type: Number,
     enum: [1, 2, 3, 4, 5]
   },
+  guardReview: {
+    type: String,
+    trim: true,
+  },
   hirerRating: {
     type: Number,
     enum: [1, 2, 3, 4, 5]
+  },
+  hirerReview: {
+    type: String,
+    trim: true,
   },
   guard_id: {
     type: mongoose.Schema.Types.ObjectId,

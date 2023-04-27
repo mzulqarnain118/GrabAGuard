@@ -77,6 +77,11 @@ const getRevenueByMonthYear = async () => {
 const getSkillCounts = async () => {
   const skillData = await HiredGuard.aggregate([
     {
+      $match: {
+        skill: { $exists: true, $ne: "" }
+      }
+    },
+    {
       $group: {
         _id: "$jobStatus",
         DoorSupervisors: {
@@ -140,12 +145,15 @@ const getSkillCounts = async () => {
                 case: { $eq: ["$_id", "Pending"] },
                 then: { Pending: ["$DoorSupervisors", "$KeyHoldingandAlarmResponse", "$DogHandlingService", "$CCTVMonitoring", "$VIPCloseProtection"] }
               }
-            ]
+            ],
+            default: { data: [] }
           }
         }
       }
     }
+
   ]);
+
   return skillData;
 
 };

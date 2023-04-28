@@ -73,7 +73,7 @@ const updateUser = {
       userBlock: Joi.boolean(),
       skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-      jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"),
+      jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"),
       guardRating: Joi.number().valid(1, 2, 3, 4, 5),
     })
     .min(1),

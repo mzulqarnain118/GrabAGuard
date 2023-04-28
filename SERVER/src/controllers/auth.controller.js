@@ -17,6 +17,11 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
+const isEmailAlreadyTaken = catchAsync(async (req, res) => {
+  const user = await userService.isEmailAlreadyTaken(req.body);
+  res.status(200).send("Not Exist");
+});
+
 const socialRegister = catchAsync(async (req, res) => {
     const { accessToken, refreshToken,expires } = req.body;
     delete req.body.accessToken;
@@ -132,5 +137,6 @@ module.exports = {
   forgotPasswordWithPhone,
   verify2FAToken,
   socialRegister,
-  socialLogin
+  socialLogin,
+  isEmailAlreadyTaken
 };

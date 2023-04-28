@@ -15,6 +15,13 @@ const createUser = async (userBody) => {
   return User.create(userBody);
 };
 
+
+const isEmailAlreadyTaken = async (userBody) => {
+  if (await User.isEmailTaken(userBody.email)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  return ;
+};
 /**
  * Query for users
  * @param {Object} filter - Mongo filter
@@ -305,5 +312,6 @@ module.exports = {
   unblockUser,
   getDashboardData,
   getRevenueByMonthYear,
-  getUserByPhone
+  getUserByPhone,
+  isEmailAlreadyTaken
 };

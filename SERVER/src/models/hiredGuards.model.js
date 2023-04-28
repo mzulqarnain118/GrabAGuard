@@ -27,7 +27,7 @@ const hiredGuardSchema = new mongoose.Schema({
   },
   jobStatus: {
     type: String,
-    enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected"],
+    enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"],
   },
   guardRating: {
     type: Number,

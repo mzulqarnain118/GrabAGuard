@@ -23,6 +23,7 @@ router.post('/forgot-password-with-phone', validate(authValidation.forgotPasswor
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
 router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
+router.post('/isEmailAlreadyTaken', validate(authValidation.forgotPassword), authController.isEmailAlreadyTaken);
 
 
 

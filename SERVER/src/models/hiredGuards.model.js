@@ -83,7 +83,12 @@ const hiredGuardSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  fcmToken: {
+  hirerFcm: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  guardFcm: {
     type: String,
     trim: true,
     default: ''

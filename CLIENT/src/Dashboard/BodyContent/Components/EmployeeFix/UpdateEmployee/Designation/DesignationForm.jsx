@@ -657,7 +657,7 @@ const DesignationForm = (props) => {
                                     setValues={setValues}
 
                                 />
-                                <AddNewGeneral label='JobNature' setUpdated={setUpdated}><JobNature /></AddNewGeneral>
+                                {/* <AddNewGeneral label='JobNature' setUpdated={setUpdated}><JobNature /></AddNewGeneral> */}
 
                             </div>
                             <div className={`${guidelines.inputclass}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

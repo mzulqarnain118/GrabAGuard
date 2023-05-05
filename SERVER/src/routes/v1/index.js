@@ -9,9 +9,8 @@ const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 const hiredGuardsRoute = require('./hiredGuards.route');
 const addServicesRoute = require('./addServices.route');
-const appDataController = require('./AppData.route');
-
 const router = express.Router();
+
 
 const defaultRoutes = [
   {
@@ -46,10 +45,10 @@ const defaultRoutes = [
     path: '/AddServices',
     route: addServicesRoute,
   },
-  {
-    path: '/AppData',
-    route: appDataController,
-  },
+  // {
+  //   path: '/AppData',
+  //   route: require('./AppData.route'),
+  // },
 ];
 
 const devRoutes = [

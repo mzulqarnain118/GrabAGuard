@@ -1,17 +1,17 @@
 const express = require('express');
-const { appDataController } = require('../../controllers');
+const { addServicesController } = require('../../controllers');
 
 const router = express.Router();
 
-router.post('/', appDataController.create);
+router.post('/', addServicesController.create);
 
-router.get('/', appDataController.findAll);
+router.get('/', addServicesController.findAll);
 
-router.get('/:id', appDataController.findOne);
+router.get('/:id', addServicesController.findOne);
 
-router.put('/:id', appDataController.update);
+router.put('/:id', addServicesController.update);
 
-router.delete('/:id', appDataController.delete);
+router.delete('/:id', addServicesController.delete);
 
 
 module.exports = router;

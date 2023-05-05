@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, Stack } from '@mui/material';
 import guidelines from '../../../../../../Modules/Guidelines/Guidelines';
 import { useLocation, Link, useHistory } from 'react-router-dom';
-const ImageDisplay = () => {
-  const location = useLocation();
-  const history = useHistory();
-  const data = location.state.data;
+const ImageDisplay = ({data,setOpen}) => {
+  // const location = useLocation();
+  // const history = useHistory();
+  // const data = location.state.data;
   console.log(data, "ImageDisplay")
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",height:"100vh",overflowY:"scroll"}}>
@@ -21,7 +21,10 @@ const ImageDisplay = () => {
             variant="contained"
             color="primary"
           size="large"
-          onClick={() => history.goBack()}
+          onClick={() => {
+            // history.goBack()
+            setOpen(false)
+          }}
           >
             BACK
           </Button>

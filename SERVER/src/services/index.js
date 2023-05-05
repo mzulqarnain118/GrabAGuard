@@ -7,3 +7,5 @@ module.exports.bugsService = require('./bugs.service');
 module.exports.seatsService = require('./seats.service');
 module.exports.hiredGuardService = require('./hiredGuards.service');
 module.exports.phoneNumberService = require('./phoneNumber.service');
+module.exports.addServicesService = require('./AddServices.service');
+module.exports.appDataService = require('./AppData.service');

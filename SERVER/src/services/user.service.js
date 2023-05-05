@@ -186,6 +186,9 @@ const getDashboardData = async () => {
 
   const hirerGuardData = await HiredGuard.aggregate([
     {
+      $match: { jobStatus: "Completed" } // Filter records based on jobStatus
+    },
+    {
       $group: {
         _id: null,
         jobs: { $sum: 1 },

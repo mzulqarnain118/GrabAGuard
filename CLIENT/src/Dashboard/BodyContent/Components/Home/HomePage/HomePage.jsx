@@ -11,7 +11,7 @@ import {
 import AccessibilityNewOutlinedIcon from '@mui/icons-material/AccessibilityNewOutlined';
 import PieChartHirerGuard from './PieChartHirerGuard';
 import PiChartGazzated from './JobsBarChart'
-import ReteringEmployee from './ReteringEmployee';
+import ActiveJobs from './ActiveJobs';
 import { ApiCallGet, ApiCallGetSimple } from '../../../../../Modules/CoreModules/ApiCall';
 import Loading from '../../../../../Modules/UiModules/Core/Loading/Loading';
 import JobsBarChart from './JobsBarChart';
@@ -113,7 +113,7 @@ const useStyles = makeStyles({
 
 
 export default function HomePage(props) {
-    const { response, error } = ApiCallGet('/users');
+    const { response, error } = ApiCallGet('/hiredGuards');
     console.log(response)
     const [open_popup1, set_open_popup1] = React.useState(false);
     const [open_popup2, set_open_popup2] = React.useState(false);
@@ -199,7 +199,7 @@ export default function HomePage(props) {
             {loading ? <div style={{ marginTop: "220px" }}><Loading /></div> :
                 <>
                     <Grid container spacing={1}>
-                        <Grid item xs={4} md={4} lg={4}  >
+                        <Grid item xs={3} md={3} lg={3}  >
                             <Card className={classes.card__content}>
                                         <MoneyIcon />
                                         <Typography gutterBottom variant="body1" component="span" className={classes.text}>
@@ -211,8 +211,19 @@ export default function HomePage(props) {
                             </Card>
                         </Grid>
 
+                        <Grid item xs={3} md={3} lg={3}  >
+                            <Card className={classes.card__content}>
+                                <MoneyIcon />
+                                <Typography gutterBottom variant="body1" component="span" className={classes.text}>
+                                    CASH FLOWS
+                                </Typography>
+                                <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
+                                    {Data?.revenue}
+                                </Typography>
+                            </Card>
+                        </Grid>
 
-                        <Grid item xs={4} md={4} lg={4} >
+                        <Grid item xs={3} md={3} lg={3} >
                             <Card className={classes.card__content}>
                                         <AccessTimeIcon />
                                         <Typography gutterBottom variant="body1" component="div" body1 className={classes.text}>
@@ -224,7 +235,7 @@ export default function HomePage(props) {
                             </Card>
                         </Grid>
 
-                        <Grid item xs={4} md={4} lg={4}
+                        <Grid item xs={3} md={3} lg={3}
                             // onClick={() => { set_open_popup3(true) }}
                         >
                             {/* <Popup title='Non Teaching Employees' openPopup={open_popup3} setOpenPopup={set_open_popup3}>
@@ -269,7 +280,7 @@ export default function HomePage(props) {
                                     <RevenueChart data={revenueChartData} categories={["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}/>}
                         </Card>
                     </Grid>}
-                    {response  && <ReteringEmployee data={response} ></ReteringEmployee>}
+                    {response  && <ActiveJobs data={response} ></ActiveJobs>}
                 </>}
         </>
     );

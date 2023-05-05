@@ -5,3 +5,5 @@ module.exports.queriesController = require('./bugs.controller');
 module.exports.seatsController = require('./seats.controller');
 module.exports.filesController = require('./files.controller');
 module.exports.hiredGuardsController = require('./hiredGuards.controller');
+module.exports.addServicesController = require('./AddServices.controller');
+module.exports.appDataController = require('./AppData.controller');

@@ -8,8 +8,8 @@ import BoardUniversityTab from './BoardUniversityTab';
 import DegreeTab from './DegreeTab';
 import OrderType from './OrderType';
 import FileType from './FileType';
-import JobNature from './JobNature';
-import LeaveType from './LeaveType';
+import AddServices from './AddServices';
+import AppFee from './AppFee';
 import PackageType from './PackageType';
 import ScaleType from './ScaleType';
 import PayType from './PayType';
@@ -97,9 +97,9 @@ export default function MasterForms() {
                     <Tab label="Terms & Conditions" {...a11yProps(1)} />
                     <Tab label="Reports" {...a11yProps(2)} />
                     <Tab label="FAQs" {...a11yProps(3)} />
-                    {/* <Tab label="job Nature" {...a11yProps(4)} />
-                    <Tab label="Leave Type" {...a11yProps(5)} />
-                    <Tab label="Package Type" {...a11yProps(6)} />
+                    <Tab label="ADD Services" {...a11yProps(4)} />
+                    <Tab label="App Fee" {...a11yProps(5)} />
+                    {/* <Tab label="Package Type" {...a11yProps(6)} />
                     <Tab label="Scale Type" {...a11yProps(7)} />
                     <Tab label="Pay Type" {...a11yProps(8)} />
                     <Tab label="Subjects" {...a11yProps(9)} />
@@ -139,13 +139,13 @@ export default function MasterForms() {
                 <TabPanel value={value} index={3}>
                     <FAQS/>
                 </TabPanel>
-                {/* <TabPanel value={value} index={4}>
-                    <JobNature></JobNature>
+                <TabPanel value={value} index={4}>
+                    <AddServices></AddServices>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
-                    <LeaveType></LeaveType>
+                    <AppFee></AppFee>
                 </TabPanel>
-                <TabPanel value={value} index={6}>
+                {/* <TabPanel value={value} index={6}>
                     <PackageType></PackageType>
                 </TabPanel>
 

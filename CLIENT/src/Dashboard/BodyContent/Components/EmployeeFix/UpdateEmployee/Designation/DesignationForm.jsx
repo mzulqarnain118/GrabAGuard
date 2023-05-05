@@ -9,7 +9,7 @@ import SubDepartments from '../../../Admin/SetupForms/MasterForms/SubDepartments
 //import Scale from '../../../Admin/SetupForms/MasterForms/Scale';
 import OrderType from '../../../Admin/SetupForms/MasterForms/OrderType';
 import AddNewGeneral from '../../../../../../Modules/UiModules/Core/AddNewGeneral';
-import JobNature from '../../../Admin/SetupForms/MasterForms/JobNature';
+// import JobNature from '../../../Admin/SetupForms/MasterForms/JobNature';
 import PackageType from '../../../Admin/SetupForms/MasterForms/PackageType';
 //import SqlDateFormat from '../../../../../../Modules/UiModules/Core/SqlDateFormat';
 //import FrontEndDateFormat from '../../../../../../Modules/UiModules/Core/FrontEndDateFormat';

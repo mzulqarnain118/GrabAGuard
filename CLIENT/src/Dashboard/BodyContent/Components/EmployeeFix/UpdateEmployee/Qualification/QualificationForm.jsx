@@ -6,10 +6,15 @@ import Controls from '../../../../../../Modules/UiModules/Control/Controls';
 import { ApiCallGet, ApiCallPatch } from '../../../../../../Modules/CoreModules/ApiCall';
 import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
 import { Link } from 'react-router-dom';
+import ImageDisplay from './DisplayDocs';
+import FilteredJobs from './FilteredJobs';
+import JobDataDisplay from './JobDataDisplay';
 
 const QualificationForm = (props) => {
-    console.log(props, "props")
-    const id=props?.data?.id
+    const  FilteredJobsData= ApiCallGet('/hiredGuards');
+    const id = props?.data?.id
+    const [row, setRow] = useState({});
+
     const [values, setValues] = useState(props.data ??{
         email: '',
         firstName: '',
@@ -19,10 +24,12 @@ const QualificationForm = (props) => {
         status: '',
         skill: '',
     });
+    const [open, setOpen] = useState(false);
+    const [jobDataOpen, setJobDataOpen] = useState(false);
+
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
     const [skillsLookup, setskillsLookup] = useState([{ id: 1, title: 'Door Supervisors' }, { id: 2, title: 'Key Holding and Alarm Response' }, { id: 3, title: 'Dog Handling Service' }, { id: 4, title: 'CCTV Monitoring' }, { id: 5, title: 'VIP Close Protection' }]);
     const { response, error } = ApiCallGet(`/files/${id}`);
-    console.log(response, "ImageDisplayPayload")
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,7 +64,7 @@ const QualificationForm = (props) => {
                     console.log(response, "result")
                     Toast('Data Updated Successfully!', 'success')
                     props.setTableUpdated((old) => old + 1);
-                    props.setopenPopup(false);
+                    props.setUpdation(false);
                 }
             } catch (error) {
                 console.log(error, "error")
@@ -75,6 +82,9 @@ const QualificationForm = (props) => {
 
     return (
         <>
+            {open ? <ImageDisplay data={response} setOpen={setOpen} /> :
+                jobDataOpen ? <JobDataDisplay data={row} setJobDataOpen={setJobDataOpen} />:
+                <>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Stack>
 
@@ -160,16 +170,17 @@ const QualificationForm = (props) => {
                             />
                         </div>}
                         <div className={`${guidelines.inputclass}`}>
-                            <Link to={{ pathname: 'showDocs', state: { data: response } }}>
+                            {/* <Link to={{ pathname: 'showDocs', state: { data: response } }}> */}
                                  <Button
                                 fullWidth
                                 variant="contained"
                                 color="primary"
-                                size="large"
+                                    size="large"
+                                    onClick={() => setOpen(true)}
                             >
                                 Check Docs
                             </Button>
-                            </Link>
+                            {/* </Link> */}
                            
                         </div>
                             <div className={`${guidelines.inputclass}`}>
@@ -184,12 +195,30 @@ const QualificationForm = (props) => {
                                     {props.label}
                                 </Button>
                             </div>
+                            <div className={`${guidelines.inputclass}`}>
+                                <Button
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                    onClick={() => {
+                                        props.setUpdation(false)
+                                    }}
+                                >
+                                    BACK
+                                </Button>
+
+                            </div>
                         </div>
 
                     </Stack>
 
 
-                </div>
+                    </div>
+                    <FilteredJobs data={FilteredJobsData?.response ?? []} setRow={setRow} setJobDataOpen={setJobDataOpen} />
+                    </>
+
+                }
 
 
         </>

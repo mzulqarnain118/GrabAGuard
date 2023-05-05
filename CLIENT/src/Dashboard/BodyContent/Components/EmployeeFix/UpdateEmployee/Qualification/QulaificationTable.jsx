@@ -38,12 +38,14 @@ const QualificationTable = (props) => {
         },
 
         {
-            title: "First Name",
-            field: "firstName",
+            title: "Name",
             type: "string",
             editable: () => false,
             cellStyle: { textAlign: "left" },
             headerStyle: { textAlign: "left" },
+            render(rowData) {
+                return rowData.firstName + " " + rowData.lastName;
+            }
         },
 
         {
@@ -64,7 +66,7 @@ const QualificationTable = (props) => {
         },
         {
             title: "Type",
-            field: "address",
+            field: "hirerType",
             type: "string",
             editable: () => false,
             cellStyle: { textAlign: "left" },
@@ -93,14 +95,14 @@ const QualificationTable = (props) => {
             cellStyle: { textAlign: "left" },
             headerStyle: { textAlign: "left" },
         },
-        {
-            title: "Warning",
-            field: "address",
-            type: "string",
-            editable: () => false,
-            cellStyle: { textAlign: "left" },
-            headerStyle: { textAlign: "left" },
-        },
+        // {
+        //     title: "Warning",
+        //     field: "address",
+        //     type: "string",
+        //     editable: () => false,
+        //     cellStyle: { textAlign: "left" },
+        //     headerStyle: { textAlign: "left" },
+        // },
         {
             title: "Phone",
             field: "phone",
@@ -146,27 +148,24 @@ const QualificationTable = (props) => {
     return (<>
         <form>
             <Stack sx={{display:"block"}}>
-                <Popup title='All Users' openPopup={openPopup} setOpenPopup={handlePopup} >
-                    {addition ? <QualificationForm  setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Add'} submitAction={'Insert'} /> : null}
-                    {updation ? <QualificationForm  data={row} setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Update'} submitAction={'Update'} /> : null}
-                </Popup>
-                <Button variant="contained" onClick={() => setUser(!user)}
-                > 
-                    {user?"Guard":"Hirer"}</Button>
-                <MatTable
-                    actionsAtStart={true}
-                    title="All Users"
-                    columns={columns}
-                    data={user ? Guards : Hirers }
-                    onDelete={onDelete}
-                    onRowClick={(event, rowData) => {
-                        console.log(event.target, rowData);
-                        setRow(rowData);
-                        setUpdation(true);
-                        setopenPopup(true);
-                    }}
-                />
-
+                    {addition ? <QualificationForm setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Add'} submitAction={'Insert'} />
+                    : updation ?
+                        <QualificationForm data={row} setTableUpdated={setTableUpdated} setopenPopup={handlePopup} label={'Update'} submitAction={'Update'} setUpdation={setUpdation} /> :
+                            
+                        <>              <Button variant="contained" onClick={() => setUser(!user)}> {user ? "Guard" : "Hirer"}</Button>
+                        <MatTable
+                                actionsAtStart={true}
+                                title="All Users"
+                                columns={columns}
+                                data={user ? Guards : Hirers}
+                                onDelete={onDelete}
+                                onRowClick={(event, rowData) => {
+                                    setRow(rowData);
+                                    setUpdation(true);
+                                    setopenPopup(true);
+                                }}
+                            /></>  
+                    }
             </Stack>
 
         </form>

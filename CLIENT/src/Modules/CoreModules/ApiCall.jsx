@@ -41,8 +41,8 @@ const getError = (error) => {
 }
 const token = localStorage.getItem('token');
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
-const baseUrl = API_BASE_URL
-// const baseUrl = 'http://localhost:3001/v1'
+// const baseUrl = API_BASE_URL
+const baseUrl = 'http://localhost:3001/v1'
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "X-Requested-With",
@@ -90,6 +90,18 @@ const ApiCallDelete = (path,data, redirect = true) => {
 const ApiCallPatch = (path, data, redirect = true) => {
   console.log(`%cdata=${data},path=${path}`, 'background: blue; color: white; font-size: 20px;margin: 30px;');
   return axios.patch(baseUrl + path, data, options)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return getError(error);
+    });
+
+}
+
+const ApiCallPut = (path, data, redirect = true) => {
+  console.log(`%cdata=${data},path=${path}`, 'background: blue; color: white; font-size: 20px;margin: 30px;');
+  return axios.put(baseUrl + path, data, options)
     .then((response) => {
       return response;
     })
@@ -156,4 +168,4 @@ const ApiCallGetSimple = (path, redirect = true) => {
     });
 
 }
-export { ApiCallGet, ApiCallGetSimple, ApiCallPost, ApiCallPatch, ApiCallGetFile, ApiCallGetDownloadFile, ApiCallDelete };
+export { ApiCallGet, ApiCallGetSimple, ApiCallPost, ApiCallPatch, ApiCallGetFile, ApiCallGetDownloadFile, ApiCallDelete, ApiCallPut };

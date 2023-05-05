@@ -72,7 +72,8 @@ const updateUser = {
       summary: Joi.string().allow(''),
       previousWork: Joi.string().allow(''),
       userBlock: Joi.boolean(),
-      skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
+      skill: Joi.array().items().items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/)) // validate that each item is a valid ObjectId
+    .unique() ,
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
       jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"),
       guardRating: Joi.number().valid(1, 2, 3, 4, 5),

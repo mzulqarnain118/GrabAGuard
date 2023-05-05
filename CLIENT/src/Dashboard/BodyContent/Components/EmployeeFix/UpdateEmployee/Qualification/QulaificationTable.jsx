@@ -74,7 +74,9 @@ const QualificationTable = (props) => {
         },
         {
             title: "Skill",
-            field: "skill",
+            render(rowData) {
+                return rowData.skill?.map((item) => item.name).join(", ");
+            },
             type: "string",
             editable: () => false,
             cellStyle: { textAlign: "left" },

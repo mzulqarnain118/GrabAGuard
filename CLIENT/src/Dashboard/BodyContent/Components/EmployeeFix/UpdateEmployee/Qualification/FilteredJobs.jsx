@@ -50,7 +50,7 @@ const FilteredJobs = ({ data, setRow, setJobDataOpen }) => {
             title: "Job Status",
             field: "jobStatus",
             type: "string",
-            lookup: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"],
+            // lookup: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"],
             dateSetting: { locale: "en-GB" },
             editable: () => false,
             cellStyle: { textAlign: "left" },

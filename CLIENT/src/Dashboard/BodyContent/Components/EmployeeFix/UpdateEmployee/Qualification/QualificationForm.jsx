@@ -11,24 +11,27 @@ import FilteredJobs from './FilteredJobs';
 import JobDataDisplay from './JobDataDisplay';
 
 const QualificationForm = (props) => {
-    const  FilteredJobsData= ApiCallGet('/hiredGuards');
+    const FilteredJobsData = ApiCallGet('/hiredGuards');
+    const skills = []
+    props.data?.skill?.map((item) => skills.push(item?._id))
+
+   const getSkills = ApiCallGet('/AddServices');
     const id = props?.data?.id
     const [row, setRow] = useState({});
 
-    const [values, setValues] = useState(props.data ??{
-        email: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        phone: '',
-        status: '',
-        skill: '',
+    const [values, setValues] = useState({
+        email: props.data?.email??'',
+        firstName: props.data?.firstName ??'',
+        lastName: props.data?.lastName ??'',
+        address: props.data?.address ??'',
+        phone: props.data?.phone ??'',
+        status: props.data?.status ??'',
+        skill: skills ??[],
     });
     const [open, setOpen] = useState(false);
     const [jobDataOpen, setJobDataOpen] = useState(false);
 
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
-    const [skillsLookup, setskillsLookup] = useState([{ id: 1, title: 'Door Supervisors' }, { id: 2, title: 'Key Holding and Alarm Response' }, { id: 3, title: 'Dog Handling Service' }, { id: 4, title: 'CCTV Monitoring' }, { id: 5, title: 'VIP Close Protection' }]);
     const { response, error } = ApiCallGet(`/files/${id}`);
 
     const handleChange = (e) => {
@@ -80,6 +83,7 @@ const QualificationForm = (props) => {
         updateUser()
     }
 
+ 
     return (
         <>
             {open ? <ImageDisplay data={response} setOpen={setOpen} /> :
@@ -147,26 +151,24 @@ const QualificationForm = (props) => {
 
                             </div>
                         <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Controls.Select fullWidth
-
+                            <Controls.Autocomplete fullWidth
                                 name="status"
                                 label="Change Status"
                                 value={values?.status === "Pending" ? 2 : values?.status === "Approved" ? 1 : values?.status === "Blocked" ? 3 : values?.status}
                                 onChange={handleChange}
                                 options={statusLookup}
-
                             />
                         </div>
 
                       {props?.data?.role==="guard" &&  <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Controls.Select fullWidth
 
-                                name="skill"
+                               name="skill"
+                                multiple        
                                 label="Change Skill"
-                                value={values?.skill === "Door Supervisors"? 1 : values?.skill === "Key Holding and Alarm Response" ? 2 : values?.skill === "Dog Handling Service" ? 3 : values?.skill === "CCTV Monitoring" ? 4 : values?.skill === "VIP Close Protection" ? 5 : values?.skill}
+                                value={values?.skill}
                                 onChange={handleChange}
-                                options={skillsLookup}
-
+                                 options={getSkills?.response?.map((item) => ({ id: item?._id, title: item?.name })) ?? []}
                             />
                         </div>}
                         <div className={`${guidelines.inputclass}`}>

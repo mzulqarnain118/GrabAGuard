@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText,
 
 export default function Select(props) {
 
-    const { name, label, value, error = null, onChange, options } = props;
+    const { name, multiple, label, value, error = null, onChange, options } = props;
 
     return (
         <FormControl fullWidth variant="standard"
@@ -13,6 +13,7 @@ export default function Select(props) {
                 value={value ?? " "}
                 label={`${label}${props.required ? `*` : ``}`}
                 name={name}
+                multiple={multiple}
                 onChange={onChange}
                 disabled={props.disabled}
                 required={props.required}

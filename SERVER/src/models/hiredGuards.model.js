@@ -105,10 +105,7 @@ const hiredGuardSchema = new mongoose.Schema({
     type: Number,
     trim: true,
   },
-  skill: {
-    type: String,
-    enum: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'],
-  }
+  skill: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddServices' }],
 },
   {
     timestamps: true,

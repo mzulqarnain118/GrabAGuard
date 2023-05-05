@@ -127,10 +127,6 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     skill: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddServices' }],
-    // skill: {
-    //   type: String,
-    //   enum: ['Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'],
-    // },
     jobStatus: {
       type: String,
       enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"],

@@ -32,7 +32,7 @@ const isEmailAlreadyTaken = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
-  const users = await User.find();
+  const users = await User.find().populate('skill');
   return users;
 };
 

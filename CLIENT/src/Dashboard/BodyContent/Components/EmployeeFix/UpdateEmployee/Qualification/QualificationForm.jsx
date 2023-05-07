@@ -26,7 +26,8 @@ const QualificationForm = (props) => {
         address: props.data?.address ??'',
         phone: props.data?.phone ??'',
         status: props.data?.status ??'',
-        skill: skills ??[],
+        skill: skills ?? [],
+        hourlyRate: props.data?.hourlyRate ??'',
     });
     const [open, setOpen] = useState(false);
     const [jobDataOpen, setJobDataOpen] = useState(false);
@@ -151,7 +152,7 @@ const QualificationForm = (props) => {
 
                             </div>
                         <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Controls.Autocomplete fullWidth
+                            <Controls.Select fullWidth
                                 name="status"
                                 label="Change Status"
                                 value={values?.status === "Pending" ? 2 : values?.status === "Approved" ? 1 : values?.status === "Blocked" ? 3 : values?.status}
@@ -170,7 +171,17 @@ const QualificationForm = (props) => {
                                 onChange={handleChange}
                                  options={getSkills?.response?.map((item) => ({ id: item?._id, title: item?.name })) ?? []}
                             />
-                        </div>}
+                                    </div>}
+                                    
+                                    {props?.data?.role === "guard" && <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <Controls.Input fullWidth
+
+                                            name="hourlyRate"
+                                            label="Hourly Rate"
+                                            value={values?.hourlyRate}
+                                            onChange={handleChange}
+                                        />
+                                    </div>}
                         <div className={`${guidelines.inputclass}`}>
                             {/* <Link to={{ pathname: 'showDocs', state: { data: response } }}> */}
                                  <Button

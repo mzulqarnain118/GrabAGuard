@@ -48,7 +48,7 @@ const QualificationForm = (props) => {
     console.log(values,"values");
 
     const updateUser = React.useCallback(
-
+      
         async () => {
             try {
                 const screenData = {
@@ -58,7 +58,8 @@ const QualificationForm = (props) => {
                     address: values.address,
                     phone: values.phone,
                     status: values.status == 1 ? "Approved" : values.status == 2 ? "Pending" : values.status == 3 ? "Blocked" : values.status,
-                    skill: values.skill == 1 ? "Door Supervisors" : values.skill == 2 ? "Key Holding and Alarm Response" : values.skill == 3 ? "Dog Handling Service" : values.skill == 4 ? "CCTV Monitoring" : values.skill===5?"VIP Close Protection":values.skill,
+                    skill: values.skill,
+                    hourlyRate: values.hourlyRate.toString().split(","),
                 }
                 console.log("==========================", screenData)
   
@@ -175,7 +176,6 @@ const QualificationForm = (props) => {
                                     
                                     {props?.data?.role === "guard" && <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <Controls.Input fullWidth
-
                                             name="hourlyRate"
                                             label="Hourly Rate"
                                             value={values?.hourlyRate}

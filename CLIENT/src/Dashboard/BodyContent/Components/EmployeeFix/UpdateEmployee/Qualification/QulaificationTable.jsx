@@ -85,7 +85,10 @@ const QualificationTable = (props) => {
         {
             title: "Hourly Rate",
             field: "hourlyRate",
-            type: "number",
+             render(rowData) {
+                 return rowData.hourlyRate.toString();
+            },
+            type: "array",
             editable: () => false,
             cellStyle: { textAlign: "left" },
             headerStyle: { textAlign: "left" }, hidden: !user

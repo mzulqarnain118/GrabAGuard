@@ -66,7 +66,7 @@ const updateUser = {
       latitude: Joi.string(),
       fcmToken: Joi.string(),
       is2FAEnabled: Joi.boolean(),
-      hourlyRate: Joi.string().allow(''),
+      hourlyRate: Joi.array(),
       height: Joi.string().allow(''),
       weight: Joi.string().allow(''),
       summary: Joi.string().allow(''),

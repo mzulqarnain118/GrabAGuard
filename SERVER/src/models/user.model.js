@@ -144,11 +144,7 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false
     },
-    hourlyRate: {
-      type: Number,
-      trim: true,
-      default: 0
-    },
+    hourlyRate: [],
     is2FAEnabled: {
       type: Boolean,
       default: false

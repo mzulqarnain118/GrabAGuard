@@ -218,7 +218,7 @@ export default function HomePage(props) {
                                     CASH FLOWS
                                 </Typography>
                                 <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
-                                    {Data?.revenue}
+                                    {Data?.cashflow}
                                 </Typography>
                             </Card>
                         </Grid>

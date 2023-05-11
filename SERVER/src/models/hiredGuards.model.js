@@ -105,7 +105,10 @@ const hiredGuardSchema = new mongoose.Schema({
     type: Number,
     trim: true,
   },
-  skill: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddServices' }],
+  skill: {
+    type: String,
+    trim: true,
+  },
 },
   {
     timestamps: true,

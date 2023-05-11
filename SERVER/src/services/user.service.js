@@ -47,7 +47,7 @@ const getRevenueByMonthYear = async () => {
     {
       $group: {
         _id: { month: "$month", year: "$year" },
-        paymentSum: { $sum: { $toInt: "$payment" } }
+        paymentSum: { $sum: { $toDouble: "$payment" } }
       }
     },
     {
@@ -77,8 +77,8 @@ const getRevenueByMonthYear = async () => {
   ]);
 
   return revenue;
-
 };
+
 
 
 const getSkillCounts = async () => {
@@ -192,18 +192,38 @@ const getDashboardData = async () => {
       $group: {
         _id: null,
         jobs: { $sum: 1 },
-        hours: { $sum: { $subtract: ["$to", "$from"] } }
+        hours: {
+          $sum: {
+            $divide: [
+              { $subtract: [{ $toDate: "$to" }, { $toDate: "$from" }] },
+              1000 * 60 * 60 // Convert milliseconds to hours
+            ]
+          }
+        },
       }
     }
   ]);
 
-  const hirerGuardData1 = await HiredGuard.find();
+  const hirerGuardData1 = await HiredGuard.aggregate([
+    {
+      $match: { paymentStatus: true } // Filter records based on jobStatus
+    },
+    {
+      $group: {
+        _id: null,
+        cashflow: { $sum: { $toInt: "$totalPayment" } },
+        revenue: { $sum: { $toInt: "$fee" } },
+      }
+    }
+  ]);
+
   const dashboardData = {
     hirers: usersData[0].hirers,
     guards: usersData[0].guards,
     jobs: hirerGuardData[0].jobs,
-    revenue: hirerGuardData1.reduce((acc, item) => acc + Number(item.payment), 0),
+    revenue: hirerGuardData1[0].revenue,
     hours: hirerGuardData[0].hours,
+    cashflow: hirerGuardData1[0].cashflow,
   };
   console.log("🚀 ~ file: user.service.js:103 ~ getDashboardData ~ dashboardData:", dashboardData)
  return dashboardData;

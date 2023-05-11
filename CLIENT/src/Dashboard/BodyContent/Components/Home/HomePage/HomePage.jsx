@@ -80,18 +80,6 @@ const useStyles = makeStyles({
         height: '64px',
         width: '190px',
     },
-    stats: {
-        marginTop: 16,
-        display: 'flex',
-        justifyContent: 'center'
-    },
-    device: {
-        textAlign: 'center',
-        padding: 8
-    },
-    deviceIcon: {
-        color: "#E4E7EB"
-    },
     titleClick: {
         color: "white",
         fontWeight: 1000,
@@ -104,9 +92,22 @@ const useStyles = makeStyles({
     root1: {
         alignItems: 'center',
         display: 'flex',
-        justifyContent:"space-evenly",
+        justifyContent: "space-evenly",
         height: '64px',
-    }
+    },
+    stats: {
+        marginTop: 16,
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    device: {
+        textAlign: 'center',
+        padding: 8
+    },
+    deviceIcon: {
+        color: "#E4E7EB"
+    },
+
 
 });
 
@@ -114,13 +115,6 @@ const useStyles = makeStyles({
 
 export default function HomePage(props) {
     const { response, error } = ApiCallGet('/hiredGuards');
-    console.log(response)
-    const [open_popup1, set_open_popup1] = React.useState(false);
-    const [open_popup2, set_open_popup2] = React.useState(false);
-    const [open_popup3, set_open_popup3] = React.useState(false);
-    const [open_popup4, set_open_popup4] = React.useState(false);
-    const [open_popup5, set_open_popup5] = React.useState(false);
-    const [piClick, setPiClick1] = React.useState(undefined);
     const [buttonSelected, setButtonSelected] = React.useState(()=>'Users');
     const buttons = [
         { title: 'Users', slug: 'Users' },
@@ -187,11 +181,6 @@ export default function HomePage(props) {
 
 
     const classes = useStyles();
-
-    const handleChartClick = () => {
-        set_open_popup5(true)
-        //  setPiClick(undefined)
-    }
 
     return (
 

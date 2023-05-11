@@ -89,6 +89,7 @@ const Login = () => {
         localStorage.setItem('2FA_qrCode', result?.data?.qrCode)
         localStorage.setItem('is2FAEnabled', result?.data?.user?.is2FAEnabled)
         Toast("Logged In Successfully", "success");
+        // history.push('/main/users');
         history.push('/');
       }
     } catch (error) {
@@ -114,8 +115,7 @@ const Login = () => {
               </div>
 
               <div className="col-md-8 col-lg-6 col-sm-6 col-sm-11 col-12 h-100" >
-                <div className={`login d-flex align-items-center h-100 ${styles.login} `}
-                >
+                <div className={`login d-flex align-items-center h-100 ${styles.login} `}>
                   <div className={styles.row}>
                     <div className="col-md-11 col-lg-11 mx-auto mb-2">
 
@@ -138,9 +138,7 @@ const Login = () => {
                               value={values.username}
                               disabled={disable}
                               onChange={(e) => handleChange('username', e)}
-                              required
-
-                            />
+                              required/>
                             {values.usererror ? <FormHelperText>{values.userhelper}</FormHelperText> : null}
                           </FormControl>
 

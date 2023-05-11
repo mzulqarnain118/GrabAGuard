@@ -275,9 +275,9 @@ const updateUserById = async (userId, updateBody) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   Object.assign(user, updateBody);
-  if (updateBody?.skill && user?.role==="guard") {
-     const results= await findByGuardId(userId,updateBody.skill);
-  }
+  // if (updateBody?.skill && user?.role==="guard") {
+  //    const results= await findByGuardId(userId,updateBody.skill);
+  // }
   await user.save();
   return user;
 };

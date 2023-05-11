@@ -23,7 +23,7 @@ const createUser = {
     location: Joi.string().allow(''),
     longitude: Joi.string().allow(''),
     latitude: Joi.string().allow(''),
-    hirerType: Joi.string().allow(''),
+    hirerType: Joi.string().valid('Company', 'Individual'),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
 

@@ -219,7 +219,7 @@ export default function HomePage(props) {
                                             TOTAL HOURS WORKED
                                         </Typography>
                                         <Typography gutterBottom variant="body1" color="text.secondary" className={classes.text2}>
-                                            {Data?.hours}
+                                            {Data?.hours.toFixed(2)}
                                         </Typography>
                             </Card>
                         </Grid>

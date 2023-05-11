@@ -19,7 +19,7 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
   const payload = {
     sub: userId,
     iat: moment().unix(),
-    exp: expires.unix(),
+    // exp: expires.unix(),//TODO: if you wanna add expiration to accessToken and refreshToken then uncomment this line
     type,
   };
   return jwt.sign(payload, secret);

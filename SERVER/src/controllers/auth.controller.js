@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService, phoneNumberService, } = require('../services');
-const { TWO_FACTOR_SECRET } = require('../config/config')
+const { authService, userService, tokenService, emailService, phoneNumberService } = require('../services');
+const { TWO_FACTOR_SECRET } = require('../config/config');
 const qrcode = require('qrcode');
 const speakeasy = require('speakeasy');
 
@@ -19,16 +19,21 @@ const register = catchAsync(async (req, res) => {
 
 const isEmailAlreadyTaken = catchAsync(async (req, res) => {
   const user = await userService.isEmailAlreadyTaken(req.body);
-  res.status(200).send("Not Exist");
+  res.status(200).send('Not Exist');
 });
 
 const socialRegister = catchAsync(async (req, res) => {
-    const { accessToken, refreshToken,expires } = req.body;
-    delete req.body.accessToken;
-    delete req.body.refreshToken;
-    const user = await userService.createUser(req.body);
-  const tokens = await tokenService.saveSocialAuthToken(user.id, accessToken, refreshToken ?? "facebookRegister", expires ?? "01/01/1980");
-    res.status(httpStatus.CREATED).send({ user, tokens });
+  const { accessToken, refreshToken, expires } = req.body;
+  delete req.body.accessToken;
+  delete req.body.refreshToken;
+  const user = await userService.createUser(req.body);
+  const tokens = await tokenService.saveSocialAuthToken(
+    user.id,
+    accessToken,
+    refreshToken ?? 'facebookRegister',
+    expires ?? '01/01/1980'
+  );
+  res.status(httpStatus.CREATED).send({ user, tokens });
 });
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
@@ -41,24 +46,24 @@ const adminPanelLogin = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.adminPanelLoginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
-  const qrCode = await qrcode.toDataURL(TWO_FACTOR_SECRET.otpauth_url);// Generate a QR code image
-  res.send({ user, tokens, qrCode});
+  const qrCode = await qrcode.toDataURL(TWO_FACTOR_SECRET.otpauth_url); // Generate a QR code image
+  res.send({ user, tokens, qrCode });
 });
 
 const verify2FAToken = catchAsync(async (req, res) => {
   const { email, password, token2FA } = req.body;
   const user = await authService.adminPanelLoginUserWithEmailAndPassword(email, password);
   const verified = speakeasy.totp.verify({
-    secret:TWO_FACTOR_SECRET.ascii,
+    secret: TWO_FACTOR_SECRET.ascii,
     encoding: 'ascii',
-    token: token2FA
+    token: token2FA,
   });
   if (verified) {
-    await userService.updateUserById(user.id, { is2FAEnabled: true })
+    await userService.updateUserById(user.id, { is2FAEnabled: true });
     const tokens = await tokenService.generateAuthTokens(user);
     res.status(200).send({ user, tokens });
   } else {
-    res.status(500).send({ message: "Invalid 2FA Token" });
+    res.status(500).send({ message: 'Invalid 2FA Token' });
   }
 });
 
@@ -101,7 +106,7 @@ const forgotPassword = catchAsync(async (req, res) => {
 
 const forgotPasswordWithPhone = catchAsync(async (req, res) => {
   const resetPasswordToken = await tokenService.generateResetPasswordTokenWithPhone(req.body.phone);
-  const ResetPasswordScreenLink =await phoneNumberService.sendResetPasswordPhoneNumber(req.body.phone, resetPasswordToken);
+  const ResetPasswordScreenLink = await phoneNumberService.sendResetPasswordPhoneNumber(req.body.phone, resetPasswordToken);
   res.send({ ResetPasswordScreenLink });
 });
 
@@ -138,5 +143,5 @@ module.exports = {
   verify2FAToken,
   socialRegister,
   socialLogin,
-  isEmailAlreadyTaken
+  isEmailAlreadyTaken,
 };

@@ -85,8 +85,8 @@ const generateAuthTokens = async (user) => {
   };
 };
 
-const saveSocialAuthToken = async (id, accessToken, refreshToken,expires) => {
-  await Token.create({ token: refreshToken, user: id, type: tokenTypes.SOCIAL, expires , blacklisted: false});
+const saveSocialAuthToken = async (id, accessToken, refreshToken, expires) => {
+  await Token.create({ token: refreshToken, user: id, type: tokenTypes.SOCIAL, expires, blacklisted: false });
   return {
     access: {
       token: accessToken,
@@ -143,5 +143,5 @@ module.exports = {
   generateResetPasswordToken,
   generateVerifyEmailToken,
   saveSocialAuthToken,
-  generateResetPasswordTokenWithPhone
+  generateResetPasswordTokenWithPhone,
 };

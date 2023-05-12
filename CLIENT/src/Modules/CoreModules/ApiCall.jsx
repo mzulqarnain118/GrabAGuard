@@ -4,7 +4,6 @@ import FileDownload from 'js-file-download';
 import React, { useState, useEffect } from 'react';
 import Toast from '../UiModules/Core/Toast/Toast';
 import { API_BASE_URL } from '../../constants';
-
 const getError = (error) => {
   if (error.response) {
     let status = error?.response?.data?.code
@@ -74,14 +73,14 @@ const ApiCallPost = (path, data, redirect = true) => {
 
 }
 
-const ApiCallDelete = (path,data, redirect = true) => {
+const ApiCallDelete = (path, data, redirect = true) => {
   return axios.delete(baseUrl + path, options)
     .then((response) => {
-      console.log('%cResponse: ','background: red; color: white; font-size: 20px;', response);
+      console.log('%cResponse: ', 'background: red; color: white; font-size: 20px;', response);
       return response;
     })
     .catch((error) => {
-      console.log(' %o\n%cError: ','background: red; color: white; font-size: 20px;', error);
+      console.log(' %o\n%cError: ', 'background: red; color: white; font-size: 20px;', error);
       return getError(error);
     });
 
@@ -131,9 +130,9 @@ const ApiCallGetFile = (path, redirect = true) => {
 
 }
 
-const ApiCallGet = (path,payload, redirect = true) => {
+const ApiCallGet = (path, payload, redirect = true) => {
 
-  
+
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

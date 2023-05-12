@@ -25,9 +25,16 @@ const register = {
     longitude: Joi.string().allow(''),
     latitude: Joi.string().allow(''),
     fcmToken: Joi.string().allow(''),
+    hirerType: Joi.string().valid('Company', 'Individual'),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-    skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
-    jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"),
+    skill: Joi.string().valid(
+      'Door Supervisors',
+      'Key Holding and Alarm Response',
+      'Dog Handling Service',
+      'CCTV Monitoring',
+      'VIP Close Protection'
+    ),
+    jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', 'Rejected', 'Cancelled'),
   }),
 };
 
@@ -60,8 +67,14 @@ const socialRegister = {
     latitude: Joi.string().allow(''),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-    skill: Joi.string().valid('Door Supervisors', 'Key Holding and Alarm Response', 'Dog Handling Service', 'CCTV Monitoring', 'VIP Close Protection'),
-    jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"),
+    skill: Joi.string().valid(
+      'Door Supervisors',
+      'Key Holding and Alarm Response',
+      'Dog Handling Service',
+      'CCTV Monitoring',
+      'VIP Close Protection'
+    ),
+    jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', 'Rejected', 'Cancelled'),
   }),
 };
 
@@ -141,5 +154,5 @@ module.exports = {
   adminPanelLogin,
   socialRegister,
   forgotPasswordWithPhone,
-  verify2FAToken
+  verify2FAToken,
 };

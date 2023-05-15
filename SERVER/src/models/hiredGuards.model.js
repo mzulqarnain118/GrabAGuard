@@ -46,9 +46,8 @@ const hiredGuardSchema = new mongoose.Schema({
     trim: true,
   },
   guard_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+    type: String,
+    default: ''
   },
   hirer_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -57,7 +56,7 @@ const hiredGuardSchema = new mongoose.Schema({
   },
   guard_name: {
     type: String,
-    required: true,
+    trim: true,
   },
   hirer_name: {
     type: String,
@@ -65,7 +64,7 @@ const hiredGuardSchema = new mongoose.Schema({
   },
   guard_phone: {
     type: String,
-    required: true,
+    trim: true,
   },
   hirer_phone: {
     type: String,

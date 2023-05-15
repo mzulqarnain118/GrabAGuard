@@ -8,27 +8,38 @@ const ImageDisplay = ({data,setOpen}) => {
   // const data = location.state.data;
   console.log(data, "ImageDisplay")
   return (
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center",height:"100vh",overflowY:"scroll"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "100vh",
+        overflowY: "scroll",
+      }}
+    >
       <div className={`${guidelines.inputclass}`}>
-      {data?.map((image) => (
-        <img src={image.url} alt={image.type} key={image._id} />
-      ))}
-     
-    </div>
+        {data?.map((image) => (
+          <img
+            src={image.url}
+            alt={image.type}
+            key={image._id}
+            style={{ height: "1000px", width: "1000px" }}
+          />
+        ))}
+      </div>
       <div className={`${guidelines.inputclass}`}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
           size="large"
           onClick={() => {
             // history.goBack()
-            setOpen(false)
+            setOpen(false);
           }}
-          >
-            BACK
-          </Button>
-
+        >
+          BACK
+        </Button>
       </div>
     </div>
   );

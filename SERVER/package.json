@@ -172,6 +172,9 @@
   "firebase": "^9.19.1",
   
     
+  "firebase-admin": "^11.8.0",
+  
+    
   "helmet": "^4.1.0",
   
     

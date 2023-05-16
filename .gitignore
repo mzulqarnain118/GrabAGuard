@@ -5,7 +5,7 @@ node_modules
 /SERVER/node_modules/*
 # yarn error logs
 yarn-error.log
-
+/SERVER/package-lock.json
 # Environment varibales
 .env*
 !.env*.example

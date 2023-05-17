@@ -552,3 +552,13 @@ width: 100%;
 height: auto;
 }
 }
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../public/assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../public/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}

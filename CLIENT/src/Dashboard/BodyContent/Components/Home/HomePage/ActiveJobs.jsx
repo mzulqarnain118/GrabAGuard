@@ -15,7 +15,7 @@ const ActiveJobs = ({ data }) => {
       pdf.addImage(Logo, "PNG", 160, 10, 30, 30);
       pdf.setFontSize(38);
       pdf.setTextColor("#003366"); // Set text color to black
-      pdf.setFont("Roboto-Bold", "bold");
+      pdf.setFont("Arial", "bold");
       pdf.text("THANK YOU", 40, 210); // Adjusted position
       pdf.text("INVOICE", 20, 20); // Adjusted position
       pdf.setFontSize(12);
@@ -23,7 +23,7 @@ const ActiveJobs = ({ data }) => {
       pdf.text(`Grab A Guard`, 20, 35); // Adjusted position
       pdf.setFontSize(18);
       pdf.setTextColor("#003366"); // Set text color to black
-      pdf.setFont("Roboto-Bold", "bold");
+      pdf.setFont("Arial", "bold");
       pdf.text("BILL TO", 20, 50); // Adjusted position
       pdf.text("INVOICE #", 100, 50); // Adjusted position
       pdf.text("INVOICE DATE", 100, 55); // Adjusted position
@@ -35,7 +35,7 @@ const ActiveJobs = ({ data }) => {
       pdf.text(`£${Number(rowData?.payment).toFixed(2)}`, 170, 125); // Adjusted position
 
       pdf.setFontSize(12);
-      pdf.setFont("Roboto-Regular", "normal");
+      pdf.setFont("Arial", "normal");
       pdf.setTextColor(0, 0, 0); // Set text color to black
       pdf.text(
         `${
@@ -69,7 +69,7 @@ const ActiveJobs = ({ data }) => {
         87
       );
       pdf.setFontSize(18);
-      pdf.setFont("Roboto-Bold", "bold");
+      pdf.setFont("Arial", "bold");
       pdf.text("Terms & Condition", 130, 205); // Adjusted position
       pdf.setTextColor("#003366"); // Set text color to black
       //LINES B/W PAGES

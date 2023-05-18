@@ -4,6 +4,7 @@ const ApiError = require('../utils/ApiError');
 const { findByGuardId } = require('./hiredGuards.service');
 const initializeFirebaseAdmin = require('../firebaseAdmin');
 initializeFirebaseAdmin();
+const admin = require('firebase-admin');
 
 /**
  * Create a user

@@ -131,7 +131,16 @@ export default function HomePage(props) {
             setLoading(true)
             let res = await ApiCallGetSimple('/users/skill-counts');
             if (res.status == 200) {
-                setJobChartData([{ name: "Pending", data: res?.data?.[1]?.data?.Pending }, { name: "Completed", data: res?.data?.[0]?.data?.Completed }])
+                setJobChartData([
+                  {
+                    name: "Pending",
+                    data: res.data[0].skillData.Pending.Pending,
+                  },
+                  {
+                    name: "Completed",
+                    data: res.data[0].skillData.Completed.Completed,
+                  },
+                ]);
                 setLoading(false)
             }
             return;

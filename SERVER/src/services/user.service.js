@@ -142,6 +142,7 @@ const getSkillCounts = async () => {
     {
       $project: {
         _id: 0,
+        jobStatus: '$_id',
         data: {
           $switch: {
             branches: [
@@ -158,6 +159,67 @@ const getSkillCounts = async () => {
                 },
               },
               {
+                case: { $eq: ['$_id', 'Accepted'] },
+                then: {
+                  Accepted: [
+                    '$DoorSupervisors',
+                    '$KeyHoldingandAlarmResponse',
+                    '$DogHandlingService',
+                    '$CCTVMonitoring',
+                    '$VIPCloseProtection',
+                  ],
+                },
+              },
+              {
+                case: { $eq: ['$_id', 'Rejected'] },
+                then: {
+                  Rejected: [
+                    '$DoorSupervisors',
+                    '$KeyHoldingandAlarmResponse',
+                    '$DogHandlingService',
+                    '$CCTVMonitoring',
+                    '$VIPCloseProtection',
+                  ],
+                },
+              },
+              {
+                case: { $eq: ['$_id', 'Checked in'] },
+                then: {
+                  CheckIn: [
+                    '$DoorSupervisors',
+                    '$KeyHoldingandAlarmResponse',
+                    '$DogHandlingService',
+                    '$CCTVMonitoring',
+                    '$VIPCloseProtection',
+                  ],
+                },
+              },
+              {
+                case: { $eq: ['$_id', 'Cancelled'] },
+                then: {
+                  Cancelled: [
+                    '$DoorSupervisors',
+                    '$KeyHoldingandAlarmResponse',
+                    '$DogHandlingService',
+                    '$CCTVMonitoring',
+                    '$VIPCloseProtection',
+                  ],
+                },
+              },
+              {
+                case: { $eq: ['$_id', 'Checked out'] },
+                then: {
+                  CheckOut: [
+                    '$DoorSupervisors',
+                    '$KeyHoldingandAlarmResponse',
+                    '$DogHandlingService',
+                    '$CCTVMonitoring',
+                    '$VIPCloseProtection',
+                  ],
+                },
+              },
+
+              {
                 case: { $eq: ['$_id', 'Pending'] },
                 then: {
                   Pending: [
@@ -170,8 +232,22 @@ const getSkillCounts = async () => {
                 },
               },
             ],
-            default: { data: [] },
+            default: { $literal: [] },
           },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        skillData: { $push: { k: '$jobStatus', v: '$data' } },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        skillData: {
+          $arrayToObject: '$skillData',
         },
       },
     },

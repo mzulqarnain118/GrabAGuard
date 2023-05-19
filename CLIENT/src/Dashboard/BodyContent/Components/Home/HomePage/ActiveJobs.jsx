@@ -287,9 +287,9 @@ const ActiveJobs = ({ data }) => {
       <MatTable
         title="Active Jobs"
         columns={columns}
-        style={{ margin: "1rem" }}
+        style={{ marginBottom: "5rem" }}
         data={data}
-        bodyHeight="75.5vh"
+        // bodyHeight="75.5vh"
       />
     </div>
   );

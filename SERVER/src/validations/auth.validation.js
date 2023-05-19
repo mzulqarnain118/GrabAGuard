@@ -47,6 +47,7 @@ const socialRegister = {
     address: Joi.string().required(),
     phone: Joi.string().required(),
     dob: Joi.date().required(),
+    hirerType: Joi.string().valid('Company', 'Individual'),
     height: Joi.string().allow(''),
     weight: Joi.string().allow(''),
     companyName: Joi.string().allow(''),

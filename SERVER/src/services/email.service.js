@@ -55,41 +55,53 @@ To verify your email, click on this link: ${verificationEmailUrl}
 If you did not create an account, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
-
-const sendEmailWithSES = async (email) => {
-  // define the email parameters
+const sendEmailWithSES = async (from = config.email.support, emailSubject, emailHTMLBody, attachmentPath) => {
+  // Define the email parameters
   const params = {
     Destination: {
-      ToAddresses: email
+      ToAddresses: [config.email.support],
     },
     Message: {
       Body: {
         Html: {
           Charset: 'UTF-8',
-          Data: 'HTML_FORMAT_BODY'
+          Data: emailHTMLBody,
         },
         Text: {
           Charset: 'UTF-8',
-          Data: 'PLAIN_TEXT_BODY'
-        }
+          Data: 'Body', //emailTextBody,
+        },
       },
       Subject: {
         Charset: 'UTF-8',
-        Data: 'EMAIL_SUBJECT'
-      }
+        Data: emailSubject,
+      },
     },
-    Source: 'SENDER_EMAIL_ADDRESS',
+    Source: 'app@grabaguard.com',
   };
-
-  // send the email
-  SES.sendEmail(params, function (err, data) {
-    if (err) {
-      console.log(err, err.stack);
-    } else {
-      console.log(data);
-    }
-  });
+  // Check if attachmentPath is provided
+  // if (attachmentPath) {
+  //   const attachmentData =attachmentPath.buffer; // Read the attachment file
+  //   const contentType = attachmentPath.mimetype; // Determine the content type based on the file extension
+  //   params.Message.Attachments = [
+  //     // Add the attachment to the email parameters
+  //     {
+  //       Filename: attachmentPath.originalname,
+  //       Content: attachmentData,
+  //       ContentType: contentType,
+  //     },
+  //   ];
+  // }
+  try {
+    console.log('Sending email with SES',params);
+    const data = await SES.sendEmail(params).promise();
+    console.log('Email sent:', data);
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+  return params;
 };
+
 module.exports = {
   transport,
   sendEmail,

@@ -31,6 +31,7 @@ const ActiveJobs = ({ data }) => {
     }
     return binary.join("");
   }
+    
   const generatePDF = (rowData) => {
     const date1 = new Date(rowData?.to);
     const date2 = new Date(rowData?.from);

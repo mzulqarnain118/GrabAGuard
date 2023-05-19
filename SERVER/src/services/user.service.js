@@ -176,7 +176,7 @@ const getSkillCounts = async () => {
       },
     },
   ]);
-
+console.log(skillData, 'skillData')
   return skillData;
 };
 

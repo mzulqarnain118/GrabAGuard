@@ -19,8 +19,8 @@ if (config.env !== 'test') {
  * @param {string} text
  * @returns {Promise}
  */
-const sendEmail = async (to, subject, text) => {
-  const msg = { from: config.email.from, to, subject, text };
+const sendEmail = async (to, subject, text, replyTo) => {
+  const msg = { from: config.email.from, to, subject, text, replyTo };
   await transport.sendMail(msg);
 };
 
@@ -55,7 +55,7 @@ To verify your email, click on this link: ${verificationEmailUrl}
 If you did not create an account, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
-const sendEmailWithSES = async (from = config.email.support, emailSubject, emailHTMLBody, attachmentPath) => {
+const sendEmailWithSES = async (clientEmail, emailSubject, emailHTMLBody, attachmentPath) => {
   // Define the email parameters
   const params = {
     Destination: {
@@ -77,7 +77,8 @@ const sendEmailWithSES = async (from = config.email.support, emailSubject, email
         Data: emailSubject,
       },
     },
-    Source: 'app@grabaguard.com',
+    Source: config.email.from,
+    ReplyToAddresses: [clientEmail],
   };
   // Check if attachmentPath is provided
   // if (attachmentPath) {
@@ -93,13 +94,14 @@ const sendEmailWithSES = async (from = config.email.support, emailSubject, email
   //   ];
   // }
   try {
-    console.log('Sending email with SES',params);
     const data = await SES.sendEmail(params).promise();
-    console.log('Email sent:', data);
+    console.log('EMAIL SENT SUCCESSFULLY', data);
+    return data
   } catch (error) {
     console.error('Error sending email:', error);
+    return error
   }
-  return params;
+   
 };
 
 module.exports = {

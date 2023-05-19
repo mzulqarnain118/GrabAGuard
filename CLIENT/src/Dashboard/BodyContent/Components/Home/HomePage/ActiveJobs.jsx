@@ -142,6 +142,14 @@ const ActiveJobs = ({ data }) => {
       headerStyle: { textAlign: "center" },
     },
     {
+      title: "Hirer Receipt No",
+      editable: () => true,
+      field: "hirerReceiptNo",
+      type: "string",
+      cellStyle: { textAlign: "left" },
+      headerStyle: { textAlign: "left" },
+    },
+    {
       title: "Hirer",
       editable: () => true,
       field: "hirer_name",
@@ -149,7 +157,14 @@ const ActiveJobs = ({ data }) => {
       cellStyle: { textAlign: "left" },
       headerStyle: { textAlign: "left" },
     },
-
+    {
+      title: "Guard Receipt No",
+      editable: () => true,
+      field: "guardReceiptNo",
+      type: "string",
+      cellStyle: { textAlign: "left" },
+      headerStyle: { textAlign: "left" },
+    },
     {
       title: "Guard",
       field: "guard_name",

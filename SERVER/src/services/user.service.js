@@ -370,7 +370,7 @@ const updateUserById = async (userId, updateBody) => {
     const message = {
       notification: {
         title: 'Grab A Guard',
-        body: 'Your Account Have been Approved',
+        body: 'Congratulations! Your account has been approved.',
       },
       // Additional data payload if needed
       data: {

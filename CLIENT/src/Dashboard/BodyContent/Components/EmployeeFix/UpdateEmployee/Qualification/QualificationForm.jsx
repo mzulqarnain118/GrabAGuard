@@ -9,9 +9,13 @@ import { Link } from 'react-router-dom';
 import ImageDisplay from './DisplayDocs';
 import FilteredJobs from './FilteredJobs';
 import JobDataDisplay from './JobDataDisplay';
-
+import moment from 'moment';
 const QualificationForm = (props) => {
-    const FilteredJobsData = ApiCallGet('/hiredGuards');
+        const [tableUpdated, setTableUpdated] = useState(0);
+
+    const FilteredJobsData = ApiCallGet("/hiredGuards", {
+      getUpdatedData: tableUpdated,
+    });
     const skills = []
     props.data?.skill?.map((item) => skills.push(item?._id))
 
@@ -27,7 +31,16 @@ const QualificationForm = (props) => {
         phone: props.data?.phone ??'',
         status: props.data?.status ??'',
         skill: skills ?? [],
-        hourlyRate: props.data?.hourlyRate ??'',
+        hourlyRate: props.data?.hourlyRate ?? '',
+        dob: props.data?.dob ?? '',
+        companyName: props.data?.companyName ?? '',
+        companyNumber: props.data?.companyNumber ?? '',
+        position: props.data?.position ?? '',
+        previousWork: props.data?.previousWork ?? '',
+        summary: props.data?.summary ?? '',
+        about: props.data?.about ?? '',
+        height: props.data?.height ?? '',
+        weight: props.data?.weight ?? '',
     });
     const [open, setOpen] = useState(false);
     const [jobDataOpen, setJobDataOpen] = useState(false);
@@ -87,154 +100,288 @@ const QualificationForm = (props) => {
 
  
     return (
-        <>
-            {open ? <ImageDisplay data={response} setOpen={setOpen} /> :
-                jobDataOpen ? <JobDataDisplay data={row} setJobDataOpen={setJobDataOpen} />:
-                <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Stack>
+      <>
+        {open ? (
+          <ImageDisplay data={response} setOpen={setOpen} />
+        ) : jobDataOpen ? (
+          <JobDataDisplay data={row} setJobDataOpen={setJobDataOpen} />
+        ) : (
+          <>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Stack>
+                <div className="row p-3">
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="First Name"
+                      name="firstName"
+                      required
+                      value={values?.firstName}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Last Name"
+                      name="lastName"
+                      required
+                      value={values?.lastName}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      inputProps={{ type: "email" }}
+                      label="Email."
+                      name="email"
+                      required
+                      value={values?.email}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                        <div className="row p-3" >
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Mobile Phone"
+                      name="phone"
+                      required
+                      value={values?.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                            <div className={`${guidelines.inputclass}`} >
-                                <Controls.Input id="standard-basic"
-                                    label="First Name"
-                                    name="firstName"
-                                    required
-                                    value={values?.firstName }
-                                    onChange={(handleChange)}
-                                />
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Address"
+                      name="address"
+                      required
+                      value={values?.address}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div
+                    className={`${guidelines.inputclass} `}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Controls.Select
+                      fullWidth
+                      name="status"
+                      label="Change Status"
+                      value={
+                        values?.status === "Pending"
+                          ? 2
+                          : values?.status === "Approved"
+                          ? 1
+                          : values?.status === "Blocked"
+                          ? 3
+                          : values?.status
+                      }
+                      onChange={handleChange}
+                      options={statusLookup}
+                    />
+                  </div>
 
-                            </div>
-                            <div className={`${guidelines.inputclass}`} >
-                                <Controls.Input id="standard-basic"
-                                    label="Last Name"
-                                    name="lastName"
-                                    required
-                                value={values?.lastName }
-                                    onChange={handleChange}
-                                />
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="DOB"
+                      value={moment(values.dob).format("DD/MM/YYYY")}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                            </div>
-                            <div className={`${guidelines.inputclass}`} >
-                                <Controls.Input id="standard-basic"
-                                    inputProps={{ type: 'email' }}
-                                    label="Email."
-                                    name="email"
-                                    required
-                                value={values?.email }
-                                    onChange={handleChange}
-                                />
-                            </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Company Name"
+                      value={values.companyName}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                            <div className={`${guidelines.inputclass}`} >
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Company Number"
+                      value={values.companyNumber}
+                      onChange={handleChange}
+                    />
+                  </div>
 
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Position"
+                      value={values.position}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                                <Controls.Input id="standard-basic"
-                                    label="Mobile Phone"
-                                    name="phone"
-                                    required
-                                value={values?.phone }
-                                    onChange={handleChange}
-                                />
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Previous Work"
+                      value={values.previousWork}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                            </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Summary"
+                      value={values.summary}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                            <div className={`${guidelines.inputclass}`} >
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="About"
+                      value={values.about}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Height"
+                      value={values.height}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Weight"
+                      value={values.weight}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-
-                                <Controls.Input id="standard-basic"
-                                    label="Address"
-                                    name="address"
-                                    required
-                                value={values?.address }
-                                    onChange={handleChange}
-                                />
-
-                            </div>
-                        <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Controls.Select fullWidth
-                                name="status"
-                                label="Change Status"
-                                value={values?.status === "Pending" ? 2 : values?.status === "Approved" ? 1 : values?.status === "Blocked" ? 3 : values?.status}
-                                onChange={handleChange}
-                                options={statusLookup}
-                            />
-                        </div>
-
-                      {props?.data?.role==="guard" &&  <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Controls.Select fullWidth
-
-                               name="skill"
-                                multiple        
-                                label="Change Skill"
-                                value={values?.skill}
-                                onChange={handleChange}
-                                 options={getSkills?.response?.map((item) => ({ id: item?._id, title: item?.name })) ?? []}
-                            />
-                                    </div>}
-                                    
-                                    {props?.data?.role === "guard" && <div className={`${guidelines.inputclass} `} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Controls.Input fullWidth
-                                            name="hourlyRate"
-                                            label="Hourly Rate"
-                                            value={values?.hourlyRate}
-                                            onChange={handleChange}
-                                        />
-                                    </div>}
-                        <div className={`${guidelines.inputclass}`}>
-                            {/* <Link to={{ pathname: 'showDocs', state: { data: response } }}> */}
-                                 <Button
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                    size="large"
-                                    onClick={() => setOpen(true)}
-                            >
-                                Check Docs
-                            </Button>
-                            {/* </Link> */}
-                           
-                        </div>
-                            <div className={`${guidelines.inputclass}`}>
-                                <Button
-                                    fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    onClick={(e)=>handleSubmit(e)}
-
-                                >
-                                    {props.label}
-                                </Button>
-                            </div>
-                            <div className={`${guidelines.inputclass}`}>
-                                <Button
-                                    fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    onClick={() => {
-                                        props.setUpdation(false)
-                                    }}
-                                >
-                                    BACK
-                                </Button>
-
-                            </div>
-                        </div>
-
-                    </Stack>
-
-
-                    </div>
-                    <FilteredJobs data={FilteredJobsData?.response ?? []} setRow={setRow} setJobDataOpen={setJobDataOpen} />
+                  {props?.data?.role === "hirer" && (
+                    <>
+                      <div className={`${guidelines.inputclass}`}>
+                        <Controls.Input
+                          id="standard-basic"
+                          label="HirerType"
+                          value={values.hirerType}
+                          onChange={handleChange}
+                        />
+                      </div>
                     </>
+                  )}
+                  {props?.data?.role === "guard" && (
+                    <>
+                      <div
+                        className={`${guidelines.inputclass} `}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Controls.Select
+                          fullWidth
+                          name="skill"
+                          multiple
+                          label="Change Skill"
+                          value={values?.skill}
+                          onChange={handleChange}
+                          options={
+                            getSkills?.response?.map((item) => ({
+                              id: item?._id,
+                              title: item?.name,
+                            })) ?? []
+                          }
+                        />
+                                                </div>
+                                                
+                    </>
+                  )}
 
-                }
-
-
-        </>
+                  {props?.data?.role === "guard" && (
+                    <div
+                      className={`${guidelines.inputclass} `}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Controls.Input
+                        fullWidth
+                        name="hourlyRate"
+                        label="Hourly Rate"
+                        value={values?.hourlyRate}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  )}
+                  <div className={`${guidelines.inputclass}`}>
+                    {/* <Link to={{ pathname: 'showDocs', state: { data: response } }}> */}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={() => setOpen(true)}
+                    >
+                      Check Docs
+                    </Button>
+                    {/* </Link> */}
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      {props.label}
+                    </Button>
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={() => {
+                        props.setUpdation(false);
+                      }}
+                    >
+                      BACK
+                    </Button>
+                  </div>
+                </div>
+              </Stack>
+            </div>
+            <FilteredJobs
+              data={FilteredJobsData?.response ?? []}
+              setRow={setRow}
+              setJobDataOpen={setJobDataOpen}
+              setTableUpdated={setTableUpdated}
+            />
+          </>
+        )}
+      </>
     );
 }
 

@@ -32,7 +32,7 @@ const ActiveJobs = ({ data }) => {
     return binary.join("");
   }
     
-  const generatePDF = (rowData) => {
+  const generatePDF = (rowData,role) => {
     const date1 = new Date(rowData?.to);
     const date2 = new Date(rowData?.from);
     const timeDifference = Math.abs(date2 - date1); // Get the time difference in milliseconds
@@ -81,7 +81,7 @@ const ActiveJobs = ({ data }) => {
         pdf.setTextColor(0, 0, 0); // Set text color to black
         pdf.text(
           `${
-            rowData?.role === "guard"
+            role === "guard"
               ? rowData?.guard_name
               : rowData?.hirer_name
           }`,
@@ -132,22 +132,22 @@ const ActiveJobs = ({ data }) => {
 
   const columns = [
     {
-      title: "Download",
-      render: (row) => (
-        <button onClick={async () => generatePDF(row)}>
-          <GetAppOutlinedIcon fontSize="large" />{" "}
-        </button>
-      ),
-      cellStyle: { textAlign: "center" },
-      headerStyle: { textAlign: "center" },
-    },
-    {
       title: "Hirer Receipt No",
       editable: () => true,
       field: "hirerReceiptNo",
       type: "string",
       cellStyle: { textAlign: "left" },
       headerStyle: { textAlign: "left" },
+    },
+    {
+      title: "Download",
+      render: (row) => (
+        <button onClick={async () => generatePDF(row,"hirer")}>
+          <GetAppOutlinedIcon fontSize="large" />{" "}
+        </button>
+      ),
+      cellStyle: { textAlign: "center" },
+      headerStyle: { textAlign: "center" },
     },
     {
       title: "Hirer",
@@ -164,6 +164,16 @@ const ActiveJobs = ({ data }) => {
       type: "string",
       cellStyle: { textAlign: "left" },
       headerStyle: { textAlign: "left" },
+    },
+    {
+      title: "Download",
+      render: (row) => (
+        <button onClick={async () => generatePDF(row,"guard")}>
+          <GetAppOutlinedIcon fontSize="large" />{" "}
+        </button>
+      ),
+      cellStyle: { textAlign: "center" },
+      headerStyle: { textAlign: "center" },
     },
     {
       title: "Guard",

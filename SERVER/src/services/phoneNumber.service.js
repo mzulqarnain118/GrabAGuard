@@ -15,7 +15,12 @@ const sendOtpToPhoneByTwilio = async (phone) => {
 
 
 const sendOtpToPhoneByAwsSNS = async (phone) => {
-  const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+  const otp = otpGenerator.generate(6, {
+    digits: true,
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
   const params = {
     Message: `Your OTP is ${otp}`,
     PhoneNumber: phone,

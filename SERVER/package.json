@@ -134,10 +134,6 @@
   ],
   
   "dependencies": {
-  
-    
-  "@aws-sdk/abort-controller": "^3.292.0",
-  
     
   "@aws-sdk/client-s3": "^3.294.0",
   

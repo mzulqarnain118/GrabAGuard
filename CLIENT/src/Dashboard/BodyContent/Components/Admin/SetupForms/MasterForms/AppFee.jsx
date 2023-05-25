@@ -11,7 +11,7 @@ const AppFee = () => {
     const { response, error } = ApiCallGet('/AppData', { getUpdatedData: updated });
     const columns = [
       {
-        title: "Fee",
+        title: "Hirer Fee",
         editable: () => true,
         field: "hirerFee",
         type: "text",
@@ -19,7 +19,7 @@ const AppFee = () => {
         headerStyle: { textAlign: "left" },
       },
       {
-        title: "Fee",
+        title: "Guard Fee",
         editable: () => true,
         field: "guardFee",
         type: "text",
@@ -31,7 +31,7 @@ const AppFee = () => {
     const handleformSubmit = async (e) => {
         e.preventDefault();
 
-        const result1 = await ApiCallPost('/AppData', { fee });
+        const result1 = await ApiCallPost('/AppData', fee);
         if (result1.error) {
             Toast(result1.text, 'error');
         }

@@ -327,7 +327,7 @@ const QualificationTable = (props) => {
                   actionsAtStart={true}
                   title="All Users"
                   columns={columns}
-                  data={user ? Guards : Hirers}
+                  data={user ?  Hirers:Guards }
                   onDelete={onDelete}
                   onRowClick={(event, rowData) => {
                     setRow(rowData);

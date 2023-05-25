@@ -112,7 +112,11 @@ const hiredGuardSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    fee: {
+    hirerFee: {
+      type: Number,
+      trim: true,
+    },
+    guardFee: {
       type: Number,
       trim: true,
     },

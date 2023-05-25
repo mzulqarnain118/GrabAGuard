@@ -22,6 +22,11 @@ const hiredGuardSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    appliedGuards: [],
+    futureJob: {
+      type: Boolean,
+      default: false,
+    },
     jobRole: {
       type: String,
       required: true,

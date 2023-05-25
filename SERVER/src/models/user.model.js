@@ -11,9 +11,17 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    updateFirstName: {
+      type: String,
+      trim: true,
+    },
     lastName: {
       type: String,
       required: true,
+      trim: true,
+    },
+    updateLastName: {
+      type: String,
       trim: true,
     },
     email: {
@@ -27,6 +35,10 @@ const userSchema = mongoose.Schema(
           throw new Error('Invalid email');
         }
       },
+    },
+    updateEmail: {
+      type: String,
+      trim: true,
     },
     password: {
       type: String,
@@ -45,14 +57,37 @@ const userSchema = mongoose.Schema(
       enum: roles,
       default: 'admin',
     },
-    address: {
+    address1: {
       type: String,
       required: true,
+      trim: true,
+    },
+    address2: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    postCode: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    updateAddress: {
+      type: String,
       trim: true,
     },
     phone: {
       type: String,
       required: true,
+      trim: true,
+    },
+    updatePhone: {
+      type: String,
       trim: true,
     },
     dob: {
@@ -76,7 +111,15 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    updateCompanyNumber: {
+      type: String,
+      trim: true,
+    },
     position: {
+      type: String,
+      trim: true,
+    },
+    updatePosition: {
       type: String,
       trim: true,
     },
@@ -107,7 +150,7 @@ const userSchema = mongoose.Schema(
     fcmToken: {
       type: String,
       trim: true,
-      default: ''
+      default: '',
     },
     status: {
       type: String,
@@ -116,7 +159,7 @@ const userSchema = mongoose.Schema(
     },
     userBlock: {
       type: Boolean,
-      default: false
+      default: false,
     },
     active: {
       type: Boolean,
@@ -129,7 +172,7 @@ const userSchema = mongoose.Schema(
     skill: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AddServices' }],
     jobStatus: {
       type: String,
-      enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"],
+      enum: ['Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', 'Rejected', 'Cancelled'],
     },
     hirerType: {
       type: String,
@@ -138,27 +181,29 @@ const userSchema = mongoose.Schema(
     profilePic: {
       type: String,
       trim: true,
-      default: ''
+      default: '',
     },
     socialAuth: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hourlyRate: [],
     is2FAEnabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    blockedUsers: [{
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    blockedUsers: [
+      {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        name: {
+          type: String,
+          trim: true,
+        },
       },
-      name: {
-        type: String,
-        trim: true
-      }
-    }]
+    ],
   },
   {
     timestamps: true,

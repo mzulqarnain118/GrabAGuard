@@ -6,20 +6,27 @@ import { ApiCallPost, ApiCallGet, ApiCallPut } from "../../../../../../Modules/C
 import Toast from '../../../../../../Modules/UiModules/Core/Toast/Toast';
 
 const AppFee = () => {
-    const [fee, setFee] = React.useState('');
+    const [fee, setFee] = React.useState({guardFee:'',hirerFee:''});
     const [updated, setUpdated] = useState(0);
     const { response, error } = ApiCallGet('/AppData', { getUpdatedData: updated });
     const columns = [
-        {
-            title: "Fee",
-            editable: () => true,
-            field: "fee",
-            type: "text",
-            cellStyle: { textAlign: "left" },
-            headerStyle: { textAlign: "left" },
-        },
-
-    ]
+      {
+        title: "Fee",
+        editable: () => true,
+        field: "hirerFee",
+        type: "text",
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+      {
+        title: "Fee",
+        editable: () => true,
+        field: "guardFee",
+        type: "text",
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+    ];
 
     const handleformSubmit = async (e) => {
         e.preventDefault();
@@ -65,49 +72,75 @@ const AppFee = () => {
 
 
     return (
+      <>
+        <div
+          className="w-100"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <form
+            container
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "2rem",
+              marginBottom: "5rem",
+              position: "relative",
+              width: "100%",
+            }}
+          >
+            <div
+              className="row w-100"
+              style={{ alignItems: "center", justifyContent: "center" }}
+            >
+              <div className={`col  ${guidelines.inputclass}`}>
+                <TextField
+                  fullWidth
+                  required
+                  label="Hirer Fee"
+                  variant="standard"
+                  value={hirerFee}
+                  name="hirerFee"
+                  onChange={(e) => {
+                    setFee((old) => ({ ...old, hirerFee: e.target.value }))
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  required
+                  label="Guard Fee"
+                  variant="standard"
+                  value={guardFee}
+                  name="guardFee"
+                                onChange={(e) => {
+                    setFee((old) => ({ ...old, guardFee: e.target.value }))
+                  }}
+                />
+              </div>
 
-        <>
-
-            <div className="w-100" style={{ display: 'flex', flexDirection: 'column' }}>
-
-                <form container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2rem', marginBottom: '5rem', position: 'relative', width: '100%' }}
+              <div className={`col  ${guidelines.inputclass}`}>
+                <Button
+                  onClick={(e) => handleformSubmit(e)}
+                  variant="contained"
+                  color="primary"
                 >
-                    <div className="row w-100" style={{ alignItems: 'center', justifyContent: 'center' }}>
-
-
-                        <div className={`col  ${guidelines.inputclass}`}  >
-                            <TextField fullWidth
-                                required
-                                label="Fee"
-                                variant="standard"
-                                value={fee}
-                                name="fee"
-                                onChange={(e) => { setFee(e.target.value) }}
-                            />
-
-
-
-                        </div>
-                    
-                        <div className={`col  ${guidelines.inputclass}`}  >
-                            <Button
-                                onClick={(e) => handleformSubmit(e)}
-                                variant="contained"
-                                color="primary"
-                            >
-                                Enter
-                            </Button>
-                        </div>
-
-                    </div>
-                </form>
-
-                <MatTable title="App Fee" columns={columns} style={{ margin: '1rem' }}
-                    data={response ?? []}
-                    onUpdate={update}
-                    // Options={options}
-                    actionsAtStart={true} />
+                  Enter
+                </Button>
+              </div>
             </div>
-        </>);
+          </form>
+
+          <MatTable
+            title="App Fee"
+            columns={columns}
+            style={{ margin: "1rem" }}
+            data={response ?? []}
+            onUpdate={update}
+            // Options={options}
+            actionsAtStart={true}
+          />
+        </div>
+      </>
+    );
 }
 export default AppFee;

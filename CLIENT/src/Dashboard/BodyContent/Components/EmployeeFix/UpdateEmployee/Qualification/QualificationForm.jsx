@@ -24,23 +24,26 @@ const QualificationForm = (props) => {
     const [row, setRow] = useState({});
 
     const [values, setValues] = useState({
-        email: props.data?.email??'',
-        firstName: props.data?.firstName ??'',
-        lastName: props.data?.lastName ??'',
-        address: props.data?.address ??'',
-        phone: props.data?.phone ??'',
-        status: props.data?.status ??'',
-        skill: skills ?? [],
-        hourlyRate: props.data?.hourlyRate ?? '',
-        dob: props.data?.dob ?? '',
-        companyName: props.data?.companyName ?? '',
-        companyNumber: props.data?.companyNumber ?? '',
-        position: props.data?.position ?? '',
-        previousWork: props.data?.previousWork ?? '',
-        summary: props.data?.summary ?? '',
-        about: props.data?.about ?? '',
-        height: props.data?.height ?? '',
-        weight: props.data?.weight ?? '',
+      email: props.data?.email ?? "",
+      firstName: props.data?.firstName ?? "",
+      lastName: props.data?.lastName ?? "",
+      address1: props.data?.address1 ?? "",
+      address2: props.data?.address2 ?? "",
+      city: props.data?.city ?? "",
+      postCode: props.data?.postCode ?? "",
+      phone: props.data?.phone ?? "",
+      status: props.data?.status ?? "",
+      skill: skills ?? [],
+      hourlyRate: props.data?.hourlyRate ?? "",
+      dob: props.data?.dob ?? "",
+      companyName: props.data?.companyName ?? "",
+      companyNumber: props.data?.companyNumber ?? "",
+      position: props.data?.position ?? "",
+      previousWork: props.data?.previousWork ?? "",
+      summary: props.data?.summary ?? "",
+      about: props.data?.about ?? "",
+      height: props.data?.height ?? "",
+      weight: props.data?.weight ?? "",
     });
     const [open, setOpen] = useState(false);
     const [jobDataOpen, setJobDataOpen] = useState(false);
@@ -162,10 +165,40 @@ const QualificationForm = (props) => {
                   <div className={`${guidelines.inputclass}`}>
                     <Controls.Input
                       id="standard-basic"
-                      label="Address"
-                      name="address"
+                      label="Address Line 1"
+                      name="address1"
                       required
-                      value={values?.address}
+                      value={values?.address1}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Address Line 2"
+                      name="address2"
+                      required
+                      value={values?.address2}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="City/Town"
+                      name="city"
+                      required
+                      value={values?.city}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Postcode"
+                      name="postCode"
+                      required
+                      value={values?.postCode}
                       onChange={handleChange}
                     />
                   </div>
@@ -310,8 +343,7 @@ const QualificationForm = (props) => {
                             })) ?? []
                           }
                         />
-                                                </div>
-                                                
+                      </div>
                     </>
                   )}
 

@@ -7,7 +7,10 @@ const createUser = {
     password: Joi.string().required().custom(password),
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
-    address: Joi.string().required(),
+    address1: Joi.string().required(),
+    address2: Joi.string().required(),
+    city: Joi.string().required(),
+    postCode: Joi.string().required(),
     phone: Joi.string().required(),
     dob: Joi.date().required(),
     height: Joi.string().allow(''),
@@ -26,7 +29,6 @@ const createUser = {
     hirerType: Joi.string().valid('Company', 'Individual'),
     fcmToken: Joi.string().allow(''),
     status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-
   }),
 };
 
@@ -56,7 +58,10 @@ const updateUser = {
       // password: Joi.string().custom(password),
       firstName: Joi.string(),
       lastName: Joi.string(),
-      address: Joi.string(),
+      address1: Joi.string(),
+      address2: Joi.string(),
+      city: Joi.string(),
+      postCode: Joi.string(),
       phone: Joi.string(),
       about: Joi.string(),
       dob: Joi.date(),

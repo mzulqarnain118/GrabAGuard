@@ -47,23 +47,6 @@ const QualificationTable = (props) => {
           return rowData.firstName + " " + rowData.lastName;
         },
       },
-
-      {
-        title: "Email",
-        field: "email",
-        type: "string",
-        editable: () => false,
-        cellStyle: { textAlign: "left" },
-        headerStyle: { textAlign: "left" },
-      },
-      {
-        title: "Address",
-        field: "address",
-        type: "string",
-        editable: () => false,
-        cellStyle: { textAlign: "left" },
-        headerStyle: { textAlign: "left" },
-      },
       {
         title: "hirerType",
         field: "hirerType",
@@ -73,6 +56,47 @@ const QualificationTable = (props) => {
         headerStyle: { textAlign: "left" },
         hidden: !user,
       },
+      {
+        title: "Email",
+        field: "email",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+      {
+        title: "Address Line 1",
+        field: "address1",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+      {
+        title: "Address Line 2",
+        field: "address2",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+      {
+        title: "Town/City",
+        field: "city",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+      {
+        title: "Postcode",
+        field: "postCode",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+      },
+
       {
         title: "Skill",
         render(rowData) {

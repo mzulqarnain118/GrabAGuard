@@ -99,7 +99,7 @@ const AppFee = () => {
                   required
                   label="Hirer Fee"
                   variant="standard"
-                  value={hirerFee}
+                  value={fee.hirerFee}
                   name="hirerFee"
                   onChange={(e) => {
                     setFee((old) => ({ ...old, hirerFee: e.target.value }))
@@ -110,7 +110,7 @@ const AppFee = () => {
                   required
                   label="Guard Fee"
                   variant="standard"
-                  value={guardFee}
+                  value={fee.guardFee}
                   name="guardFee"
                                 onChange={(e) => {
                     setFee((old) => ({ ...old, guardFee: e.target.value }))

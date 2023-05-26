@@ -18,8 +18,8 @@ const register = catchAsync(async (req, res) => {
 });
 
 const isEmailAlreadyTaken = catchAsync(async (req, res) => {
-  const user = await userService.isEmailAlreadyTaken(req.body);
-  res.status(200).send('Not Exist');
+   await userService.isEmailAlreadyTaken(req.body);
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const socialRegister = catchAsync(async (req, res) => {
@@ -121,6 +121,12 @@ const sendVerificationEmail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const sendVerificationOTPEmail = catchAsync(async (req, res) => {
+  await userService.isEmailAlreadyTaken(req.body);
+   const otp = await emailService.sendOtpEmailByAwsSES(req.body.email);
+   res.status(200).send({ otp });
+});
+
 const verifyEmail = catchAsync(async (req, res) => {
   await authService.verifyEmail(req.query.token);
   res.status(httpStatus.NO_CONTENT).send();
@@ -144,4 +150,5 @@ module.exports = {
   socialRegister,
   socialLogin,
   isEmailAlreadyTaken,
+  sendVerificationOTPEmail,
 };

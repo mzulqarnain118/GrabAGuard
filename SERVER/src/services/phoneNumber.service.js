@@ -4,8 +4,13 @@ const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, } = process.
 const otpGenerator = require('otp-generator');
 
 const sendOtpToPhoneByTwilio = async (phone) => {
-  const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-  // await twilio.messages.create({
+  const otp = otpGenerator.generate(6, {
+    digits: true,
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
+    // await twilio.messages.create({
   //   body: `Your OTP is ${otp}`,
   //   from: TWILIO_PHONE_NUMBER,
   //   to: phone

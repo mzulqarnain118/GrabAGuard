@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
 const { SES } = require('../aws-config');
+const otpGenerator = require('otp-generator');
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
@@ -40,26 +41,30 @@ If you did not request any password resets, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
 
+
+
+const sendOtpEmailByAwsSES = async (to) => {
+  const otp = otpGenerator.generate(6, {
+    digits: true,
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
+  await sendEmailWithSES(to, 'Email Verification OTP', otp);
+  return otp;
+};
 /**
  * Send verification email
  * @param {string} to
  * @param {string} token
  * @returns {Promise}
  */
-const sendVerificationEmail = async (to, token) => {
-  const subject = 'Email Verification';
-  // replace this url with the link to the email verification page of your front-end app
-  const verificationEmailUrl = `http://link-to-app/verify-email?token=${token}`;
-  const text = `Dear user,
-To verify your email, click on this link: ${verificationEmailUrl}
-If you did not create an account, then ignore this email.`;
-  await sendEmail(to, subject, text);
-};
-const sendEmailWithSES = async (clientEmail, emailSubject, emailHTMLBody, attachmentPath) => {
+
+const sendEmailWithSES = async (to, subject, emailHTMLBody, replyTo, attachmentPath) => {
   // Define the email parameters
   const params = {
     Destination: {
-      ToAddresses: [config.email.support],
+      ToAddresses: to ? [to] : [config.email.support],
     },
     Message: {
       Body: {
@@ -74,11 +79,11 @@ const sendEmailWithSES = async (clientEmail, emailSubject, emailHTMLBody, attach
       },
       Subject: {
         Charset: 'UTF-8',
-        Data: emailSubject,
+        Data: subject,
       },
     },
-    Source: config.email.from,
-    ReplyToAddresses: [clientEmail],
+    Source: 'app@grabaguard.com'.trim(),
+    ReplyToAddresses: [replyTo],
   };
   // Check if attachmentPath is provided
   // if (attachmentPath) {
@@ -96,18 +101,29 @@ const sendEmailWithSES = async (clientEmail, emailSubject, emailHTMLBody, attach
   try {
     const data = await SES.sendEmail(params).promise();
     console.log('EMAIL SENT SUCCESSFULLY', data);
-    return data
+    return data;
   } catch (error) {
     console.error('Error sending email:', error);
-    return error
+    return error;
   }
-   
 };
+
+const sendVerificationEmail = async (to, token) => {
+  const subject = 'Email Verification';
+  // replace this url with the link to the email verification page of your front-end app
+  const verificationEmailUrl = `http://link-to-app/verify-email?token=${token}`;
+  const text = `Dear user,
+To verify your email, click on this link: ${verificationEmailUrl}
+If you did not create an account, then ignore this email.`;
+  await sendEmailWithSES(to, subject, text);
+};
+
 
 module.exports = {
   transport,
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
-  sendEmailWithSES
+  sendEmailWithSES,
+  sendOtpEmailByAwsSES,
 };

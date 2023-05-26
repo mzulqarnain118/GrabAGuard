@@ -188,6 +188,7 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     hourlyRate: [],
+    rejectedOrders: [],
     is2FAEnabled: {
       type: Boolean,
       default: false,

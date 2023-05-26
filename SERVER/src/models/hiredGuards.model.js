@@ -22,7 +22,18 @@ const hiredGuardSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    appliedGuards: [],
+    appliedGuards: [
+      {
+        email: {
+          type: String,
+          trim: true,
+        },
+        name: {
+          type: String,
+          trim: true,
+        },
+      },
+    ],
     futureJob: {
       type: Boolean,
       default: false,

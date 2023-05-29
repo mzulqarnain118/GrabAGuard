@@ -82,7 +82,7 @@ const sendEmailWithSES = async (to, subject, emailHTMLBody, replyTo, attachmentP
         Data: subject,
       },
     },
-    Source: 'app@grabaguard.com'.trim(),
+    Source: config.email.from,
     ReplyToAddresses: [replyTo],
   };
   // Check if attachmentPath is provided

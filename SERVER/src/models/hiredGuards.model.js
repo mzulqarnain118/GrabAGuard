@@ -24,9 +24,9 @@ const hiredGuardSchema = new mongoose.Schema(
     },
     appliedGuards: [
       {
-        email: {
-          type: String,
-          trim: true,
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
         },
         name: {
           type: String,

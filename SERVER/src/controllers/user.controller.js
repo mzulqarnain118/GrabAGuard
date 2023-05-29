@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { userService } = require('../services');
+const { userService,emailService } = require('../services');
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -36,6 +36,18 @@ const getUser = catchAsync(async (req, res) => {
 });
 
 const updateUser = catchAsync(async (req, res) => {
+  const user = await userService.updateUserById(req.params.userId, req.body);
+  res.send(user);
+});
+
+const ApproveUpdateUser = catchAsync(async (req, res) => {
+  const emailSentData =JSON.stringify(req.body)
+  const sentEmail = await emailService.sendEmailWithSES(
+    'ranamzulqarnain1@gmail.com',
+    'User Data Update Request',
+    `<h1>A user has requested to update his data !</h1><h8>${emailSentData}</h8><p>Thank you for your patience.</p><p>- GrabAGuard Team</p>`
+  );
+  console.log("sentEmail",sentEmail)
   const user = await userService.updateUserById(req.params.userId, req.body);
   res.send(user);
 });
@@ -100,5 +112,6 @@ module.exports = {
   blockUser,
   unblockUser,
   getDashboardData,
-  getRevenueByMonthYear
+  getRevenueByMonthYear,
+  ApproveUpdateUser,
 };

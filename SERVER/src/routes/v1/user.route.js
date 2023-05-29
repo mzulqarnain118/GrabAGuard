@@ -12,6 +12,7 @@ router.get('/skill-counts', userController.getSkillCounts);
 router.get('/revenueByMonthYear', userController.getRevenueByMonthYear);
 router.post('/:userId/block', userController.blockUser);
 router.post('/:userId/unblock', userController.unblockUser);
+router.patch('/:userId/ApproveUpdateUser', userController.ApproveUpdateUser);
 
 router
   .route('/')
@@ -22,7 +23,7 @@ router
 router
   .route('/:userId')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
-  .patch(validate(userValidation.updateUser), userController.updateUser)//auth('manageUsers'), 
+  .patch(validate(userValidation.updateUser), userController.updateUser) //auth('manageUsers'),
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;

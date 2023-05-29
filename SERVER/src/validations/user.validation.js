@@ -57,6 +57,7 @@ const updateUser = {
       email: Joi.string().email(),
       // password: Joi.string().custom(password),
       firstName: Joi.string(),
+      
       lastName: Joi.string(),
       address1: Joi.string(),
       address2: Joi.string(),

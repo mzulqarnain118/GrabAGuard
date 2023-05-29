@@ -100,7 +100,7 @@ const sendEmailWithSES = async (to, subject, emailHTMLBody, replyTo, attachmentP
   // }
   try {
     const data = await SES.sendEmail(params).promise();
-    console.log('EMAIL SENT SUCCESSFULLY', data);
+    console.log('EMAIL SENT SUCCESSFULLY', data, params);
     return data;
   } catch (error) {
     console.error('Error sending email:', error);

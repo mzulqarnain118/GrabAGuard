@@ -77,7 +77,19 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    updateAddress: {
+    updateAddress1: {
+      type: String,
+      trim: true,
+    },
+    updateAddress2: {
+      type: String,
+      trim: true,
+    },
+    updateCity: {
+      type: String,
+      trim: true,
+    },
+    updatePostCode: {
       type: String,
       trim: true,
     },

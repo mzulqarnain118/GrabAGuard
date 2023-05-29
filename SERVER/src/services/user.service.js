@@ -1,7 +1,6 @@
 const httpStatus = require('http-status');
 const { User, HiredGuard } = require('../models');
 const ApiError = require('../utils/ApiError');
-const { findByGuardId } = require('./hiredGuards.service');
 const initializeFirebaseAdmin = require('../firebaseAdmin');
 initializeFirebaseAdmin();
 const admin = require('firebase-admin');
@@ -363,9 +362,6 @@ const updateUserById = async (userId, updateBody) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   Object.assign(user, updateBody);
-  // if (updateBody?.skill && user?.role==="guard") {
-  //    const results= await findByGuardId(userId,updateBody.skill);
-  // }
   if (updateBody?.status === 'Approved') {
     const message = {
       notification: {

@@ -55,10 +55,30 @@ const updateUser = {
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
+      updateEmail: Joi.string().email().allow(''),
       // password: Joi.string().custom(password),
       firstName: Joi.string(),
-      
+      updateFirstName: Joi.string().allow(''),
+      updateLastName: Joi.string().allow(''),
+      updateAddress1: Joi.string().allow(''),
+      updateAddress2: Joi.string().allow(''),
+      updateCity: Joi.string().allow(''),
+      updatePostCode: Joi.string().allow(''),
+      approveUpdateUser: Joi.boolean(),
+      updatePosition: Joi.string().allow(''),
+      updateCompanyNumber: Joi.string().allow(''),
+      updatePhone: Joi.string().allow(''),
+      updateAbout: Joi.string().allow(''),
+      updateLocation: Joi.string().allow(''),
+      updateLongitude: Joi.string().allow(''),
+      updateLatitude: Joi.string().allow(''),
+      updateWeight: Joi.string().allow(''),
+      updateHeight: Joi.string().allow(''),
+      updateSummary: Joi.string().allow(''),
+      updatePreviousWork: Joi.string().allow(''),
       lastName: Joi.string(),
+      position: Joi.string(),
+      companyNumber: Joi.string(),
       address1: Joi.string(),
       address2: Joi.string(),
       city: Joi.string(),
@@ -78,10 +98,12 @@ const updateUser = {
       summary: Joi.string().allow(''),
       previousWork: Joi.string().allow(''),
       userBlock: Joi.boolean(),
-      skill: Joi.array().items().items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/)) // validate that each item is a valid ObjectId
-    .unique() ,
+      skill: Joi.array()
+        .items()
+        .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/)) // validate that each item is a valid ObjectId
+        .unique(),
       status: Joi.string().valid('Approved', 'Pending', 'Blocked'),
-      jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', "Rejected", "Cancelled"),
+      jobStatus: Joi.string().valid('Pending', 'Accepted', 'CheckedIn', 'CheckedOut', 'Completed', 'Rejected', 'Cancelled'),
       guardRating: Joi.number().valid(1, 2, 3, 4, 5),
     })
     .min(1),

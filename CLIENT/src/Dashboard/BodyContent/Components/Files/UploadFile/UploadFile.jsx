@@ -19,78 +19,103 @@ const UploadComponent = (props) => {
 
 }
 
-const UploadFile = ({ type, accept, setTableUpdated, setLoading, isExists }) => {
-    const fileDescriptionRef = useRef('');
-    const [files, setFiles] = useState([]);
-    const handleSubmit = async (e) => {
-        if (files.length == 0) {
-            Toast("Please Upload atleast one file!!", "error")
-            return;
-        }
-        try {
-            setLoading(true);
-            let formData = new FormData();
-            const id = localStorage.getItem('id')
-            formData.append("userId", id);
-            formData.append("type", type ?? fileDescriptionRef.current.value);
-            formData.append("file", files[0].file);
-                let result;
-                if (isExists) {
-                    result = await ApiCallPatch(`/files/${isExists}`, formData)
-                }
-                else {
-                    result = await ApiCallPost('/files', formData);
-                }
-                console.log('Result: ', result, result.status)
-                if (result.status === 201 || result.status === 200) {
-                    Toast("File Uploaded Successfully", "success");
-                    setTableUpdated(old => old + 1);
-                    setLoading(false);
-                }
-                else
-                    Toast("Could Not Upload File", "error");
-                setLoading(false);
-        } catch (error) {
-            Toast("Something went wrong", "error");
-            setLoading(false);
-        }
+const UploadFile = ({
+  type,
+  accept,
+  userId,
+  setLoading,
+  isExists,
+  setTableUpdated,
+}) => {
+  const fileDescriptionRef = useRef("");
+  const [files, setFiles] = useState([]);
+  const handleSubmit = async (e) => {
+    if (files.length == 0) {
+      Toast("Please Upload atleast one file!!", "error");
+      return;
     }
+    try {
+      setLoading(true);
+      let formData = new FormData();
+      const id = localStorage.getItem("id");
+      formData.append("userId", userId ?? id);
+      formData.append("type", type ?? fileDescriptionRef.current.value);
+      formData.append("file", files[0].file);
+      let result;
+      if (isExists) {
+        result = await ApiCallPatch(`/files/${isExists}`, formData);
+      } else {
+        result = await ApiCallPost("/files", formData);
+      }
+        if (result.status === 201 || result.status === 200) {
+                console.log("Result->uploadFile: ", result, result.status);
+        Toast("File Uploaded Successfully", "success");
+        setTableUpdated((old) => old + 1);
+        setLoading(false);
+      } else {Toast("Could Not Upload File", "error");
+      setLoading(false);}
+    } catch (error) {
+      Toast("Something went wrong", "error");
+      setLoading(false);
+    }
+  };
 
-    return (
-        <>
-                <Stack>
-                       
-                    <div className='row align-items-center'>
-                    {!type && <div className='col-6 col-lg-6 col-md-12 col-sm-12'>
-                            <TextArea
-                                required
-                                label="Description" name="description"
-                                inputRef={fileDescriptionRef}
-                            />
-                        </div>}
+  return (
+    <>
+      <Stack>
+        <div className="row align-items-center">
+          {!type && (
+            <div className="col-12 col-lg-12 col-md-12 col-sm-12">
+              <TextArea
+                required
+                label="Description"
+                name="description"
+                inputRef={fileDescriptionRef}
+              />
+            </div>
+          )}
 
-                    {type?<div className="col-12 pl-4 pr-4 pt-1 pb-2">
-                            <FileUploader files={files} setFiles={setFiles} label='Upload File'
-                                accept={accept ?? "image/*,.pdf"} limit={1}
-                        /></div>
-                        :<div className="col-6 col-lg-6 col-md-12 col-sm-12 pl-4 pr-4 pt-1 pb-2">
-                            <FileUploader files={files} setFiles={setFiles} label='Upload File'
-                                accept={accept ?? "image/*,.pdf"} limit={1}
-                            /></div>}
-
-                    </div>
-                    <Button variant="contained" style={{
-                        float: 'right', backgroundColor: '#872b26', alignItems: 'right', marginTop: '1rem'
-                        , fontSize: '0.9rem', letterSpacing: '0.05rem'
-                    }}
-                        onClick={() => handleSubmit()}
-                    > Upload</Button>
-                </Stack >
-        </>
-    );
-
-
-}
+          {type ? (
+            <div className="col-12 col-lg-12 col-md-12 pl-4 pr-4 pt-1 pb-2">
+              <FileUploader
+                files={files}
+                setFiles={setFiles}
+                label="Upload File"
+                accept={accept ?? "image/*,.pdf"}
+                limit={1}
+              />
+            </div>
+          ) : (
+            <div className="col-12 col-lg-12 col-md-12 col-sm-12 pl-4 pr-4 pt-1 pb-2">
+              <FileUploader
+                files={files}
+                setFiles={setFiles}
+                label="Upload File"
+                accept={accept ?? "image/*,.pdf"}
+                limit={1}
+              />
+            </div>
+          )}
+        </div>
+        <Button
+          variant="contained"
+          style={{
+            float: "right",
+            backgroundColor: "#872b26",
+            alignItems: "right",
+            marginTop: "1rem",
+            fontSize: "0.9rem",
+            letterSpacing: "0.05rem",
+          }}
+          onClick={() => handleSubmit()}
+        >
+          {" "}
+          Upload
+        </Button>
+      </Stack>
+    </>
+  );
+};
 
 export { UploadFile };
 export default UploadComponent;

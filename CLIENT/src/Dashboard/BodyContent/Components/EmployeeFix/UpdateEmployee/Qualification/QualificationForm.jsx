@@ -10,6 +10,7 @@ import ImageDisplay from './DisplayDocs';
 import FilteredJobs from './FilteredJobs';
 import JobDataDisplay from './JobDataDisplay';
 import moment from 'moment';
+import Formheading from '../../../../../../Modules/UiModules/Control/Formheading';
 const QualificationForm = (props) => {
         const [tableUpdated, setTableUpdated] = useState(0);
 
@@ -49,7 +50,6 @@ const QualificationForm = (props) => {
     const [jobDataOpen, setJobDataOpen] = useState(false);
 
     const [statusLookup, setStatusLookup] = useState([{ id: 1, title: 'Approved' }, { id: 2, title: 'Pending' }, { id: 3, title: 'Blocked' }]);
-    const { response, error } = ApiCallGet(`/files/${id}`);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -96,6 +96,48 @@ const QualificationForm = (props) => {
     );
 
 
+    const ApproveUpdateUser = React.useCallback(async () => {
+      try {
+        const screenData = {
+          email: props?.data?.updateEmail,
+          firstName: props?.data?.updateFirstName,
+          lastName: props?.data?.updateLastName,
+          address1: props?.data?.updateAddress1,
+          address2: props?.data?.updateAddress2,
+          city: props?.data?.updateCity,
+          postCode: props?.data?.updatePostcode,
+          phone: props?.data?.updatePhone,
+          companyNumber: props?.data?.updateCompanyNumber,
+          position: props?.data?.updatePosition,
+          updateEmail: "",
+          updateFirstName: "",
+          updateLastName: "",
+          updateAddress1: "",
+          updateAddress2: "",
+          updateCity: "",
+          updatePostCode: "",
+          updatePhone: "",
+          updateCompanyNumber: "",
+          updatePosition: "",
+          approveUpdateUser: false,
+        };
+        console.log("==========================", screenData);
+
+        const response = await ApiCallPatch(`/users/${id}`, screenData);
+
+        if (response?.status === 200) {
+          console.log(response, "result");
+          Toast("Data Updated After Approval Successfully!", "success");
+          props.setTableUpdated((old) => old + 1);
+          props.setUpdation(false);
+        }
+      } catch (error) {
+        console.log(error, "error");
+        Toast(error.message, "error");
+      }
+    }, [props?.data]);
+    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         updateUser()
@@ -105,7 +147,7 @@ const QualificationForm = (props) => {
     return (
       <>
         {open ? (
-          <ImageDisplay data={response} setOpen={setOpen} />
+          <ImageDisplay id={id} setOpen={setOpen} />
         ) : jobDataOpen ? (
           <JobDataDisplay data={row} setJobDataOpen={setJobDataOpen} />
         ) : (
@@ -405,6 +447,114 @@ const QualificationForm = (props) => {
                 </div>
               </Stack>
             </div>
+           { props?.data?.approveUpdateUser && <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Stack>
+                <div className="row p-3">
+                  <Formheading label="Data Update Request"/>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="First Name"
+                      value={props?.data?.updateFirstName}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Last Name"
+                      value={props?.data?.updateLastName}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      inputProps={{ type: "email" }}
+                      label="Email."
+                      value={props?.data?.updateEmail}
+                      editable={false}
+                    />
+                  </div>
+
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Mobile Phone"
+                      value={props?.data?.updatePhone}
+                      editable={false}
+                    />
+                  </div>
+
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Address Line 1"
+                      value={props?.data?.updateAddress1}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Address Line 2"
+                      value={props?.data?.updateAddress2}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="City/Town"
+                      value={props?.data?.updateCity}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Postcode"
+                      value={props?.data?.updatePostCode}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Company Number"
+                      value={props?.data?.updateCompanyNumber}
+                      editable={false}
+                    />
+                  </div>
+
+                  <div className={`${guidelines.inputclass}`}>
+                    <Controls.Input
+                      id="standard-basic"
+                      label="Position"
+                      value={props?.data?.updatePosition}
+                      editable={false}
+                    />
+                  </div>
+                  <div className={`${guidelines.inputclass}`}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={(e) => ApproveUpdateUser(e)}
+                    >
+                      Accept
+                    </Button>
+                  </div>
+                </div>
+              </Stack>
+            </div>}
             <FilteredJobs
               data={FilteredJobsData?.response ?? []}
               setRow={setRow}

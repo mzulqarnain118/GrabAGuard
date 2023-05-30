@@ -111,7 +111,15 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    updateHeight: {
+      type: String,
+      trim: true,
+    },
     weight: {
+      type: String,
+      trim: true,
+    },
+    updateWeight: {
       type: String,
       trim: true,
     },
@@ -135,7 +143,15 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    approveUpdateUser: {
+      type: Boolean,
+      default: false,
+    },
     previousWork: {
+      type: String,
+      trim: true,
+    },
+    updatePreviousWork: {
       type: String,
       trim: true,
     },
@@ -143,7 +159,16 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    updateSummary: {
+      type: String,
+      trim: true,
+    },
+
     about: {
+      type: String,
+      trim: true,
+    },
+    updateAbout: {
       type: String,
       trim: true,
     },
@@ -151,11 +176,23 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    updateLocation: {
+      type: String,
+      trim: true,
+    },
     longitude: {
       type: String,
       trim: true,
     },
+    updateLongitude: {
+      type: String,
+      trim: true,
+    },
     latitude: {
+      type: String,
+      trim: true,
+    },
+    updateLatitude: {
       type: String,
       trim: true,
     },
@@ -200,6 +237,7 @@ const userSchema = mongoose.Schema(
       default: false,
     },
     hourlyRate: [],
+    updateHourlyRate: [],
     rejectedOrders: [],
     is2FAEnabled: {
       type: Boolean,

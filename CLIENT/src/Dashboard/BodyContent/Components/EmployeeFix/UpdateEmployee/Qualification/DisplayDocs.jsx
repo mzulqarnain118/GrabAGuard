@@ -1,33 +1,63 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Button, Stack } from '@mui/material';
 import guidelines from '../../../../../../Modules/Guidelines/Guidelines';
 import { useLocation, Link, useHistory } from 'react-router-dom';
-const ImageDisplay = ({data,setOpen}) => {
+import { UploadFile } from '../../../Files/UploadFile/UploadFile';
+import {
+  ApiCallGet,
+} from "../../../../../../Modules/CoreModules/ApiCall";
+
+const ImageDisplay = ({id,setOpen}) => {
   // const location = useLocation();
   // const history = useHistory();
   // const data = location.state.data;
-  console.log(data, "ImageDisplay")
+      const [tableUpdated, setTableUpdated] = useState(0);
+  const [loading, setLoading] = React.useState(false);
+      const { response, error } = ApiCallGet(`/files/${id}`, {
+        getUpdatedData: tableUpdated,
+      });
+
+  console.log(response, "ImageDisplay");
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "100vh",
-        overflowY: "scroll",
+        gap: "20px",
       }}
     >
-      <div className={`${guidelines.inputclass}`}>
-        {data?.map((image) => (
-          <img
-            src={image.url}
-            alt={image.type}
-            key={image._id}
-            style={{ height: "1000px", width: "1000px" }}
-          />
-        ))}
-      </div>
-      <div className={`${guidelines.inputclass}`}>
+      {response?.map((image) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <div className="col-12 col-lg-12 col-md-12 col-sm-12">
+            <UploadFile
+              type={image.type}
+              userId={image.userId}
+              setLoading={setLoading}
+              isExists={image._id}
+              setTableUpdated={setTableUpdated}
+            />
+          </div>
+          <div className="col-12 col-lg-12 col-md-12 col-sm-12">
+            <img
+              src={image.url}
+              alt={image.type}
+              style={{ height: "auto", width: "1000px" }}
+            />
+          </div>
+        </div>
+      ))}
+      <div
+        className={`${guidelines.inputclass}`}
+        style={{ marginBottom: "100px" }}
+      >
         <Button
           fullWidth
           variant="contained"

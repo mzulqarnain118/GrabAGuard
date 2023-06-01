@@ -123,7 +123,7 @@ const sendVerificationEmail = catchAsync(async (req, res) => {
 
 const sendVerificationOTPEmail = catchAsync(async (req, res) => {
   await userService.isEmailAlreadyTaken(req.body);
-   const otp = await emailService.sendOtpEmailByAwsSES(req.body.email);
+   const otp = await emailService.sendOtpEmailByAwsSES(req.body.email ?? req.body.updateEmail);
    res.status(200).send({ otp });
 });
 

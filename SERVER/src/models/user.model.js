@@ -232,6 +232,11 @@ const userSchema = mongoose.Schema(
       trim: true,
       default: '',
     },
+    updateProfilePic: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     socialAuth: {
       type: Boolean,
       default: false,

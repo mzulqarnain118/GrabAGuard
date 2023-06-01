@@ -109,6 +109,15 @@ const QualificationForm = (props) => {
           phone: props?.data?.updatePhone,
           companyNumber: props?.data?.updateCompanyNumber,
           position: props?.data?.updatePosition,
+          height: props?.data?.updateHeight,
+          weight: props?.data?.updateWeight,
+          location: props?.data?.updateLocation,
+          hourlyRate: props?.data?.updateHourlyRate,
+          summary: props?.data?.updateSummary,
+          about: props?.data?.updateAbout,
+          previousWork: props?.data?.updatePreviousWork,
+          latitude: props?.data?.updateLatitude,
+          longitude: props?.data?.updateLongitude,
           updateEmail: "",
           updateFirstName: "",
           updateLastName: "",
@@ -120,6 +129,15 @@ const QualificationForm = (props) => {
           updateCompanyNumber: "",
           updatePosition: "",
           approveUpdateUser: false,
+          updateWeight: "",
+          updateHeight: "",
+          updateLocation: "",
+          updateHourlyRate: [],
+          updateSummary: "",
+          updateAbout: "",
+          updatePreviousWork: "",
+          updateLatitude: "",
+          updateLongitude: "",
         };
         console.log("==========================", screenData);
 
@@ -447,114 +465,186 @@ const QualificationForm = (props) => {
                 </div>
               </Stack>
             </div>
-           { props?.data?.approveUpdateUser && <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Stack>
-                <div className="row p-3">
-                  <Formheading label="Data Update Request"/>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="First Name"
-                      value={props?.data?.updateFirstName}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Last Name"
-                      value={props?.data?.updateLastName}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      inputProps={{ type: "email" }}
-                      label="Email."
-                      value={props?.data?.updateEmail}
-                      editable={false}
-                    />
-                  </div>
+            {props?.data?.approveUpdateUser && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Stack>
+                  <div className="row p-3">
+                    <Formheading label="Data Update Request" />
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="First Name"
+                        value={props?.data?.updateFirstName}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Last Name"
+                        value={props?.data?.updateLastName}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        inputProps={{ type: "email" }}
+                        label="Email."
+                        value={props?.data?.updateEmail}
+                        editable={false}
+                      />
+                    </div>
 
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Mobile Phone"
-                      value={props?.data?.updatePhone}
-                      editable={false}
-                    />
-                  </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Mobile Phone"
+                        value={props?.data?.updatePhone}
+                        editable={false}
+                      />
+                    </div>
 
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Address Line 1"
-                      value={props?.data?.updateAddress1}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Address Line 2"
-                      value={props?.data?.updateAddress2}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="City/Town"
-                      value={props?.data?.updateCity}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Postcode"
-                      value={props?.data?.updatePostCode}
-                      editable={false}
-                    />
-                  </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Company Number"
-                      value={props?.data?.updateCompanyNumber}
-                      editable={false}
-                    />
-                  </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Address Line 1"
+                        value={props?.data?.updateAddress1}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Address Line 2"
+                        value={props?.data?.updateAddress2}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="City/Town"
+                        value={props?.data?.updateCity}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Postcode"
+                        value={props?.data?.updatePostCode}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Company Number"
+                        value={props?.data?.updateCompanyNumber}
+                        editable={false}
+                      />
+                    </div>
 
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Position"
-                      value={props?.data?.updatePosition}
-                      editable={false}
-                    />
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Position"
+                        value={props?.data?.updatePosition}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Height"
+                        value={props?.data?.updateHeight}
+                        editable={false}
+                      />
+                    </div>
+
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Weight"
+                        value={props?.data?.updateWeight}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Location"
+                        value={props?.data?.updateLocation}
+                        editable={false}
+                      />
+                    </div>
+
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Longitude"
+                        value={props?.data?.updateLongitude}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Latitude"
+                        value={props?.data?.updateLatitude}
+                        editable={false}
+                      />
+                    </div>
+
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Weight"
+                        value={props?.data?.updateWeight}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Previous Work"
+                        value={props?.data?.updatePreviousWork}
+                        editable={false}
+                      />
+                    </div>
+
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Summary"
+                        value={props?.data?.updateSummary}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        label="Hourly Rate"
+                        value={props?.data?.updateHourlyRate}
+                        editable={false}
+                      />
+                    </div>
+                    <div className={`${guidelines.inputclass}`}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={(e) => ApproveUpdateUser(e)}
+                      >
+                        Accept
+                      </Button>
+                    </div>
                   </div>
-                  <div className={`${guidelines.inputclass}`}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      onClick={(e) => ApproveUpdateUser(e)}
-                    >
-                      Accept
-                    </Button>
-                  </div>
-                </div>
-              </Stack>
-            </div>}
+                </Stack>
+              </div>
+            )}
             <FilteredJobs
               data={FilteredJobsData?.response ?? []}
               setRow={setRow}

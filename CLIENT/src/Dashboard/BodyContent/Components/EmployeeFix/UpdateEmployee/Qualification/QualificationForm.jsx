@@ -98,26 +98,31 @@ const QualificationForm = (props) => {
 
     const ApproveUpdateUser = React.useCallback(async () => {
       try {
+        const { updateEmail,updateCompanyName, updateFirstName, updateLastName, updateAddress1, updateAddress2, updateCity, updatePostCode, updatePhone, updateCompanyNumber, updatePosition, updateHeight, updateWeight, updateLocation, updateHourlyRate, updateSummary, updateAbout, updatePreviousWork, updateLatitude, updateLongitude, email, phone, address1,
+          address2, firstName, lastName,city, postCode, hourlyRate, companyName, companyNumber, position, previousWork, summary, about, height, weight, location, latitude, longitude, skill, dob, status, role, approveUpdateUser,
+        
+        } = props?.data;
         const screenData = {
-          email: props?.data?.updateEmail,
-          firstName: props?.data?.updateFirstName,
-          lastName: props?.data?.updateLastName,
-          address1: props?.data?.updateAddress1,
-          address2: props?.data?.updateAddress2,
-          city: props?.data?.updateCity,
-          postCode: props?.data?.updatePostcode,
-          phone: props?.data?.updatePhone,
-          companyNumber: props?.data?.updateCompanyNumber,
-          position: props?.data?.updatePosition,
-          height: props?.data?.updateHeight,
-          weight: props?.data?.updateWeight,
-          location: props?.data?.updateLocation,
-          hourlyRate: props?.data?.updateHourlyRate,
-          summary: props?.data?.updateSummary,
-          about: props?.data?.updateAbout,
-          previousWork: props?.data?.updatePreviousWork,
-          latitude: props?.data?.updateLatitude,
-          longitude: props?.data?.updateLongitude,
+          email: updateEmail ?updateEmail: email,
+          firstName: updateFirstName ?updateFirstName: firstName,
+          lastName: updateLastName ?updateLastName: lastName,
+          address1: updateAddress1 ?updateAddress1: address1,
+          address2: updateAddress2 ?updateAddress2: address2,
+          city: updateCity ?updateCity: city,
+          postCode: updatePostCode ?updatePostCode: postCode,
+          phone: updatePhone ?updatePhone: phone,
+          companyNumber: updateCompanyNumber ?updateCompanyNumber: companyNumber,
+          companyName: updateCompanyName ?updateCompanyName: companyName,
+          position: updatePosition ?updatePosition: position,
+          height: updateHeight ?updateHeight: height,
+          weight: updateWeight ?updateWeight: weight,
+          location: updateLocation ?updateLocation: location,
+          hourlyRate: updateHourlyRate.length!=0?updateHourlyRate: hourlyRate,
+          summary: updateSummary ?updateSummary: summary,
+          about: updateAbout ?updateAbout: about,
+          previousWork: updatePreviousWork ?updatePreviousWork: previousWork,
+          latitude: updateLatitude ?updateLatitude: latitude,
+          longitude: updateLongitude ?updateLongitude: longitude,
           updateEmail: "",
           updateFirstName: "",
           updateLastName: "",
@@ -127,6 +132,7 @@ const QualificationForm = (props) => {
           updatePostCode: "",
           updatePhone: "",
           updateCompanyNumber: "",
+          updateCompanyName: "",
           updatePosition: "",
           approveUpdateUser: false,
           updateWeight: "",
@@ -555,7 +561,14 @@ const QualificationForm = (props) => {
                         editable={false}
                       />
                     </div>
-
+                    <div className={`${guidelines.inputclass}`}>
+                      <Controls.Input
+                        id="standard-basic"
+                        label="Company Name"
+                        value={props?.data?.updateCompanyName}
+                        editable={false}
+                      />
+                    </div>
                     <div className={`${guidelines.inputclass}`}>
                       <Controls.Input
                         label="Position"

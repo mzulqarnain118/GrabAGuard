@@ -127,6 +127,10 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    updateCompanyName: {
+      type: String,
+      trim: true,
+    },
     companyNumber: {
       type: String,
       trim: true,

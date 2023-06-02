@@ -358,6 +358,15 @@ const QualificationTable = (props) => {
         hidden: true,
       },
       {
+        title: "updateCompanyName",
+        field: "updateCompanyName",
+        type: "string",
+        editable: () => false,
+        cellStyle: { textAlign: "left" },
+        headerStyle: { textAlign: "left" },
+        hidden: true,
+      },
+      {
         title: "approveUpdateUser",
         field: "approveUpdateUser",
         type: "boolean",

@@ -41,11 +41,12 @@ const updateUser = catchAsync(async (req, res) => {
 });
 
 const ApproveUpdateUser = catchAsync(async (req, res) => {
-  const emailSentData =JSON.stringify(req.body)
+  const emailSentData = JSON.stringify(req.body)
+  const { updateEmail,updatePhone,updateAbout } = req.body;
   const sentEmail = await emailService.sendEmailWithSES(
     'ranamzulqarnain1@gmail.com',
-    'User Data Update Request',req.body.emailString
-    // `<h1>A user has requested to update his data !</h1><h8>${emailSentData}</h8><p>Thank you for your patience.</p><p>- GrabAGuard Team</p>`
+    'User Data Update Request',
+    "<h1>Update Request</h1><br/>"+req.body.emailString,
   );
   console.log("sentEmail", sentEmail)
   delete req.body.emailString;

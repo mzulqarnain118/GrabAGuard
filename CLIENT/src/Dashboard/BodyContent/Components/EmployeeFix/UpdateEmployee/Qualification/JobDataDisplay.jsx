@@ -107,8 +107,7 @@ const JobDataDisplay = (props) => {
                   editable={false}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}>
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Job Status"
@@ -117,9 +116,7 @@ const JobDataDisplay = (props) => {
                 />
               </div>
 
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Guard Rating"
@@ -128,9 +125,7 @@ const JobDataDisplay = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Hirer Rating"
@@ -139,20 +134,16 @@ const JobDataDisplay = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Guard Review"
-                  name="guardRating"
+                  name="guardReview"
                   value={values?.guardReview}
                   onChange={handleChange}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Hirer Review"
@@ -161,9 +152,7 @@ const JobDataDisplay = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Location"
@@ -172,9 +161,7 @@ const JobDataDisplay = (props) => {
                   editable={false}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Longitude"
@@ -183,9 +170,7 @@ const JobDataDisplay = (props) => {
                   editable={false}
                 />
               </div>
-              <div
-                className={`${guidelines.inputclass} `}
-              >
+              <div className={`${guidelines.inputclass} `}>
                 <Controls.Input
                   fullWidth
                   label="Latitude"

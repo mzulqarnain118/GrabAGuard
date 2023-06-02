@@ -167,7 +167,11 @@ const QualificationForm = (props) => {
         {open ? (
           <ImageDisplay id={id} setOpen={setOpen} />
         ) : jobDataOpen ? (
-          <JobDataDisplay data={row} setJobDataOpen={setJobDataOpen} />
+          <JobDataDisplay
+            data={row}
+            setJobDataOpen={setJobDataOpen}
+            setTableUpdated={setTableUpdated}
+          />
         ) : (
           <>
             <div

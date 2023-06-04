@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Button, Stack } from '@mui/material';
 import guidelines from '../../../../../../Modules/Guidelines/Guidelines';
 import { useLocation, Link, useHistory } from 'react-router-dom';
@@ -7,17 +7,20 @@ import {
   ApiCallGet,
 } from "../../../../../../Modules/CoreModules/ApiCall";
 
-const ImageDisplay = ({id,setOpen}) => {
-  // const location = useLocation();
-  // const history = useHistory();
-  // const data = location.state.data;
+const ImageDisplay = () => {
+  const location = useLocation();
+  const history = useHistory();
+  const id = location.state.id;
       const [tableUpdated, setTableUpdated] = useState(0);
   const [loading, setLoading] = React.useState(false);
       const { response, error } = ApiCallGet(`/files/${id}`, {
         getUpdatedData: tableUpdated,
       });
 
+useEffect(() => {
   console.log(response, "ImageDisplay");
+}, [response]);
+  
   return (
     <div
       style={{
@@ -29,6 +32,7 @@ const ImageDisplay = ({id,setOpen}) => {
     >
       {response?.map((image) => (
         <div
+          key={image.updatedAt}
           style={{
             display: "flex",
             alignItems: "center",
@@ -64,8 +68,8 @@ const ImageDisplay = ({id,setOpen}) => {
           color="primary"
           size="large"
           onClick={() => {
-            // history.goBack()
-            setOpen(false);
+            history.goBack();
+            // setOpen(false);
           }}
         >
           BACK

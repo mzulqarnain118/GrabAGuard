@@ -77,6 +77,7 @@ const updateUser = {
       updateSummary: Joi.string().allow(''),
       updatePreviousWork: Joi.string().allow(''),
       updateCompanyName: Joi.string().allow(''),
+      companyName: Joi.string().allow(''),
       updateHourlyRate: Joi.array(),
       rejectedOrders: Joi.array(),
       lastName: Joi.string(),

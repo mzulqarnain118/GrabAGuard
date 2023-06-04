@@ -436,17 +436,17 @@ const QualificationForm = (props) => {
                     </div>
                   )}
                   <div className={`${guidelines.inputclass}`}>
-                    {/* <Link to={{ pathname: 'showDocs', state: { data: response } }}> */}
+                    <Link to={{ pathname: 'showDocs', state: { id: id } }}>
                     <Button
                       fullWidth
                       variant="contained"
                       color="primary"
                       size="large"
-                      onClick={() => setOpen(true)}
+                      // onClick={() => setOpen(true)}
                     >
                       Check Docs
                     </Button>
-                    {/* </Link> */}
+                    </Link>
                   </div>
                   <div className={`${guidelines.inputclass}`}>
                     <Button

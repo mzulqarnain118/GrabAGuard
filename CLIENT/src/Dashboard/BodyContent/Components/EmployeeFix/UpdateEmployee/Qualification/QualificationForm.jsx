@@ -310,33 +310,6 @@ const QualificationForm = (props) => {
                   <div className={`${guidelines.inputclass}`}>
                     <Controls.Input
                       id="standard-basic"
-                      label="Company Name"
-                      value={values.companyName}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Company Number"
-                      value={values.companyNumber}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
-                      label="Position"
-                      value={values.position}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className={`${guidelines.inputclass}`}>
-                    <Controls.Input
-                      id="standard-basic"
                       label="Previous Work"
                       value={values.previousWork}
                       onChange={handleChange}
@@ -384,6 +357,32 @@ const QualificationForm = (props) => {
                           id="standard-basic"
                           label="HirerType"
                           value={values.hirerType}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className={`${guidelines.inputclass}`}>
+                        <Controls.Input
+                          id="standard-basic"
+                          label="Company Name"
+                          value={values.companyName}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className={`${guidelines.inputclass}`}>
+                        <Controls.Input
+                          id="standard-basic"
+                          label="Company Number"
+                          value={values.companyNumber}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className={`${guidelines.inputclass}`}>
+                        <Controls.Input
+                          id="standard-basic"
+                          label="Position"
+                          value={values.position}
                           onChange={handleChange}
                         />
                       </div>
@@ -436,16 +435,16 @@ const QualificationForm = (props) => {
                     </div>
                   )}
                   <div className={`${guidelines.inputclass}`}>
-                    <Link to={{ pathname: 'showDocs', state: { id: id } }}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      // onClick={() => setOpen(true)}
-                    >
-                      Check Docs
-                    </Button>
+                    <Link to={{ pathname: "showDocs", state: { id: id } }}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        // onClick={() => setOpen(true)}
+                      >
+                        Check Docs
+                      </Button>
                     </Link>
                   </div>
                   <div className={`${guidelines.inputclass}`}>
@@ -663,7 +662,11 @@ const QualificationForm = (props) => {
               </div>
             )}
             <FilteredJobs
-              data={FilteredJobsData?.response ?? []}
+              data={
+                FilteredJobsData?.response?.filter(
+                  (row) => row.guard_id === id || row.hirer_id === id
+            ) ?? []
+              }
               setRow={setRow}
               setJobDataOpen={setJobDataOpen}
               setTableUpdated={setTableUpdated}

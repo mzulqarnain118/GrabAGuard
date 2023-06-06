@@ -64,12 +64,10 @@ const userSchema = mongoose.Schema(
     },
     address2: {
       type: String,
-      required: true,
       trim: true,
     },
     city: {
       type: String,
-      required: true,
       trim: true,
     },
     postCode: {

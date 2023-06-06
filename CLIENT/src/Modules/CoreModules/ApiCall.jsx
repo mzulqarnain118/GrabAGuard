@@ -42,6 +42,8 @@ const token = localStorage.getItem('token');
 const csrf_token = 'jaf?lsajf#alskjf%aljdkf?klasf';
 const baseUrl = "http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3001/v1/"
 // const baseUrl=import.meta.env.VITE_API_BASE_URL;
+// const baseUrl = "grabaguard.com/v1/";
+
 const headers = {  
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "X-Requested-With",

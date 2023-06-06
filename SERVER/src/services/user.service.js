@@ -362,30 +362,28 @@ const updateUserById = async (userId, updateBody) => {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   Object.assign(user, updateBody);
-  if (updateBody?.status === 'Approved') {
-    const message = {
-      notification: {
-        title: 'Grab A Guard',
-        body: 'Congratulations! Your account has been approved.',
-      },
-      // Additional data payload if needed
-      data: {
-        key1: 'value1',
-        key2: 'value2',
-      },
-      // Target device(s) or topic(s)
-      token: user.fcmToken,
-    };
-    admin
-      .messaging()
-      .send(message)
-      .then((response) => {
-        console.log('Successfully sent notification:', response);
-      })
-      .catch((error) => {
-        console.error('Error sending notification:', error);
-      });
-  }
+if (updateBody?.status === 'Approved' && user.status !== 'Approved') {
+  const message = {
+    notification: {
+      title: 'Grab A Guard',
+      body: 'Congratulations! Your account has been approved.',
+    },
+    data: {
+      key1: 'value1',
+      key2: 'value2',
+    },
+    token: user.fcmToken,
+  };
+  admin
+    .messaging()
+    .send(message)
+    .then((response) => {
+      console.log('Successfully sent notification:', response);
+    })
+    .catch((error) => {
+      console.error('Error sending notification:', error);
+    });
+}
   await user.save();
   return user;
 };

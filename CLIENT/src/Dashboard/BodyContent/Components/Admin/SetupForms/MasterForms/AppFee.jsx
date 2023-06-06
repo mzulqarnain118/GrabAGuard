@@ -51,12 +51,19 @@ const AppFee = () => {
         }
     }
     const update = async (oldRow, newRow) => {
-
         let validate = true;
-        if (newRow.fee === '' || newRow.fee === null || newRow.fee === undefined) {
+        if (newRow.guardFee === '' || newRow.guardFee === null || newRow.guardFee === undefined) {
             validate = false;
-            Toast("Name Cannot be empty", "error");
+            Toast("Guard Fee Cannot be empty", "error");
         }
+       else if (
+         newRow.hirerFee === "" ||
+         newRow.hirerFee === null ||
+         newRow.hirerFee === undefined
+       ) {
+         validate = false;
+         Toast("Hirer Fee Cannot be empty", "error");
+       }
         if (validate === true) {
 
             const result1 = await ApiCallPut(`/AppData/${newRow._id}`, { ...newRow });
@@ -77,7 +84,7 @@ const AppFee = () => {
           className="w-100"
           style={{ display: "flex", flexDirection: "column" }}
         >
-          <form
+        {  response?.length===0 &&<form
             container
             style={{
               display: "flex",
@@ -128,7 +135,7 @@ const AppFee = () => {
                 </Button>
               </div>
             </div>
-          </form>
+          </form>}
 
           <MatTable
             title="App Fee"

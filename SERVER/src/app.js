@@ -13,7 +13,7 @@ const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
-
+const path = require('path');
 const app = express();
 
 if (config.env !== 'test') {
@@ -38,13 +38,13 @@ app.use(mongoSanitize());
 app.use(compression());
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3003', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3002'],
+  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3003', 'https://grabaguard.com'],
   credentials: true,
 }));
 
 // add the following middleware to send the correct headers for preflight requests
 app.options('*', cors({
-  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3003', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3000', 'http://ec2-52-56-60-201.eu-west-2.compute.amazonaws.com:3002'],
+  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3003', 'https://grabaguard.com'],
   credentials: true,
 }));
 
@@ -56,6 +56,12 @@ passport.use('jwt', jwtStrategy);
 if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);
 }
+
+app.use(express.static(path.join(
+    '/var/www/html/SERVER', "public")));
+
+
+
 
 // v1 api routes
 app.use('/v1', routes);

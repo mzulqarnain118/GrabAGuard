@@ -11,7 +11,8 @@ const hiredGuardsRoute = require('./hiredGuards.route');
 const addServicesRoute = require('./addServices.route');
 const router = express.Router();
 const appDataRoute = require('./appData.route');
-
+const path = require('path');
+const fs = require('fs');
 const defaultRoutes = [
   {
     path: '/auth',
@@ -69,5 +70,15 @@ if (config.env === 'development') {
     router.use(route.path, route.route);
   });
 }
+
+router.get('/*', (req, res, next) => {
+ let webAppPath = path.join(
+            '/var/www/html/SERVER', "public", "index.html")
+        if (fs.existsSync(webAppPath))
+            res.sendFile(webAppPath);
+        else
+            res.send({ message: 'unavaliable' });
+
+});
 
 module.exports = router;

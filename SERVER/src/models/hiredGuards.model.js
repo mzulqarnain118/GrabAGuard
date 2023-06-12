@@ -6,6 +6,9 @@ const hiredGuardSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    cancelTimer: {
+      type: Date,
+    },
     to: {
       type: Date,
       required: true,

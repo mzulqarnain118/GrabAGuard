@@ -87,15 +87,48 @@ exports.findOne = async (req, res) => {
   }
 };
 
+// exports.update = async (req, res) => {
+//   try {
+//     const hiredGuard = await hiredGuardService.update(req.params.id, req.body);
+//     if (!hiredGuard) {
+//       return res.status(404).json({ message: 'Hired guard not found' });
+//     }
+//     if (req.body.jobStatus === 'Accepted') {
+//       io.emit('updateHiredGuard', hiredGuard); // Emit the updated hiredGuard object to all clients
+//     }
+//     res.json(hiredGuard);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
 exports.update = async (req, res) => {
   try {
     const hiredGuard = await hiredGuardService.update(req.params.id, req.body);
     if (!hiredGuard) {
       return res.status(404).json({ message: 'Hired guard not found' });
     }
+
     if (req.body.jobStatus === 'Accepted') {
-      io.emit('updateHiredGuard', hiredGuard); // Emit the updated hiredGuard object to all clients
+      // Start the timer for 30 minutes
+      const timer = setTimeout(async () => {
+        const updatedGuard = await hiredGuardService.getById(req.params.id);
+        if (updatedGuard && !updatedGuard.paymentStatus) {
+          // If paymentStatus is still false after 30 minutes, update jobStatus to "Blocked"
+          updatedGuard.jobStatus = 'Blocked';
+          await hiredGuardService.update(req.params.id, updatedGuard);
+          io.emit('updateHiredGuard', updatedGuard);
+        }
+      }, 30 * 60 * 1000); // 30 minutes in milliseconds
+
+      // Clear the timer if the paymentStatus is updated before 30 minutes
+      hiredGuardService.onPaymentStatusChange(req.params.id, (paymentStatus) => {
+        if (paymentStatus) {
+          clearTimeout(timer);
+        }
+      });
     }
+
     res.json(hiredGuard);
   } catch (err) {
     res.status(500).json({ message: err.message });
